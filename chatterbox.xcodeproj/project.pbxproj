@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		331EC649250BB9470084E89C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC648250BB9470084E89C /* AppDelegate.swift */; };
-		331EC64B250BB9470084E89C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC64A250BB9470084E89C /* SceneDelegate.swift */; };
 		331EC64D250BB9470084E89C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC64C250BB9470084E89C /* ViewController.swift */; };
 		331EC650250BB9470084E89C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC64E250BB9470084E89C /* Main.storyboard */; };
 		331EC652250BB94B0084E89C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331EC651250BB94B0084E89C /* Assets.xcassets */; };
 		331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC653250BB94B0084E89C /* LaunchScreen.storyboard */; };
+		331EC65F250BBDB30084E89C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 331EC65E250BBDB30084E89C /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		331EC645250BB9470084E89C /* chatterbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatterbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		331EC648250BB9470084E89C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		331EC64A250BB9470084E89C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		331EC64C250BB9470084E89C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		331EC64F250BB9470084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		331EC651250BB94B0084E89C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		331EC654250BB94B0084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		331EC656250BB94B0084E89C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		331EC65E250BBDB30084E89C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,31 @@
 		331EC647250BB9470084E89C /* chatterbox */ = {
 			isa = PBXGroup;
 			children = (
-				331EC648250BB9470084E89C /* AppDelegate.swift */,
-				331EC64A250BB9470084E89C /* SceneDelegate.swift */,
-				331EC64C250BB9470084E89C /* ViewController.swift */,
-				331EC64E250BB9470084E89C /* Main.storyboard */,
-				331EC651250BB94B0084E89C /* Assets.xcassets */,
-				331EC653250BB94B0084E89C /* LaunchScreen.storyboard */,
-				331EC656250BB94B0084E89C /* Info.plist */,
+				331EC65D250BBD6F0084E89C /* Screens */,
+				331EC65C250BBD5E0084E89C /* Supporting files */,
 			);
 			path = chatterbox;
+			sourceTree = "<group>";
+		};
+		331EC65C250BBD5E0084E89C /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				331EC65E250BBDB30084E89C /* .gitignore */,
+				331EC648250BB9470084E89C /* AppDelegate.swift */,
+				331EC651250BB94B0084E89C /* Assets.xcassets */,
+				331EC656250BB94B0084E89C /* Info.plist */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		331EC65D250BBD6F0084E89C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				331EC653250BB94B0084E89C /* LaunchScreen.storyboard */,
+				331EC64E250BB9470084E89C /* Main.storyboard */,
+				331EC64C250BB9470084E89C /* ViewController.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331EC65F250BBDB30084E89C /* .gitignore in Resources */,
 				331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */,
 				331EC652250BB94B0084E89C /* Assets.xcassets in Resources */,
 				331EC650250BB9470084E89C /* Main.storyboard in Resources */,
@@ -140,7 +157,6 @@
 			files = (
 				331EC64D250BB9470084E89C /* ViewController.swift in Sources */,
 				331EC649250BB9470084E89C /* AppDelegate.swift in Sources */,
-				331EC64B250BB9470084E89C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = chatterbox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,7 +311,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexandr-Lazarev.Stocks.chatterbox";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = chatterbox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,7 +330,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Alexandr-Lazarev.Stocks.chatterbox";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
