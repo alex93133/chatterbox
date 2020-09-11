@@ -90,6 +90,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 331EC659250BB94B0084E89C /* Build configuration list for PBXNativeTarget "chatterbox" */;
 			buildPhases = (
+				331EC662250BC0980084E89C /* ShellScript */,
 				331EC641250BB9470084E89C /* Sources */,
 				331EC642250BB9470084E89C /* Frameworks */,
 				331EC643250BB9470084E89C /* Resources */,
@@ -149,6 +150,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		331EC662250BC0980084E89C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "exit\nif which swiftlint >/dev/null; then\n swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from #https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		331EC641250BB9470084E89C /* Sources */ = {
@@ -299,10 +320,9 @@
 		331EC65A250BB94B0084E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
-				INFOPLIST_FILE = chatterbox/Info.plist;
+				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -318,10 +338,9 @@
 		331EC65B250BB94B0084E89C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
-				INFOPLIST_FILE = chatterbox/Info.plist;
+				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
