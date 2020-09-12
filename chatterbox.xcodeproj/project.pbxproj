@@ -10,9 +10,10 @@
 		331EC649250BB9470084E89C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC648250BB9470084E89C /* AppDelegate.swift */; };
 		331EC64D250BB9470084E89C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC64C250BB9470084E89C /* ViewController.swift */; };
 		331EC650250BB9470084E89C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC64E250BB9470084E89C /* Main.storyboard */; };
-		331EC652250BB94B0084E89C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 331EC651250BB94B0084E89C /* Assets.xcassets */; };
 		331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC653250BB94B0084E89C /* LaunchScreen.storyboard */; };
 		331EC65F250BBDB30084E89C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 331EC65E250BBDB30084E89C /* .gitignore */; };
+		331EC664250BC13A0084E89C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 331EC663250BC13A0084E89C /* .swiftlint.yml */; };
+		339B6900250D024000578B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 339B68FF250D024000578B7E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +21,11 @@
 		331EC648250BB9470084E89C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		331EC64C250BB9470084E89C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		331EC64F250BB9470084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		331EC651250BB94B0084E89C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		331EC654250BB94B0084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		331EC656250BB94B0084E89C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		331EC65E250BBDB30084E89C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		331EC663250BC13A0084E89C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		339B68FF250D024000578B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +67,11 @@
 		331EC65C250BBD5E0084E89C /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				331EC65E250BBDB30084E89C /* .gitignore */,
 				331EC648250BB9470084E89C /* AppDelegate.swift */,
-				331EC651250BB94B0084E89C /* Assets.xcassets */,
+				339B68FF250D024000578B7E /* Assets.xcassets */,
 				331EC656250BB94B0084E89C /* Info.plist */,
+				331EC65E250BBDB30084E89C /* .gitignore */,
+				331EC663250BC13A0084E89C /* .swiftlint.yml */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -142,10 +145,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331EC664250BC13A0084E89C /* .swiftlint.yml in Resources */,
 				331EC65F250BBDB30084E89C /* .gitignore in Resources */,
 				331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */,
-				331EC652250BB94B0084E89C /* Assets.xcassets in Resources */,
 				331EC650250BB9470084E89C /* Main.storyboard in Resources */,
+				339B6900250D024000578B7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +324,7 @@
 		331EC65A250BB94B0084E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";
@@ -338,6 +343,7 @@
 		331EC65B250BB94B0084E89C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";

@@ -1,0 +1,108 @@
+disabled_rules:
+- force_cast
+
+opt_in_rules:
+- vertical_whitespace_closing_braces
+- unused_import
+- unused_declaration
+- unused_capture_list
+- untyped_error_in_catch
+- unowned_variable_capture
+- unneeded_parentheses_in_closure_argument
+- type_name
+- trailing_comma
+- trailing_closure
+- toggle_bool
+- switch_case_on_newline
+- strict_fileprivate
+- static_operator
+- strong_iboutlet
+- vertical_parameter_alignment_on_call
+- yoda_condition
+- sorted_imports
+- sorted_first_last
+- single_test_class
+- required_enum_case
+- redundant_void_return
+- redundant_objc_attribute
+- redundant_discardable_let
+- raw_value_for_camel_cased_codable_enum
+- quick_discouraged_pending_test
+- quick_discouraged_focused_test
+- quick_discouraged_call
+- prohibited_super_call
+- prohibited_interface_builder
+- private_outlet
+- private_action
+- prefixed_toplevel_constant
+- prefer_self_type_over_type_of_self
+- pattern_matching_keywords
+- override_in_extension
+- overridden_super_call
+- optional_enum_case_matching
+- no_extension_access_modifier
+- nimble_operator
+- multiline_parameters
+- multiline_function_chains
+- multiline_arguments
+- modifier_order
+- missing_docs
+- lower_acl_than_parent
+- legacy_random
+- legacy_multiple
+- last_where
+- large_tuple
+- joined_default_parameter
+- identical_operands
+- function_default_parameter_at_end
+- flatmap_over_map_reduce
+- first_where
+- file_types_order
+- file_name_no_space
+- file_header
+- fatal_error_message
+- fallthrough
+- extension_access_modifier
+- explicit_self
+- explicit_init
+- explicit_enum_raw_value
+- expiring_todo
+- enum_case_associated_values_count
+- empty_string
+- empty_collection_literal
+- discouraged_optional_boolean
+- discouraged_object_literal
+- convenience_type
+- contains_over_range_nil_comparison
+- contains_over_first_not_nil
+- contains_over_filter_is_empty
+- contains_over_filter_count
+- collection_alignment
+- closure_spacing
+- closure_end_indentation
+- closure_body_length
+- attributes
+- array_init
+- vertical_whitespace_between_cases
+
+
+excluded:
+- Carthage
+- Pods
+- fastlane
+
+
+line_length:
+    warning: 150
+    error: 200
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+
+identifier_name:
+    min_length:
+        warning: 3
+        error: 2
+    excluded:
+       - id
+       - URL
