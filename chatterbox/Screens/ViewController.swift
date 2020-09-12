@@ -3,11 +3,6 @@ import UIKit
 class ViewController: UIViewController {
 
     // MARK: - VC Lifecycle
-    override func loadView() {
-        //Prohibited to call super.loadView()
-        printLogs(text: "View is loading: \(#function)")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         printLogs(text: "View is loaded into memory.: \(#function)")
