@@ -7,25 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3309F7872517CA52004C6015 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3309F7892517CA52004C6015 /* Localizable.strings */; };
 		331EC649250BB9470084E89C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC648250BB9470084E89C /* AppDelegate.swift */; };
-		331EC64D250BB9470084E89C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC64C250BB9470084E89C /* ViewController.swift */; };
-		331EC650250BB9470084E89C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC64E250BB9470084E89C /* Main.storyboard */; };
 		331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC653250BB94B0084E89C /* LaunchScreen.storyboard */; };
 		331EC65F250BBDB30084E89C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 331EC65E250BBDB30084E89C /* .gitignore */; };
 		331EC664250BC13A0084E89C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 331EC663250BC13A0084E89C /* .swiftlint.yml */; };
+		335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B4B2517B045005B11EC /* ProfileView.swift */; };
+		335E8B512517B0ED005B11EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B502517B0ED005B11EC /* Colors.swift */; };
 		339B6900250D024000578B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 339B68FF250D024000578B7E /* Assets.xcassets */; };
+		33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1A1DC2516134200531116 /* UIAlertController.swift */; };
+		33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F8312515069D005A6EB8 /* ProfileViewController.swift */; };
+		33E9F84025152BF0005A6EB8 /* AccessChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */; };
+		33F45EFB25187AEC0018F1E4 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3309F7882517CA52004C6015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3309F78C2517CA70004C6015 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		331EC645250BB9470084E89C /* chatterbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatterbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		331EC648250BB9470084E89C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		331EC64C250BB9470084E89C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		331EC64F250BB9470084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		331EC654250BB94B0084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		331EC656250BB94B0084E89C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		331EC65E250BBDB30084E89C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		331EC663250BC13A0084E89C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		335E8B4B2517B045005B11EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		335E8B502517B0ED005B11EC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		339B68FF250D024000578B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		33C1A1DC2516134200531116 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		33E9F8312515069D005A6EB8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessChecker.swift; sourceTree = "<group>"; };
+		33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +69,11 @@
 		331EC647250BB9470084E89C /* chatterbox */ = {
 			isa = PBXGroup;
 			children = (
+				33E9F835251506C3005A6EB8 /* Storyboards */,
+				335E8B4E2517B0D6005B11EC /* Sources */,
 				331EC65D250BBD6F0084E89C /* Screens */,
+				33E9F83E25152BBD005A6EB8 /* Utilities */,
+				33C1A1DB2516132A00531116 /* Extensions */,
 				331EC65C250BBD5E0084E89C /* Supporting files */,
 			);
 			path = chatterbox;
@@ -67,8 +82,10 @@
 		331EC65C250BBD5E0084E89C /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				33F45EF925187AD70018F1E4 /* Fonts */,
 				331EC648250BB9470084E89C /* AppDelegate.swift */,
 				339B68FF250D024000578B7E /* Assets.xcassets */,
+				3309F7892517CA52004C6015 /* Localizable.strings */,
 				331EC656250BB94B0084E89C /* Info.plist */,
 				331EC65E250BBDB30084E89C /* .gitignore */,
 				331EC663250BC13A0084E89C /* .swiftlint.yml */,
@@ -79,11 +96,74 @@
 		331EC65D250BBD6F0084E89C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				331EC653250BB94B0084E89C /* LaunchScreen.storyboard */,
-				331EC64E250BB9470084E89C /* Main.storyboard */,
-				331EC64C250BB9470084E89C /* ViewController.swift */,
+				335E8B482517B021005B11EC /* Profile */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		335E8B482517B021005B11EC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				335E8B4A2517B02F005B11EC /* View */,
+				335E8B492517B028005B11EC /* Controller */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		335E8B492517B028005B11EC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33E9F8312515069D005A6EB8 /* ProfileViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		335E8B4A2517B02F005B11EC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				335E8B4B2517B045005B11EC /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		335E8B4E2517B0D6005B11EC /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				335E8B502517B0ED005B11EC /* Colors.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		33C1A1DB2516132A00531116 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				33C1A1DC2516134200531116 /* UIAlertController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		33E9F835251506C3005A6EB8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				331EC653250BB94B0084E89C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		33E9F83E25152BBD005A6EB8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		33F45EF925187AD70018F1E4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +194,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Alexander Lazarev";
 				TargetAttributes = {
 					331EC644250BB9470084E89C = {
@@ -129,6 +209,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 331EC63C250BB9470084E89C;
 			productRefGroup = 331EC646250BB9470084E89C /* Products */;
@@ -145,10 +226,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F45EFB25187AEC0018F1E4 /* Roboto-Regular.ttf in Resources */,
+				3309F7872517CA52004C6015 /* Localizable.strings in Resources */,
 				331EC664250BC13A0084E89C /* .swiftlint.yml in Resources */,
 				331EC65F250BBDB30084E89C /* .gitignore in Resources */,
 				331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */,
-				331EC650250BB9470084E89C /* Main.storyboard in Resources */,
 				339B6900250D024000578B7E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,20 +262,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				331EC64D250BB9470084E89C /* ViewController.swift in Sources */,
+				33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */,
+				335E8B512517B0ED005B11EC /* Colors.swift in Sources */,
+				33E9F84025152BF0005A6EB8 /* AccessChecker.swift in Sources */,
+				335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */,
 				331EC649250BB9470084E89C /* AppDelegate.swift in Sources */,
+				33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		331EC64E250BB9470084E89C /* Main.storyboard */ = {
+		3309F7892517CA52004C6015 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				331EC64F250BB9470084E89C /* Base */,
+				3309F7882517CA52004C6015 /* en */,
+				3309F78C2517CA70004C6015 /* ru */,
 			);
-			name = Main.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		331EC653250BB94B0084E89C /* LaunchScreen.storyboard */ = {
@@ -211,6 +298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -233,6 +321,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -257,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -293,6 +383,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -311,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
