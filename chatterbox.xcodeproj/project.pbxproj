@@ -18,6 +18,8 @@
 		33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1A1DC2516134200531116 /* UIAlertController.swift */; };
 		33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F8312515069D005A6EB8 /* ProfileViewController.swift */; };
 		33E9F84025152BF0005A6EB8 /* AccessChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */; };
+		33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4466251E011400DA3401 /* ConversationsListViewController.swift */; };
+		33EA446F251E016600DA3401 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA446E251E016600DA3401 /* Logger.swift */; };
 		33F45EFB25187AEC0018F1E4 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		33C1A1DC2516134200531116 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		33E9F8312515069D005A6EB8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessChecker.swift; sourceTree = "<group>"; };
+		33EA4466251E011400DA3401 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		33EA446E251E016600DA3401 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +100,7 @@
 		331EC65D250BBD6F0084E89C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				33EA4463251E00CF00DA3401 /* ConversationsList */,
 				335E8B482517B021005B11EC /* Profile */,
 			);
 			path = Screens;
@@ -105,17 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				335E8B4A2517B02F005B11EC /* View */,
-				335E8B492517B028005B11EC /* Controller */,
+				337485B8251E3E8200E3C172 /* Controller */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		335E8B492517B028005B11EC /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				33E9F8312515069D005A6EB8 /* ProfileViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		335E8B4A2517B02F005B11EC /* View */ = {
@@ -132,6 +129,22 @@
 				335E8B502517B0ED005B11EC /* Colors.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		337485B8251E3E8200E3C172 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33E9F8312515069D005A6EB8 /* ProfileViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		337485BA251E3EE200E3C172 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33EA4466251E011400DA3401 /* ConversationsListViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		33C1A1DB2516132A00531116 /* Extensions */ = {
@@ -154,8 +167,25 @@
 			isa = PBXGroup;
 			children = (
 				33E9F83F25152BF0005A6EB8 /* AccessChecker.swift */,
+				33EA446E251E016600DA3401 /* Logger.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		33EA4463251E00CF00DA3401 /* ConversationsList */ = {
+			isa = PBXGroup;
+			children = (
+				33EA4465251E00F500DA3401 /* View */,
+				337485BA251E3EE200E3C172 /* Controller */,
+			);
+			path = ConversationsList;
+			sourceTree = "<group>";
+		};
+		33EA4465251E00F500DA3401 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		33F45EF925187AD70018F1E4 /* Fonts */ = {
@@ -265,8 +295,10 @@
 				33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */,
 				335E8B512517B0ED005B11EC /* Colors.swift in Sources */,
 				33E9F84025152BF0005A6EB8 /* AccessChecker.swift in Sources */,
+				33EA446F251E016600DA3401 /* Logger.swift in Sources */,
 				335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */,
 				331EC649250BB9470084E89C /* AppDelegate.swift in Sources */,
+				33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */,
 				33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

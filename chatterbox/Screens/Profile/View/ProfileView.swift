@@ -7,7 +7,7 @@ protocol ProfileViewDelegate: class {
 
 class ProfileView: UIView {
 
-    // MARK: - Properties
+    // MARK: - UI
     var profilePhotoImageView: UIImageView!
     var initialsLabel: UILabel!
     var editButton: UIButton!
@@ -32,7 +32,7 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - UI elements
+    // MARK: - Setup UI elements
     private func setupProfilePhotoImageView() {
         profilePhotoImageView                 = UIImageView()
         profilePhotoImageView.contentMode     = .scaleAspectFill

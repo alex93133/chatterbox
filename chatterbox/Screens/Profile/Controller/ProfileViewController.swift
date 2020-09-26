@@ -10,30 +10,16 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
             customView.profilePhotoImageView.image = newValue
         }
     }
-
-    init() {
-        // printLogs(text: "Edit button frame is: \(editButton.frame)")
-        // Line above crashes the app because button is not inited.
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
+    
     // MARK: - VC Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        printLogs(text: "Method: \(#function), edit button frame is: \(customView.editButton.frame)")
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         customView.profilePhotoImageView.layer.cornerRadius = customView.profilePhotoImageView.frame.size.width / 2
-        printLogs(text: "Method: \(#function), edit button frame is: \(customView.editButton.frame)")
-        // As we can see frames  differentiate. It happens because viewDidAppear called after layout,
-        // but viewDidLoad instead. So after layout frame positions are correct.
     }
 
     // MARK: - Functions
