@@ -1,0 +1,12 @@
+"Camera"        = "Камера";
+"Cancel"        = "Отмена";
+"Edit"          = "Изм.";
+"Get access"    = "Хорошо";
+"Maybe later"   = "В другой раз";
+"Oops!"         = "Упс!!";
+"Open Settings" = "Открыть настройки";
+"Photo library" = "Библиотека";
+"Please note"   = "Пожалуйста, обратите внимание";
+"Save"          = "Сохранить";
+"For the full application, you will need a smartphone camera. Please allow access" = "Для полноценной работы приложения, Вам необходимо предоставить доступ к камере";
+"Looks like you forgot to turn on the camera access. To continue, you'll need to fix it in the Settings" = "Похоже вы не предоставили доступ к камере. Чтобы продолжить, необходимо включить доступ в Настройках";
