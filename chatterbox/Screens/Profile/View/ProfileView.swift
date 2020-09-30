@@ -8,82 +8,64 @@ protocol ProfileViewDelegate: class {
 class ProfileView: UIView {
 
     // MARK: - UI
-    var profilePhotoImageView: UIImageView!
-    var initialsLabel: UILabel!
-    var editButton: UIButton!
-    var profileNameLabel: UILabel!
-    var profileDescriptionLabel: UILabel!
-    var saveButton: UIButton!
+    lazy var photoImageView: UIImageView = {
+        let photoImageView             = UIImageView()
+        photoImageView.contentMode     = .scaleAspectFill
+        photoImageView.clipsToBounds   = true
+        photoImageView.backgroundColor = Colors.customYellow
+        return photoImageView
+    }()
 
-    weak var delegate: ProfileViewDelegate?
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupProfilePhotoImageView()
-        setupInitialsLabel()
-        setupEditButton()
-        setupProfileNameLabel()
-        setupProfileDescriptionLabel()
-        setupSaveButton()
-        backgroundColor = Colors.mainBG
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Setup UI elements
-    private func setupProfilePhotoImageView() {
-        profilePhotoImageView                 = UIImageView()
-        profilePhotoImageView.contentMode     = .scaleAspectFill
-        profilePhotoImageView.clipsToBounds   = true
-        profilePhotoImageView.backgroundColor = Colors.customYellow
-        setupProfilePhotoImageViewConstraints()
-    }
-
-    private func setupInitialsLabel() {
-        initialsLabel                 = UILabel()
-        initialsLabel.textColor       = Colors.textBlack
-        initialsLabel.font            = UIFont(name: "Roboto-Regular", size: 120)
-        initialsLabel.textAlignment   = .center
-        setupInitialsLabelConstraints()
-    }
-
-    private func setupEditButton() {
-        editButton                  = UIButton()
+    lazy var editButton: UIButton = {
+        let editButton              = UIButton()
         editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         editButton.setTitleColor(Colors.textBlue, for: .normal)
         editButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
         editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
-        setupEditButtonConstraints()
-    }
+        return editButton
+    }()
 
-    private func setupProfileNameLabel() {
-        profileNameLabel               = UILabel()
-        profileNameLabel.textColor     = Colors.textBlack
-        profileNameLabel.font          = .systemFont(ofSize: 24, weight: .bold)
-        profileNameLabel.textAlignment = .center
-        profileNameLabel.text          = "Marina Dudarenko"
-        setupProfileNameLabelConstraints()
-    }
+    lazy var nameLabel: UILabel = {
+        let nameLabel           = UILabel()
+        nameLabel.textColor     = Colors.textBlack
+        nameLabel.font          = .systemFont(ofSize: 24, weight: .bold)
+        nameLabel.textAlignment = .center
+        nameLabel.numberOfLines = 0
+        return nameLabel
+    }()
 
-    private func setupProfileDescriptionLabel() {
-        profileDescriptionLabel               = UILabel()
-        profileDescriptionLabel.textColor     = Colors.textBlack
-        profileDescriptionLabel.font          = .systemFont(ofSize: 16, weight: .regular)
-        profileDescriptionLabel.numberOfLines = 0
-        profileDescriptionLabel.text          = "UX/UI designer, web-designer\nMoscow, Russia"
-        setupProfileDescriptionLabelConstraints()
-    }
+    lazy var descriptionTextView: UITextView = {
+        let descriptionTextView          = UITextView()
+        descriptionTextView.textColor    = Colors.textBlack
+        descriptionTextView.font         = .systemFont(ofSize: 16, weight: .regular)
+        descriptionTextView.isEditable   = false
+        descriptionTextView.isSelectable = false
+        return descriptionTextView
+    }()
 
-    private func setupSaveButton() {
-        saveButton                    = UIButton()
+    lazy var saveButton: UIButton = {
+        let saveButton                = UIButton()
         saveButton.titleLabel?.font   = UIFont.systemFont(ofSize: 19, weight: .semibold)
         saveButton.backgroundColor    = Colors.additionalBG
         saveButton.layer.cornerRadius = 14
         saveButton.setTitleColor(Colors.textBlue, for: .normal)
         saveButton.setTitle(NSLocalizedString(NSLocalizedString("Save", comment: ""), comment: ""), for: .normal)
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return saveButton
+    }()
+
+    weak var delegate: ProfileViewDelegate?
+
+    func setupUIElements() {
+        addSubviews(photoImageView,
+                    editButton,
+                    nameLabel,
+                    descriptionTextView,
+                    saveButton)
+        setupPhotoImageViewConstraints()
+        setupEditButtonConstraints()
+        setupNameLabelConstraints()
+        setupDescriptionTextViewConstraints()
         setupSaveButtonConstraints()
     }
 
@@ -99,69 +81,47 @@ class ProfileView: UIView {
     }
 
     // MARK: - Constraints
-    private func setupProfilePhotoImageViewConstraints() {
-        addSubview(profilePhotoImageView)
-
-        profilePhotoImageView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupPhotoImageViewConstraints() {
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profilePhotoImageView.widthAnchor.constraint(equalToConstant: 240),
-            profilePhotoImageView.heightAnchor.constraint(equalToConstant: 240),
-            profilePhotoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45),
-            profilePhotoImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
-    }
-
-    private func setupInitialsLabelConstraints() {
-        addSubview(initialsLabel)
-
-        initialsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            initialsLabel.leadingAnchor.constraint(equalTo: profilePhotoImageView.leadingAnchor),
-            initialsLabel.topAnchor.constraint(equalTo: profilePhotoImageView.topAnchor),
-            initialsLabel.trailingAnchor.constraint(equalTo: profilePhotoImageView.trailingAnchor),
-            initialsLabel.bottomAnchor.constraint(equalTo: profilePhotoImageView.bottomAnchor)
+            photoImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5),
+            photoImageView.heightAnchor.constraint(equalTo: photoImageView.widthAnchor, multiplier: 1),
+            photoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45),
+            photoImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 
     private func setupEditButtonConstraints() {
-        addSubview(editButton)
-
         editButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             editButton.widthAnchor.constraint(equalToConstant: 40),
             editButton.heightAnchor.constraint(equalToConstant: 40),
-            editButton.trailingAnchor.constraint(equalTo: profilePhotoImageView.trailingAnchor),
-            editButton.firstBaselineAnchor.constraint(equalTo: profilePhotoImageView.bottomAnchor)
+            editButton.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor),
+            editButton.firstBaselineAnchor.constraint(equalTo: photoImageView.bottomAnchor)
         ])
     }
 
-    private func setupProfileNameLabelConstraints() {
-        addSubview(profileNameLabel)
-
-        profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupNameLabelConstraints() {
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 80),
-            profileNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -80),
-            profileNameLabel.heightAnchor.constraint(equalToConstant: 20),
-            profileNameLabel.topAnchor.constraint(equalTo: profilePhotoImageView.bottomAnchor, constant: 32)
+            nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            nameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            nameLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 32),
+            nameLabel.bottomAnchor.constraint(equalTo: descriptionTextView.topAnchor, constant: -32)
         ])
     }
 
-    private func setupProfileDescriptionLabelConstraints() {
-        addSubview(profileDescriptionLabel)
-
-        profileDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupDescriptionTextViewConstraints() {
+        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileDescriptionLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 78),
-            profileDescriptionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -78),
-            profileDescriptionLabel.heightAnchor.constraint(equalToConstant: 44),
-            profileDescriptionLabel.topAnchor.constraint(equalTo: profileNameLabel.bottomAnchor, constant: 32)
+            descriptionTextView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            descriptionTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
+            descriptionTextView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 32),
+            descriptionTextView.bottomAnchor.constraint(greaterThanOrEqualTo: saveButton.topAnchor, constant: -32)
         ])
     }
 
     private func setupSaveButtonConstraints() {
-        addSubview(saveButton)
-
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             saveButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 56),
