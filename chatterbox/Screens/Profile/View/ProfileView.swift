@@ -12,22 +12,21 @@ class ProfileView: UIView {
         let photoImageView             = UIImageView()
         photoImageView.contentMode     = .scaleAspectFill
         photoImageView.clipsToBounds   = true
-        photoImageView.backgroundColor = Colors.customYellow
+        photoImageView.backgroundColor = UIColor(hex: "#E4E82B")
         return photoImageView
     }()
 
     lazy var editButton: UIButton = {
         let editButton              = UIButton()
         editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        editButton.setTitleColor(Colors.textBlue, for: .normal)
+        editButton.setTitleColor(UIColor.systemBlue, for: .normal)
         editButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
-        editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
         return editButton
     }()
 
     lazy var nameLabel: UILabel = {
         let nameLabel           = UILabel()
-        nameLabel.textColor     = Colors.textBlack
+        nameLabel.textColor     = ThemesManager.shared.textColor
         nameLabel.font          = .systemFont(ofSize: 24, weight: .bold)
         nameLabel.textAlignment = .center
         nameLabel.numberOfLines = 0
@@ -35,22 +34,22 @@ class ProfileView: UIView {
     }()
 
     lazy var descriptionTextView: UITextView = {
-        let descriptionTextView          = UITextView()
-        descriptionTextView.textColor    = Colors.textBlack
-        descriptionTextView.font         = .systemFont(ofSize: 16, weight: .regular)
-        descriptionTextView.isEditable   = false
-        descriptionTextView.isSelectable = false
+        let descriptionTextView             = UITextView()
+        descriptionTextView.textColor       = ThemesManager.shared.textColor
+        descriptionTextView.font            = .systemFont(ofSize: 16, weight: .regular)
+        descriptionTextView.isEditable      = false
+        descriptionTextView.isSelectable    = false
+        descriptionTextView.backgroundColor = ThemesManager.shared.mainBGColor
         return descriptionTextView
     }()
 
     lazy var saveButton: UIButton = {
         let saveButton                = UIButton()
         saveButton.titleLabel?.font   = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        saveButton.backgroundColor    = Colors.additionalBG
+        saveButton.backgroundColor    = UIColor.systemGray.withAlphaComponent(0.2)
         saveButton.layer.cornerRadius = 14
-        saveButton.setTitleColor(Colors.textBlue, for: .normal)
+        saveButton.setTitleColor(UIColor.systemBlue, for: .normal)
         saveButton.setTitle(NSLocalizedString(NSLocalizedString("Save", comment: ""), comment: ""), for: .normal)
-        saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return saveButton
     }()
 
@@ -67,17 +66,6 @@ class ProfileView: UIView {
         setupNameLabelConstraints()
         setupDescriptionTextViewConstraints()
         setupSaveButtonConstraints()
-    }
-
-    // MARK: - Actions
-    @objc
-    private func editButtonPressed() {
-        delegate?.editButtonPressed()
-    }
-
-    @objc
-    private func saveButtonPressed() {
-        delegate?.saveButtonPressed()
     }
 
     // MARK: - Constraints

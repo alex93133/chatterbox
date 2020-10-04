@@ -1,9 +1,12 @@
 "Camera"          = "Camera";
 "Cancel"          = "Cancel";
+"Classic"         = "Classic";
+"Day"             = "Day";
 "Edit"            = "Edit";
 "Get access"      = "Get access";
 "History"         = "History";
 "Maybe later"     = "Maybe later";
+"Night"           = "Night";
 "No messages yet" = "No messages yet";
 "Online"          = "Online";
 "Oops!"           = "Oops!";
@@ -11,5 +14,5 @@
 "Photo library"   = "Photo library";
 "Please note"     = "Please note";
 "Save"            = "Save";
-"For the full application, you will need a smartphone camera. Please allow access" = "For the full application, you will need a smartphone camera. Please allow access";
 "Looks like you forgot to turn on the camera access. To continue, you'll need to fix it in the Settings" = "Looks like you forgot to turn on the camera access. To continue, you'll need to fix it in the Settings";
+"For the full application, you will need a smartphone camera. Please allow access" = "For the full application, you will need a smartphone camera. Please allow access";

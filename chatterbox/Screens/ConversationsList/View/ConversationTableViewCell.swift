@@ -8,7 +8,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     lazy var nameLabel: UILabel = {
         let nameLabel                       = UILabel()
         nameLabel.font                      = .systemFont(ofSize: 15, weight: .semibold)
-        nameLabel.textColor                 = Colors.textBlack
+        nameLabel.textColor                 = ThemesManager.shared.textColor
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.minimumScaleFactor        = 0.9
         nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -18,7 +18,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     lazy var lastMessageLabel: UILabel = {
         let lastMessageLabel       = UILabel()
         lastMessageLabel.font      = .systemFont(ofSize: 15, weight: .regular)
-        lastMessageLabel.textColor = Colors.lightGray
+        lastMessageLabel.textColor = UIColor(hex: "#8D8D93")
         return lastMessageLabel
     }()
 
@@ -34,7 +34,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     lazy var dateLabel: UILabel = {
         let dateLabel           = UILabel()
         dateLabel.font          = .systemFont(ofSize: 15, weight: .regular)
-        dateLabel.textColor     = Colors.lightGray
+        dateLabel.textColor     = UIColor(hex: "#8D8D93")
         dateLabel.textAlignment = .right
         dateLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return dateLabel
@@ -55,8 +55,9 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupUIElements() {
-        accessoryType  = .disclosureIndicator
-        selectionStyle = .none
+        accessoryType   = .disclosureIndicator
+        selectionStyle  = .none
+        backgroundColor = .clear
         addSubviews(nameLabel, lastMessageLabel, photoImageView, dateLabel)
         setupNameLabelConstraints()
         setupLastMessageLabelConstraints()
@@ -78,14 +79,9 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
             lastMessageLabel.font = .italicSystemFont(ofSize: 15)
             dateLabel.isHidden    = true
         }
-
-        if model.isOnline {
-            backgroundColor = Colors.lightYellow
-        }
     }
 
     private func setDefaultCellProperties() {
-        backgroundColor       = Colors.mainBG
         lastMessageLabel.font = .systemFont(ofSize: 15, weight: .regular)
         dateLabel.isHidden    = false
     }

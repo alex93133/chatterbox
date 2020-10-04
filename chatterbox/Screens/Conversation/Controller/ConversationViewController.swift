@@ -35,7 +35,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
     private func setupView() {
         customView.setupUIElements()
         view                            = customView
-        customView.backgroundColor      = Colors.mainBG
+        customView.backgroundColor      = ThemesManager.shared.mainBGColor
         customView.tableView.delegate   = self
         customView.tableView.dataSource = self
     }

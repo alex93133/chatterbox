@@ -32,8 +32,9 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     private func setupView() {
         customView.setupUIElements()
         view                       = customView
-        customView.backgroundColor = Colors.mainBG
-        customView.delegate        = self
+        customView.backgroundColor = ThemesManager.shared.mainBGColor
+        customView.editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+        customView.saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
     }
 
     func configure(with model: ConfigurationModel) {
@@ -78,19 +79,20 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true)
     }
-}
 
-// MARK: - Delegates
-extension ProfileViewController: ProfileViewDelegate {
-    func editButtonPressed() {
+    // MARK: - Actions
+    @objc
+    private func editButtonPressed() {
         presentRequestPhotoAlert()
     }
 
-    func saveButtonPressed() {
+    @objc
+    private func saveButtonPressed() {
         print("Save button action")
     }
 }
 
+// MARK: - Delegates
 extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {

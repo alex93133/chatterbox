@@ -18,11 +18,11 @@ struct ProfileModel {
         } else {
             let initialsLabel             = UILabel()
             initialsLabel.frame.size      = CGSize(width: 240, height: 240)
-            initialsLabel.textColor       = Colors.textBlack
+            initialsLabel.textColor       = ThemesManager.shared.mainBGColor
             initialsLabel.font            = UIFont(name: "Roboto-Regular", size: 120)
             initialsLabel.text            = initials
             initialsLabel.textAlignment   = .center
-            initialsLabel.backgroundColor = Colors.customYellow
+            initialsLabel.backgroundColor = UIColor(hex: "#E4E82B")
 
             let image = UIImage.imageWithLabel(initialsLabel)
 
