@@ -46,9 +46,9 @@ class ConversationsListViewController: UIViewController {
     }
 
     private func applyNewTheme() {
-        conversationsListView.tableView.backgroundColor        = ThemesManager.shared.mainBGColor
-        conversationsListView.backgroundColor                  = ThemesManager.shared.mainBGColor
-        navigationItem.leftBarButtonItem?.tintColor            = ThemesManager.shared.barItemColor
+        conversationsListView.tableView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationsListView.backgroundColor           = ThemesManager.shared.mainBGColor
+        navigationItem.leftBarButtonItem?.tintColor     = ThemesManager.shared.barItemColor
         conversationsListView.tableView.reloadData()
         guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
         cells.forEach { $0.nameLabel.textColor = ThemesManager.shared.textColor }
@@ -57,8 +57,8 @@ class ConversationsListViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func settingsItemPressed() {
-        let theme = ThemesManager.shared.theme
-        let themesViewController = ThemesViewController(with: theme)
+        let theme                     = ThemesManager.shared.theme
+        let themesViewController      = ThemesViewController(with: theme)
         themesViewController.delegate = self
         // Closure method
         themesViewController.themeChangeHandler = {
