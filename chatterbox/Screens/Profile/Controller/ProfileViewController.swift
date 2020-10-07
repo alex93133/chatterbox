@@ -1,19 +1,14 @@
 import UIKit
 
-class ProfileViewController: UIViewController, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, ConfigurableView, UINavigationControllerDelegate {
 
     // MARK: - Properties
     private let customView = ProfileView(frame: UIScreen.main.bounds)
-    var profilePhoto: UIImage? {
-        willSet {
-            customView.initialsLabel.isHidden = true
-            customView.profilePhotoImageView.image = newValue
-        }
-    }
+    var profileModel: ProfileModel
+    typealias ConfigurationModel = ProfileModel
 
-    init() {
-        // printLogs(text: "Edit button frame is: \(editButton.frame)")
-        // Line above crashes the app because button is not inited.
+    init(with profileModel: ProfileModel) {
+        self.profileModel = profileModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -25,32 +20,26 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        printLogs(text: "Method: \(#function), edit button frame is: \(customView.editButton.frame)")
+        configure(with: profileModel)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        customView.profilePhotoImageView.layer.cornerRadius = customView.profilePhotoImageView.frame.size.width / 2
-        printLogs(text: "Method: \(#function), edit button frame is: \(customView.editButton.frame)")
-        // As we can see frames  differentiate. It happens because viewDidAppear called after layout,
-        // but viewDidLoad instead. So after layout frame positions are correct.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        customView.photoImageView.layer.cornerRadius = customView.photoImageView.frame.size.width / 2
     }
 
     // MARK: - Functions
     private func setupView() {
-        view = customView
-        customView.delegate = self
-        if let name = customView.profileNameLabel.text { // Temporarily
-            let initials = getInitials(from: name)
-            customView.initialsLabel.text = initials
-        }
+        customView.setupUIElements()
+        view                       = customView
+        customView.backgroundColor = Colors.mainBG
+        customView.delegate        = self
     }
 
-    private func getInitials(from name: String) -> String {
-        let namesArray = name.split(separator: " ")
-        guard namesArray.count == 2 else { return "" }
-        let firstCharacters = namesArray.compactMap { $0.first }
-        return String(firstCharacters)
+    func configure(with model: ConfigurationModel) {
+        customView.photoImageView.image     = model.accountIcon
+        customView.nameLabel.text           = model.name
+        customView.descriptionTextView.text = model.description
     }
 
     private func presentRequestPhotoAlert() {
@@ -98,13 +87,14 @@ extension ProfileViewController: ProfileViewDelegate {
     }
 
     func saveButtonPressed() {
+        print("Save button action")
     }
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {
-            profilePhoto = image
+            customView.photoImageView.image = image
         }
         picker.dismiss(animated: true)
     }
