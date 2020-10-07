@@ -3,9 +3,16 @@ import UIKit
 class ConversationsListViewController: UIViewController {
 
     // MARK: - Properties
-    private let customView = ConversationsListView(frame: UIScreen.main.bounds)
+    private lazy var conversationsListView: ConversationsListView = {
+        let view = ConversationsListView(frame: UIScreen.main.bounds)
+        return view
+    }()
 
     // MARK: - VC Lifecycle
+    override func loadView() {
+        view = conversationsListView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -14,11 +21,11 @@ class ConversationsListViewController: UIViewController {
 
     // MARK: - Functions
     private func setupView() {
-        customView.setupUIElements()
-        view                            = customView
-        customView.backgroundColor      = ThemesManager.shared.mainBGColor
-        customView.tableView.delegate   = self
-        customView.tableView.dataSource = self
+        conversationsListView.setupUIElements()
+        conversationsListView.backgroundColor      = ThemesManager.shared.mainBGColor
+        conversationsListView.tableView.delegate   = self
+        conversationsListView.tableView.dataSource = self
+        conversationsListView.tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationCell)
     }
 
     private func setupNavigationBar() {
@@ -39,11 +46,11 @@ class ConversationsListViewController: UIViewController {
     }
 
     private func applyNewTheme() {
-        customView.tableView.backgroundColor        = ThemesManager.shared.mainBGColor
-        customView.backgroundColor                  = ThemesManager.shared.mainBGColor
-        navigationItem.leftBarButtonItem?.tintColor = ThemesManager.shared.barItemColor
-        customView.tableView.reloadData()
-        guard let cells = customView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
+        conversationsListView.tableView.backgroundColor        = ThemesManager.shared.mainBGColor
+        conversationsListView.backgroundColor                  = ThemesManager.shared.mainBGColor
+        navigationItem.leftBarButtonItem?.tintColor            = ThemesManager.shared.barItemColor
+        conversationsListView.tableView.reloadData()
+        guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
         cells.forEach { $0.nameLabel.textColor = ThemesManager.shared.textColor }
     }
 
@@ -54,18 +61,19 @@ class ConversationsListViewController: UIViewController {
         let themesViewController = ThemesViewController(with: theme)
         themesViewController.delegate = self
         // Closure method
-        themesViewController.themeChangeHandler = { [self] in
-            applyNewTheme()
+        themesViewController.themeChangeHandler = {
+            self.applyNewTheme()
         }
         navigationController?.pushViewController(themesViewController, animated: true)
     }
 
     @objc
     private func accountItemPressed() {
-        let profileModel                             = UserManager.shared.currentUserModel
-        let profileViewController                    = ProfileViewController(with: profileModel)
-        profileViewController.modalPresentationStyle = .popover
-        present(profileViewController, animated: true)
+        let profileModel                            = UserManager.shared.currentUserModel
+        let profileViewController                   = ProfileViewController(with: profileModel)
+        let navigationController                    = UINavigationController(rootViewController: profileViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 

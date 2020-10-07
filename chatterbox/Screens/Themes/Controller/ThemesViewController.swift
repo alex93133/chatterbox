@@ -7,11 +7,15 @@ protocol ThemesPickerDelegate: class {
 class ThemesViewController: UIViewController, ConfigurableView {
 
     // MARK: - Properties
-    private let customView = ThemesView(frame: UIScreen.main.bounds)
+    private let themesView: ThemesView = {
+        let view = ThemesView(frame: UIScreen.main.bounds)
+        return view
+    }()
+
     var themeModel: ThemeModel
-    lazy var buttons = [customView.classicThemeButton,
-                        customView.dayThemeButton,
-                        customView.nightThemeButton]
+    lazy var buttons = [themesView.classicThemeButton,
+                        themesView.dayThemeButton,
+                        themesView.nightThemeButton]
 
     typealias ConfigurationModel = ThemeModel
 
@@ -30,6 +34,10 @@ class ThemesViewController: UIViewController, ConfigurableView {
     }
 
     // MARK: - VC Lifecycle
+    override func loadView() {
+        view = themesView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -39,13 +47,12 @@ class ThemesViewController: UIViewController, ConfigurableView {
 
     // MARK: - Functions
     private func setupView() {
-        customView.setupUIElements()
-        view                       = customView
-        customView.backgroundColor = ThemesManager.shared.incomingMessageBGColor
+        themesView.setupUIElements()
+        themesView.backgroundColor = ThemesManager.shared.outgoingMessageBGColor
 
-        customView.classicThemeButton.addTarget(self, action: #selector(classicThemeButtonPressed), for: .touchUpInside)
-        customView.dayThemeButton.addTarget(self, action: #selector(dayThemeButtonPressed), for: .touchUpInside)
-        customView.nightThemeButton.addTarget(self, action: #selector(nightThemeButtonPressed), for: .touchUpInside)
+        themesView.classicThemeButton.addTarget(self, action: #selector(classicThemeButtonPressed), for: .touchUpInside)
+        themesView.dayThemeButton.addTarget(self, action: #selector(dayThemeButtonPressed), for: .touchUpInside)
+        themesView.nightThemeButton.addTarget(self, action: #selector(nightThemeButtonPressed), for: .touchUpInside)
     }
 
     private func setupNavigationBar() {
@@ -55,13 +62,13 @@ class ThemesViewController: UIViewController, ConfigurableView {
     func configure(with model: ConfigurationModel) {
         switch model {
         case .classic:
-            customView.classicThemeButton.isSelected = true
+            themesView.classicThemeButton.isSelected = true
 
         case .day:
-            customView.dayThemeButton.isSelected = true
+            themesView.dayThemeButton.isSelected = true
 
         case .night:
-            customView.nightThemeButton.isSelected = true
+            themesView.nightThemeButton.isSelected = true
         }
     }
 
@@ -77,8 +84,8 @@ class ThemesViewController: UIViewController, ConfigurableView {
 
     private func applyNewTheme() {
         UIView.animate(withDuration: 0.3) { [self] in
-            view.backgroundColor = ThemesManager.shared.incomingMessageBGColor
-            buttons.forEach { $0.setTitleColor(ThemesManager.shared.textColor, for: .normal) }
+            view.backgroundColor = ThemesManager.shared.outgoingMessageBGColor
+            buttons.forEach { $0.interactiveTitle.textColor = ThemesManager.shared.outgoingMessageTextColor }
             ThemesManager.shared.setupNavigationBar(target: self)
         }
     }

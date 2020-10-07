@@ -95,6 +95,7 @@ class ThemesManager {
 
     // MARK: - Functions
     private func saveThemeSettings(theme: ThemeModel) {
+        guard theme != currentTheme else { return }
         let themeString = theme.rawValue
         defaults.set(themeString, forKey: key)
     }
