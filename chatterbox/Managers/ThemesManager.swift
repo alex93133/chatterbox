@@ -6,22 +6,19 @@ class ThemesManager {
     private init() {}
 
     // MARK: - Properties
-    private let defaults = UserDefaults.standard
-    private let key = "Theme"
     private var currentTheme: ThemeModel?
-    var theme: ThemeModel {
+    private var theme: ThemeModel {
         get {
             if let currentTheme = currentTheme {
                 return currentTheme
             } else {
-                guard let themeString = defaults.object(forKey: key) as? String else { return .classic }
-                guard let themeModel = ThemeModel(rawValue: themeString) else { return .classic }
+                let userModel = UserManager.shared.userModel
+                guard let themeModel = ThemeModel(rawValue: userModel.theme.rawValue) else { return .classic }
                 currentTheme = themeModel
                 return themeModel
             }
         }
         set {
-            saveThemeSettings(theme: newValue)
             currentTheme = newValue
         }
     }
@@ -94,10 +91,21 @@ class ThemesManager {
     }
 
     // MARK: - Functions
-    private func saveThemeSettings(theme: ThemeModel) {
+    func saveThemeSettings(theme: ThemeModel, handler: @escaping (Result) -> Void) {
         guard theme != currentTheme else { return }
-        let themeString = theme.rawValue
-        defaults.set(themeString, forKey: key)
+        var userModel = UserManager.shared.userModel
+        userModel.theme = theme
+        UserManager.shared.dataManager.updateModel(with: userModel) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.theme = UserManager.shared.userModel.theme
+
+            case .error:
+                return
+            }
+            handler(result)
+        }
     }
 
     func setupNavigationBar(target: UIViewController) {

@@ -38,42 +38,36 @@ class ConversationsListViewController: UIViewController {
         settingsUIBarButtonItem.tintColor = ThemesManager.shared.barItemColor
         navigationItem.leftBarButtonItem = settingsUIBarButtonItem
 
-        let image = UserManager.shared.currentUserModel.accountIcon
+        let image = UserManager.shared.userModel.accountIcon
         let accountButton = UIBarButtonItem.roundedButton(from: image,
                                                           target: self,
                                                           action: #selector(accountItemPressed))
         navigationItem.rightBarButtonItem = accountButton
     }
 
-    private func applyNewTheme() {
-        conversationsListView.tableView.backgroundColor = ThemesManager.shared.mainBGColor
-        conversationsListView.backgroundColor           = ThemesManager.shared.mainBGColor
-        navigationItem.leftBarButtonItem?.tintColor     = ThemesManager.shared.barItemColor
-        conversationsListView.tableView.reloadData()
-        guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
-        cells.forEach { $0.nameLabel.textColor = ThemesManager.shared.textColor }
-    }
-
     // MARK: - Actions
     @objc
     private func settingsItemPressed() {
-        let theme                     = ThemesManager.shared.theme
+        let theme                     = UserManager.shared.userModel.theme
         let themesViewController      = ThemesViewController(with: theme)
         themesViewController.delegate = self
-        // Closure method
-        themesViewController.themeChangeHandler = {
-            self.applyNewTheme()
-        }
         navigationController?.pushViewController(themesViewController, animated: true)
     }
 
     @objc
     private func accountItemPressed() {
-        let profileModel                            = UserManager.shared.currentUserModel
-        let profileViewController                   = ProfileViewController(with: profileModel)
-        let navigationController                    = UINavigationController(rootViewController: profileViewController)
-        navigationController.modalPresentationStyle = .fullScreen
+        let profileModel               = UserManager.shared.userModel
+        let profileViewController      = ProfileViewController(with: profileModel)
+        let navigationController       = UINavigationController(rootViewController: profileViewController)
         present(navigationController, animated: true)
+        profileViewController.updateUserIcon = { [weak self] in
+            guard let self = self else { return }
+            let image = UserManager.shared.userModel.accountIcon
+            let accountButton = UIBarButtonItem.roundedButton(from: image,
+                                                              target: self,
+                                                              action: #selector(self.accountItemPressed))
+            self.navigationItem.rightBarButtonItem = accountButton
+        }
     }
 }
 
@@ -114,9 +108,14 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
 }
 
-// Delegate method
+// Delegates
 extension ConversationsListViewController: ThemesPickerDelegate {
     func updateColors() {
-        applyNewTheme()
+        conversationsListView.tableView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationsListView.backgroundColor           = ThemesManager.shared.mainBGColor
+        navigationItem.leftBarButtonItem?.tintColor     = ThemesManager.shared.barItemColor
+        conversationsListView.tableView.reloadData()
+        guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
+        cells.forEach { $0.nameLabel.textColor = ThemesManager.shared.textColor }
     }
 }

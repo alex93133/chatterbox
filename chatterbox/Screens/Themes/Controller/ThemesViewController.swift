@@ -19,10 +19,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
 
     typealias ConfigurationModel = ThemeModel
 
-    // Delegate method
     weak var delegate: ThemesPickerDelegate?
-    // Closure method
-    var themeChangeHandler: (() -> Void)?
 
     init(with themeModel: ThemeModel) {
         self.themeModel = themeModel
@@ -90,50 +87,48 @@ class ThemesViewController: UIViewController, ConfigurableView {
         }
     }
 
+    private func handleThemeSaving(_ result: Result) {
+        DispatchQueue.main.async {
+            self.delegate?.updateColors()
+            switch result {
+            case .success:
+                self.applyNewTheme()
+                Logger.shared.printLogs(text: "Theme successfully changed to \(UserManager.shared.userModel.theme.rawValue)")
+
+            case .error:
+                Logger.shared.printLogs(text: "Theme changing error")
+            }
+        }
+    }
+
     // MARK: - Actions
     @objc
     private func classicThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-        ThemesManager.shared.theme = .classic
-        applyNewTheme()
 
-        // Delegate method
-        // delegate?.updateColors()
-
-        // Closure method
-        themeChangeHandler?()
-
-        /*
-         If we are using self in non-escaping closures we can get retain cycles issue.
-         It is connected with deallocation of the objects. In this case we don't have
-         such functionality as DispatchSemaphore or DispatchQueue.asyncAfter etc.
-         so we don't have to use [weak self].
-         */
+        ThemesManager.shared.saveThemeSettings(theme: .classic) { [weak self] result in
+            guard let self = self else { return }
+            self.handleThemeSaving(result)
+        }
     }
 
     @objc
     private func dayThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-        ThemesManager.shared.theme = .day
-        applyNewTheme()
 
-        // Delegate method
-        // delegate?.updateColors()
-
-        // Closure method
-        themeChangeHandler?()
+        ThemesManager.shared.saveThemeSettings(theme: .day) { [weak self] result in
+            guard let self = self else { return }
+            self.handleThemeSaving(result)
+        }
     }
 
     @objc
     private func nightThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-        ThemesManager.shared.theme = .night
-        applyNewTheme()
 
-        // Delegate method
-        // delegate?.updateColors()
-
-        // Closure method
-        themeChangeHandler?()
+        ThemesManager.shared.saveThemeSettings(theme: .night) { [weak self] result in
+            guard let self = self else { return }
+            self.handleThemeSaving(result)
+        }
     }
 }
