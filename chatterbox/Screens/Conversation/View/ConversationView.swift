@@ -8,8 +8,7 @@ class ConversationView: UIView {
         tableView.tableFooterView = UIView()
         tableView.rowHeight       = UITableView.automaticDimension
         tableView.separatorStyle  = .none
-        tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
-        tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
+        tableView.backgroundColor = ThemesManager.shared.mainBGColor
         return tableView
     }()
 

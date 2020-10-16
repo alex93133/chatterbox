@@ -2,7 +2,6 @@ opt_in_rules:
 - vertical_whitespace_closing_braces
 - unused_import
 - unused_declaration
-- unused_capture_list
 - untyped_error_in_catch
 - unowned_variable_capture
 - unneeded_parentheses_in_closure_argument

@@ -3,7 +3,11 @@ import UIKit
 class ProfileViewController: UIViewController, ConfigurableView, UINavigationControllerDelegate {
 
     // MARK: - Properties
-    private let customView = ProfileView(frame: UIScreen.main.bounds)
+    private lazy var profileView: ProfileView = {
+        let view = ProfileView(frame: UIScreen.main.bounds)
+        return view
+    }()
+
     var profileModel: ProfileModel
     typealias ConfigurationModel = ProfileModel
 
@@ -17,29 +21,45 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     }
 
     // MARK: - VC Lifecycle
+    override func loadView() {
+        view = profileView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         configure(with: profileModel)
+        setupNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        customView.photoImageView.layer.cornerRadius = customView.photoImageView.frame.size.width / 2
+        profileView.photoImageView.layer.cornerRadius = profileView.photoImageView.frame.size.width / 2
     }
 
     // MARK: - Functions
     private func setupView() {
-        customView.setupUIElements()
-        view                       = customView
-        customView.backgroundColor = Colors.mainBG
-        customView.delegate        = self
+        profileView.setupUIElements()
+        profileView.backgroundColor = ThemesManager.shared.mainBGColor
+        profileView.editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+        profileView.saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+    }
+
+    private func setupNavigationBar() {
+        let closeButtonItem = UIBarButtonItem(title: NSLocalizedString("Close", comment: ""),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(closeButtonPressed))
+        closeButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ThemesManager.shared.barItemColor],
+                                               for: .normal)
+        navigationItem.rightBarButtonItem = closeButtonItem
+        ThemesManager.shared.setupNavigationBar(target: self)
     }
 
     func configure(with model: ConfigurationModel) {
-        customView.photoImageView.image     = model.accountIcon
-        customView.nameLabel.text           = model.name
-        customView.descriptionTextView.text = model.description
+        profileView.photoImageView.image     = model.accountIcon
+        profileView.nameLabel.text           = model.name
+        profileView.descriptionTextView.text = model.description
     }
 
     private func presentRequestPhotoAlert() {
@@ -78,23 +98,29 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true)
     }
-}
 
-// MARK: - Delegates
-extension ProfileViewController: ProfileViewDelegate {
-    func editButtonPressed() {
+    // MARK: - Actions
+    @objc
+    private func editButtonPressed() {
         presentRequestPhotoAlert()
     }
 
-    func saveButtonPressed() {
+    @objc
+    private func saveButtonPressed() {
         print("Save button action")
+    }
+
+    @objc
+    private func closeButtonPressed() {
+        dismiss(animated: true)
     }
 }
 
+// MARK: - Delegates
 extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {
-            customView.photoImageView.image = image
+            profileView.photoImageView.image = image
         }
         picker.dismiss(animated: true)
     }

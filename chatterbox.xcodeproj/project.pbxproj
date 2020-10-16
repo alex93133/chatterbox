@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3302E1202527149F00BF8EEE /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E11F2527149F00BF8EEE /* ThemesViewController.swift */; };
+		3302E123252714C700BF8EEE /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E122252714C700BF8EEE /* ThemesView.swift */; };
+		3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E1262527168E00BF8EEE /* ThemeButton.swift */; };
 		3309F7872517CA52004C6015 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3309F7892517CA52004C6015 /* Localizable.strings */; };
 		331EC649250BB9470084E89C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC648250BB9470084E89C /* AppDelegate.swift */; };
 		331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC653250BB94B0084E89C /* LaunchScreen.storyboard */; };
@@ -29,7 +32,9 @@
 		3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */; };
 		3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */; };
 		335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B4B2517B045005B11EC /* ProfileView.swift */; };
-		335E8B512517B0ED005B11EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B502517B0ED005B11EC /* Colors.swift */; };
+		3373ED7B25273D92001EDE7E /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED7A25273D92001EDE7E /* ThemeModel.swift */; };
+		3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED8125275D4D001EDE7E /* UIColor.swift */; };
+		3373ED8525276830001EDE7E /* ThemesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED8425276830001EDE7E /* ThemesManager.swift */; };
 		339B6900250D024000578B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 339B68FF250D024000578B7E /* Assets.xcassets */; };
 		33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1A1DC2516134200531116 /* UIAlertController.swift */; };
 		33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F8312515069D005A6EB8 /* ProfileViewController.swift */; };
@@ -41,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3302E11F2527149F00BF8EEE /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		3302E122252714C700BF8EEE /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
+		3302E1262527168E00BF8EEE /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		3309F7882517CA52004C6015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3309F78C2517CA70004C6015 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		331EC645250BB9470084E89C /* chatterbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatterbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +74,9 @@
 		3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		335E8B4B2517B045005B11EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		335E8B502517B0ED005B11EC /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		3373ED7A25273D92001EDE7E /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
+		3373ED8125275D4D001EDE7E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		3373ED8425276830001EDE7E /* ThemesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesManager.swift; sourceTree = "<group>"; };
 		339B68FF250D024000578B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33C1A1DC2516134200531116 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		33E9F8312515069D005A6EB8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +98,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3302E11C2527129400BF8EEE /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				3373ED7925273D60001EDE7E /* Model */,
+				3302E11E252712AD00BF8EEE /* View */,
+				3302E11D252712A300BF8EEE /* Controller */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		3302E11D252712A300BF8EEE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3302E11F2527149F00BF8EEE /* ThemesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3302E11E252712AD00BF8EEE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3302E122252714C700BF8EEE /* ThemesView.swift */,
+				3302E1262527168E00BF8EEE /* ThemeButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		331EC63C250BB9470084E89C = {
 			isa = PBXGroup;
 			children = (
@@ -108,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				33E9F835251506C3005A6EB8 /* Storyboards */,
-				335E8B4E2517B0D6005B11EC /* Sources */,
+				335E8B4E2517B0D6005B11EC /* Resources */,
 				331EC65D250BBD6F0084E89C /* Screens */,
 				33265563251F5A6300C16D5E /* Protocols */,
 				33265579251F6CD700C16D5E /* Managers */,
@@ -122,10 +159,7 @@
 		331EC65C250BBD5E0084E89C /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				33F45EF925187AD70018F1E4 /* Fonts */,
 				331EC648250BB9470084E89C /* AppDelegate.swift */,
-				339B68FF250D024000578B7E /* Assets.xcassets */,
-				3309F7892517CA52004C6015 /* Localizable.strings */,
 				331EC656250BB94B0084E89C /* Info.plist */,
 				331EC65E250BBDB30084E89C /* .gitignore */,
 				331EC663250BC13A0084E89C /* .swiftlint.yml */,
@@ -137,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				33EA4463251E00CF00DA3401 /* ConversationsList */,
+				3302E11C2527129400BF8EEE /* Themes */,
 				3326558E2520A1BC00C16D5E /* Conversation */,
 				335E8B482517B021005B11EC /* Profile */,
 			);
@@ -172,6 +207,7 @@
 			children = (
 				3326557A251F6CF400C16D5E /* UserManager.swift */,
 				33265586251FA6C400C16D5E /* HardcodedStorage.swift */,
+				3373ED8425276830001EDE7E /* ThemesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -230,14 +266,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		335E8B4E2517B0D6005B11EC /* Sources */ = {
+		335E8B4E2517B0D6005B11EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				335E8B502517B0ED005B11EC /* Colors.swift */,
+				33F45EF925187AD70018F1E4 /* Fonts */,
+				339B68FF250D024000578B7E /* Assets.xcassets */,
 				33265560251F576700C16D5E /* Identifiers.swift */,
 				33265571251F660800C16D5E /* Images.swift */,
+				3309F7892517CA52004C6015 /* Localizable.strings */,
 			);
-			path = Sources;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3373ED7925273D60001EDE7E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3373ED7A25273D92001EDE7E /* ThemeModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		337485B8251E3E8200E3C172 /* Controller */ = {
@@ -263,6 +309,7 @@
 				3326557D251F775300C16D5E /* UIImage.swift */,
 				33265580251F866900C16D5E /* UIBarButtonItem.swift */,
 				33F4648B252324E300ACA297 /* UIView.swift */,
+				3373ED8125275D4D001EDE7E /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -398,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#exit\nif which swiftlint >/dev/null; then\n swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from #https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "exit\nif which swiftlint >/dev/null; then\n swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from #https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -409,8 +456,9 @@
 			files = (
 				33265576251F694A00C16D5E /* ProfileModel.swift in Sources */,
 				33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */,
+				3373ED8525276830001EDE7E /* ThemesManager.swift in Sources */,
 				331F7D612520AD07005E7666 /* MessageCellModel.swift in Sources */,
-				335E8B512517B0ED005B11EC /* Colors.swift in Sources */,
+				3302E123252714C700BF8EEE /* ThemesView.swift in Sources */,
 				3326556E251F63AA00C16D5E /* ConversationsListView.swift in Sources */,
 				3326556A251F5B1F00C16D5E /* ConversationCellModel.swift in Sources */,
 				3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */,
@@ -421,9 +469,13 @@
 				332655982520A2CB00C16D5E /* ConversationView.swift in Sources */,
 				335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */,
 				33265581251F866900C16D5E /* UIBarButtonItem.swift in Sources */,
+				3373ED7B25273D92001EDE7E /* ThemeModel.swift in Sources */,
 				33265587251FA6C400C16D5E /* HardcodedStorage.swift in Sources */,
 				33265572251F660800C16D5E /* Images.swift in Sources */,
+				3302E1202527149F00BF8EEE /* ThemesViewController.swift in Sources */,
+				3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */,
 				3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */,
+				3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */,
 				332655932520A27E00C16D5E /* ConversationViewController.swift in Sources */,
 				331EC649250BB9470084E89C /* AppDelegate.swift in Sources */,
 				33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */,

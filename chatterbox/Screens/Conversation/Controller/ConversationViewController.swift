@@ -3,7 +3,10 @@ import UIKit
 class ConversationViewController: UIViewController, ConfigurableView {
 
     // MARK: - Properties
-    private let customView = ConversationView(frame: UIScreen.main.bounds)
+    private lazy var conversationView: ConversationView = {
+        let view = ConversationView(frame: UIScreen.main.bounds)
+        return view
+    }()
     var conversationModel: ConversationCellModel
     var cellModels: [MessageCellModel]?
 
@@ -19,6 +22,10 @@ class ConversationViewController: UIViewController, ConfigurableView {
     }
 
     // MARK: - VC Lifecycle
+    override func loadView() {
+        view = conversationView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -33,11 +40,12 @@ class ConversationViewController: UIViewController, ConfigurableView {
 
     // MARK: - Functions
     private func setupView() {
-        customView.setupUIElements()
-        view                            = customView
-        customView.backgroundColor      = Colors.mainBG
-        customView.tableView.delegate   = self
-        customView.tableView.dataSource = self
+        conversationView.setupUIElements()
+        conversationView.backgroundColor      = ThemesManager.shared.mainBGColor
+        conversationView.tableView.delegate   = self
+        conversationView.tableView.dataSource = self
+        conversationView.tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
+        conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
     }
 
     func configure(with model: ConfigurationModel) {
@@ -53,7 +61,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
         guard let cellModels = cellModels, !conversationModel.message.isEmpty else { return }
         DispatchQueue.main.async {
             let lastIndexPath = IndexPath(row: cellModels.count - 1, section: 0)
-            self.customView.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
+            self.conversationView.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
         }
     }
 }
@@ -66,21 +74,22 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let incomingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.incomingMessageCell,
-                                                               for: indexPath) as? IncomingMessageTableViewCell else { return UITableViewCell() }
-
-        guard let outGoingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.outgoingMessageCell,
-                                                               for: indexPath) as? OutgoingMessageTableViewCell else { return UITableViewCell() }
-
         guard let cellModels = cellModels else { return UITableViewCell() }
         let cellModel = cellModels[indexPath.row]
 
         if cellModel.isIncoming {
-            incomingCell.configure(with: cellModel)
-            return incomingCell
+            if let incomingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.incomingMessageCell,
+                                                                for: indexPath) as? IncomingMessageTableViewCell {
+                incomingCell.configure(with: cellModel)
+                return incomingCell
+            }
         } else {
-            outGoingCell.configure(with: cellModel)
-            return outGoingCell
+            if let outGoingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.outgoingMessageCell,
+                                                                for: indexPath) as? OutgoingMessageTableViewCell {
+                outGoingCell.configure(with: cellModel)
+                return outGoingCell
+            }
         }
+        return UITableViewCell()
     }
 }

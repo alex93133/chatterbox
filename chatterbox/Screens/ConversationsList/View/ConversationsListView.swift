@@ -7,7 +7,7 @@ class ConversationsListView: UIView {
         let tableView             = UITableView()
         tableView.tableFooterView = UIView()
         tableView.rowHeight       = 88
-        tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationCell)
+        tableView.backgroundColor = ThemesManager.shared.mainBGColor
         return tableView
     }()
 
