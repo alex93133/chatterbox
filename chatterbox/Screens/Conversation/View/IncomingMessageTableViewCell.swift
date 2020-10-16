@@ -6,16 +6,16 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
 
     // MARK: - UI
     private lazy var overlayView: UIView = {
-        let overlayView                = UIView()
-        overlayView.backgroundColor    = ThemesManager.shared.incomingMessageBGColor
+        let overlayView = UIView()
+        overlayView.backgroundColor = ThemesManager.shared.incomingMessageBGColor
         overlayView.layer.cornerRadius = 8
         return overlayView
     }()
 
     lazy var incomingMessageLabel: UILabel = {
-        let incomingMessageLabel           = UILabel()
-        incomingMessageLabel.font          = .systemFont(ofSize: 16, weight: .regular)
-        incomingMessageLabel.textColor     = ThemesManager.shared.textColor
+        let incomingMessageLabel = UILabel()
+        incomingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        incomingMessageLabel.textColor = ThemesManager.shared.textColor
         incomingMessageLabel.numberOfLines = 0
         return incomingMessageLabel
     }()
@@ -34,7 +34,7 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupUIElements() {
-        selectionStyle  = .none
+        selectionStyle = .none
         backgroundColor = .clear
         addSubviews(overlayView, incomingMessageLabel)
         setupOverlayViewConstraints()

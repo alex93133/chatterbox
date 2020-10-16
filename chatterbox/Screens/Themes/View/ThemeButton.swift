@@ -4,18 +4,18 @@ class ThemeButton: UIButton {
 
     // MARK: - UI
     private lazy var themeImageView: UIImageView = {
-        let themeImageView                = UIImageView()
-        themeImageView.contentMode        = .scaleAspectFill
-        themeImageView.clipsToBounds      = true
-        themeImageView.backgroundColor    = UIColor(hex: "#E4E82B")
+        let themeImageView = UIImageView()
+        themeImageView.contentMode = .scaleAspectFill
+        themeImageView.clipsToBounds = true
+        themeImageView.backgroundColor = UIColor(hex: "#E4E82B")
         themeImageView.layer.cornerRadius = 14
         return themeImageView
     }()
 
     lazy var interactiveTitle: UILabel = {
-        let interactiveTitle           = UILabel()
-        interactiveTitle.textColor     = ThemesManager.shared.outgoingMessageTextColor
-        interactiveTitle.font          = .systemFont(ofSize: 19, weight: .semibold)
+        let interactiveTitle = UILabel()
+        interactiveTitle.textColor = ThemesManager.shared.outgoingMessageTextColor
+        interactiveTitle.font = .systemFont(ofSize: 19, weight: .semibold)
         interactiveTitle.textAlignment = .center
         return interactiveTitle
     }()
@@ -34,7 +34,7 @@ class ThemeButton: UIButton {
         self.init(frame: .zero)
         setupUIElements()
         interactiveTitle.text = title
-        themeImageView.image  = image
+        themeImageView.image = image
     }
 
     func setupUIElements() {

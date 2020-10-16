@@ -4,15 +4,15 @@ class ProfileView: UIView {
 
     // MARK: - UI
     lazy var photoImageView: UIImageView = {
-        let photoImageView             = UIImageView()
-        photoImageView.contentMode     = .scaleAspectFill
-        photoImageView.clipsToBounds   = true
+        let photoImageView = UIImageView()
+        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.clipsToBounds = true
         photoImageView.backgroundColor = UIColor(hex: "#E4E82B")
         return photoImageView
     }()
 
     lazy var editPhotoButton: UIButton = {
-        let editPhotoButton              = UIButton()
+        let editPhotoButton = UIButton()
         editPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         editPhotoButton.setTitleColor(UIColor.systemBlue, for: .normal)
         editPhotoButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
@@ -20,27 +20,27 @@ class ProfileView: UIView {
     }()
 
     lazy var nameTextView: UITextView = {
-        let nameTextView                = UITextView()
-        nameTextView.textColor          = ThemesManager.shared.textColor
-        nameTextView.font               = .systemFont(ofSize: 24, weight: .bold)
-        nameTextView.isSelectable       = false
-        nameTextView.isScrollEnabled    = false
-        nameTextView.isEditable         = false
-        nameTextView.returnKeyType      = .done
-        nameTextView.backgroundColor    = .clear
-        nameTextView.textAlignment      = .center
+        let nameTextView = UITextView()
+        nameTextView.textColor = ThemesManager.shared.textColor
+        nameTextView.font = .systemFont(ofSize: 24, weight: .bold)
+        nameTextView.isSelectable = false
+        nameTextView.isScrollEnabled = false
+        nameTextView.isEditable = false
+        nameTextView.returnKeyType = .done
+        nameTextView.backgroundColor = .clear
+        nameTextView.textAlignment = .center
         nameTextView.layer.cornerRadius = 8
         return nameTextView
     }()
 
     lazy var descriptionTextView: UITextView = {
-        let descriptionTextView                = UITextView()
-        descriptionTextView.textColor          = ThemesManager.shared.textColor
-        descriptionTextView.font               = .systemFont(ofSize: 16, weight: .regular)
-        descriptionTextView.isSelectable       = false
-        descriptionTextView.isEditable         = false
-        descriptionTextView.returnKeyType      = .done
-        descriptionTextView.backgroundColor    = .clear
+        let descriptionTextView = UITextView()
+        descriptionTextView.textColor = ThemesManager.shared.textColor
+        descriptionTextView.font = .systemFont(ofSize: 16, weight: .regular)
+        descriptionTextView.isSelectable = false
+        descriptionTextView.isEditable = false
+        descriptionTextView.returnKeyType = .done
+        descriptionTextView.backgroundColor = .clear
         descriptionTextView.layer.cornerRadius = 8
         return descriptionTextView
     }()
@@ -52,7 +52,7 @@ class ProfileView: UIView {
     }()
 
     lazy var saveButtonOperation: SaveButton = {
-        let saveButtonOperation  = SaveButton(title: "Operation")
+        let saveButtonOperation = SaveButton(title: "Operation")
         saveButtonOperation.isEnabled = false
         return saveButtonOperation
     }()

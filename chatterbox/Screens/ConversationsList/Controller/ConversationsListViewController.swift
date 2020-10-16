@@ -22,8 +22,8 @@ class ConversationsListViewController: UIViewController {
     // MARK: - Functions
     private func setupView() {
         conversationsListView.setupUIElements()
-        conversationsListView.backgroundColor      = ThemesManager.shared.mainBGColor
-        conversationsListView.tableView.delegate   = self
+        conversationsListView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationsListView.tableView.delegate = self
         conversationsListView.tableView.dataSource = self
         conversationsListView.tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationCell)
     }
@@ -48,17 +48,17 @@ class ConversationsListViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func settingsItemPressed() {
-        let theme                     = UserManager.shared.userModel.theme
-        let themesViewController      = ThemesViewController(with: theme)
+        let theme = UserManager.shared.userModel.theme
+        let themesViewController = ThemesViewController(with: theme)
         themesViewController.delegate = self
         navigationController?.pushViewController(themesViewController, animated: true)
     }
 
     @objc
     private func accountItemPressed() {
-        let profileModel               = UserManager.shared.userModel
-        let profileViewController      = ProfileViewController(with: profileModel)
-        let navigationController       = UINavigationController(rootViewController: profileViewController)
+        let profileModel = UserManager.shared.userModel
+        let profileViewController = ProfileViewController(with: profileModel)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
         present(navigationController, animated: true)
         profileViewController.updateUserIcon = { [weak self] in
             guard let self = self else { return }
@@ -103,7 +103,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor        = ThemesManager.shared.textColor
+        header.textLabel?.textColor = ThemesManager.shared.textColor
         header.contentView.backgroundColor = ThemesManager.shared.mainBGColor.withAlphaComponent(0.8)
     }
 }
@@ -112,8 +112,8 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
 extension ConversationsListViewController: ThemesPickerDelegate {
     func updateColors() {
         conversationsListView.tableView.backgroundColor = ThemesManager.shared.mainBGColor
-        conversationsListView.backgroundColor           = ThemesManager.shared.mainBGColor
-        navigationItem.leftBarButtonItem?.tintColor     = ThemesManager.shared.barItemColor
+        conversationsListView.backgroundColor = ThemesManager.shared.mainBGColor
+        navigationItem.leftBarButtonItem?.tintColor = ThemesManager.shared.barItemColor
         conversationsListView.tableView.reloadData()
         guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
         cells.forEach { $0.nameLabel.textColor = ThemesManager.shared.textColor }

@@ -41,15 +41,15 @@ class ConversationViewController: UIViewController, ConfigurableView {
     // MARK: - Functions
     private func setupView() {
         conversationView.setupUIElements()
-        conversationView.backgroundColor      = ThemesManager.shared.mainBGColor
-        conversationView.tableView.delegate   = self
+        conversationView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationView.tableView.delegate = self
         conversationView.tableView.dataSource = self
         conversationView.tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
         conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
     }
 
     func configure(with model: ConfigurationModel) {
-        let title            = "\(model.name) (\(model.statusString))"
+        let title = "\(model.name) (\(model.statusString))"
         navigationItem.title = title
     }
 

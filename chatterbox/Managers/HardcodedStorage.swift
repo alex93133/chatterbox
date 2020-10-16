@@ -12,10 +12,10 @@ struct HardcodedStorage {
     }
 
     var sections: [ConversationsListSections] {
-        let conversations  = HardcodedStorage.shared.conversations
+        let conversations = HardcodedStorage.shared.conversations
 
-        let onlineSection  = ConversationsListSections(title: NSLocalizedString("Online", comment: ""),
-                                                       conversations: conversations.filter { $0.isOnline })
+        let onlineSection = ConversationsListSections(title: NSLocalizedString("Online", comment: ""),
+                                                      conversations: conversations.filter { $0.isOnline })
         let offlineSection = ConversationsListSections(title: NSLocalizedString("History", comment: ""),
                                                        conversations: conversations.filter { !$0.isOnline })
         let sections       = [onlineSection, offlineSection]

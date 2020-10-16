@@ -25,10 +25,10 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
             }
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self = self else { return }
-                self.profileView.nameTextView.backgroundColor        = textViewBGColor
+                self.profileView.nameTextView.backgroundColor = textViewBGColor
                 self.profileView.descriptionTextView.backgroundColor = textViewBGColor
-                self.profileView.nameTextView.isEditable             = isEditable
-                self.profileView.descriptionTextView.isEditable      = isEditable
+                self.profileView.nameTextView.isEditable = isEditable
+                self.profileView.descriptionTextView.isEditable = isEditable
             }
         }
     }
@@ -40,14 +40,14 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
             } else {
                 profileView.activityIndicator.stopAnimating()
             }
-            profileView.saveButtonGCD.isEnabled       = !isSaving
+            profileView.saveButtonGCD.isEnabled = !isSaving
             profileView.saveButtonOperation.isEnabled = !isSaving
         }
     }
 
     var isAbleToSave: Bool = false {
         willSet {
-            profileView.saveButtonGCD.isEnabled       = newValue
+            profileView.saveButtonGCD.isEnabled = newValue
             profileView.saveButtonOperation.isEnabled = newValue
         }
     }
@@ -85,16 +85,12 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         profileView.photoImageView.layer.cornerRadius = profileView.photoImageView.frame.size.width / 2
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: - Functions
     private func setupView() {
         profileView.setupUIElements()
-        profileView.backgroundColor               = ThemesManager.shared.mainBGColor
-        profileView.nameTextView.delegate         = self
-        profileView.descriptionTextView.delegate  = self
+        profileView.backgroundColor = ThemesManager.shared.mainBGColor
+        profileView.nameTextView.delegate = self
+        profileView.descriptionTextView.delegate = self
 
         profileView.editPhotoButton.addTarget(self, action: #selector(editPhotoButtonPressed), for: .touchUpInside)
         profileView.saveButtonGCD.addTarget(self, action: #selector(saveButtonGCDPressed), for: .touchUpInside)
@@ -112,14 +108,14 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         editInfoButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                                   for: .normal)
 
-        navigationItem.leftBarButtonItem  = closeButtonItem
+        navigationItem.leftBarButtonItem = closeButtonItem
         navigationItem.rightBarButtonItem = editInfoButtonItem
         ThemesManager.shared.setupNavigationBar(target: self)
     }
 
     func configure(with model: ConfigurationModel) {
-        profileView.photoImageView.image     = model.accountIcon
-        profileView.nameTextView.text        = model.name
+        profileView.photoImageView.image = model.accountIcon
+        profileView.nameTextView.text = model.name
         profileView.descriptionTextView.text = model.description
     }
 
@@ -161,8 +157,8 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     }
 
     private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
-        let imagePicker        = UIImagePickerController()
-        imagePicker.delegate   = self
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true)
     }
@@ -175,18 +171,18 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         else { return }
 
         let state = (name != profileModel.name || description != profileModel.description) ? true : false
-        updatedModel.name        = name
+        updatedModel.name = name
         updatedModel.description = description
-        isAbleToSave             = state
+        isAbleToSave = state
     }
 
     private func saveData() {
-        isSaving     = true
+        isSaving = true
         isAbleToSave = false
         UserManager.shared.dataManager.updateModel(with: updatedModel) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.isSaving           = false
+                self.isSaving = false
                 self.isTextViewEditable = false
                 switch result {
                 case .success:

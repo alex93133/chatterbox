@@ -6,35 +6,35 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
 
     // MARK: - UI
     lazy var nameLabel: UILabel = {
-        let nameLabel                       = UILabel()
-        nameLabel.font                      = .systemFont(ofSize: 15, weight: .semibold)
-        nameLabel.textColor                 = ThemesManager.shared.textColor
+        let nameLabel = UILabel()
+        nameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        nameLabel.textColor = ThemesManager.shared.textColor
         nameLabel.adjustsFontSizeToFitWidth = true
-        nameLabel.minimumScaleFactor        = 0.9
+        nameLabel.minimumScaleFactor = 0.9
         nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return nameLabel
     }()
 
     lazy var lastMessageLabel: UILabel = {
-        let lastMessageLabel       = UILabel()
-        lastMessageLabel.font      = .systemFont(ofSize: 15, weight: .regular)
+        let lastMessageLabel = UILabel()
+        lastMessageLabel.font = .systemFont(ofSize: 15, weight: .regular)
         lastMessageLabel.textColor = UIColor(hex: "#8D8D93")
         return lastMessageLabel
     }()
 
     lazy var photoImageView: UIImageView = {
-        let photoImageView                = UIImageView()
-        photoImageView.contentMode        = .scaleAspectFill
+        let photoImageView = UIImageView()
+        photoImageView.contentMode = .scaleAspectFill
         photoImageView.layer.cornerRadius = 24
-        photoImageView.clipsToBounds      = true
-        photoImageView.backgroundColor    = .red
+        photoImageView.clipsToBounds = true
+        photoImageView.backgroundColor = .red
         return photoImageView
     }()
 
     lazy var dateLabel: UILabel = {
-        let dateLabel           = UILabel()
-        dateLabel.font          = .systemFont(ofSize: 15, weight: .regular)
-        dateLabel.textColor     = UIColor(hex: "#8D8D93")
+        let dateLabel = UILabel()
+        dateLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        dateLabel.textColor = UIColor(hex: "#8D8D93")
         dateLabel.textAlignment = .right
         dateLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return dateLabel
@@ -55,8 +55,8 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupUIElements() {
-        accessoryType   = .disclosureIndicator
-        selectionStyle  = .none
+        accessoryType = .disclosureIndicator
+        selectionStyle = .none
         backgroundColor = .clear
         addSubviews(nameLabel, lastMessageLabel, photoImageView, dateLabel)
         setupNameLabelConstraints()
@@ -66,9 +66,9 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     func configure(with model: ConfigurationModel) {
-        nameLabel.text        = model.name
+        nameLabel.text = model.name
         lastMessageLabel.text = model.message
-        dateLabel.text        = model.dateString
+        dateLabel.text = model.dateString
 
         if model.hasUnreadMessages {
             lastMessageLabel.font = .systemFont(ofSize: 15, weight: .bold)
@@ -77,13 +77,13 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
         if model.message.isEmpty {
             lastMessageLabel.text = NSLocalizedString("No messages yet", comment: "")
             lastMessageLabel.font = .italicSystemFont(ofSize: 15)
-            dateLabel.isHidden    = true
+            dateLabel.isHidden = true
         }
     }
 
     private func setDefaultCellProperties() {
         lastMessageLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        dateLabel.isHidden    = false
+        dateLabel.isHidden = false
     }
 
     // MARK: - Constraints
