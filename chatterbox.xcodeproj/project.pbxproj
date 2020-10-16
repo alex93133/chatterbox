@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		332655982520A2CB00C16D5E /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332655972520A2CB00C16D5E /* ConversationView.swift */; };
 		3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */; };
 		3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */; };
+		334AF3502539F20C001A666B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334AF34F2539F20C001A666B /* GoogleService-Info.plist */; };
 		335DDC8C2534A28C00004193 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8B2534A28C00004193 /* UserManager.swift */; };
 		335DDC902534C10200004193 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8F2534C10200004193 /* OperationDataManager.swift */; };
 		335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B4B2517B045005B11EC /* ProfileView.swift */; };
@@ -49,9 +50,11 @@
 		33EA446F251E016600DA3401 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA446E251E016600DA3401 /* Logger.swift */; };
 		33F45EFB25187AEC0018F1E4 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */; };
 		33F4648C252324E300ACA297 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4648B252324E300ACA297 /* UIView.swift */; };
+		3C28A1216F32E5B277C60D40 /* Pods_chatterbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB96F25D9967016761BD20CF /* Pods_chatterbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		322273BCF0DE40F0D8889461 /* Pods-chatterbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatterbox.debug.xcconfig"; path = "Target Support Files/Pods-chatterbox/Pods-chatterbox.debug.xcconfig"; sourceTree = "<group>"; };
 		3302E11F2527149F00BF8EEE /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		3302E122252714C700BF8EEE /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		3302E1262527168E00BF8EEE /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		332655972520A2CB00C16D5E /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		334AF34F2539F20C001A666B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		335DDC8B2534A28C00004193 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		335DDC8F2534C10200004193 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		335E8B4B2517B045005B11EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 		33EA446E251E016600DA3401 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		33F45EFA25187AEC0018F1E4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		33F4648B252324E300ACA297 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		9D2F2229F47041E821CB446B /* Pods-chatterbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatterbox.release.xcconfig"; path = "Target Support Files/Pods-chatterbox/Pods-chatterbox.release.xcconfig"; sourceTree = "<group>"; };
+		FB96F25D9967016761BD20CF /* Pods_chatterbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatterbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +110,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C28A1216F32E5B277C60D40 /* Pods_chatterbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29521E8E1D1CA7A778141770 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				322273BCF0DE40F0D8889461 /* Pods-chatterbox.debug.xcconfig */,
+				9D2F2229F47041E821CB446B /* Pods-chatterbox.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		3302E11C2527129400BF8EEE /* Themes */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +158,8 @@
 			children = (
 				331EC647250BB9470084E89C /* chatterbox */,
 				331EC646250BB9470084E89C /* Products */,
+				29521E8E1D1CA7A778141770 /* Pods */,
+				7F4AE412B715D067EB652BE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +191,7 @@
 			children = (
 				331EC648250BB9470084E89C /* AppDelegate.swift */,
 				331EC656250BB94B0084E89C /* Info.plist */,
+				334AF34F2539F20C001A666B /* GoogleService-Info.plist */,
 				331EC65E250BBDB30084E89C /* .gitignore */,
 				331EC663250BC13A0084E89C /* .swiftlint.yml */,
 			);
@@ -376,6 +395,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		7F4AE412B715D067EB652BE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB96F25D9967016761BD20CF /* Pods_chatterbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -383,10 +410,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 331EC659250BB94B0084E89C /* Build configuration list for PBXNativeTarget "chatterbox" */;
 			buildPhases = (
+				E63898B1758128B9B1AC768F /* [CP] Check Pods Manifest.lock */,
 				331EC662250BC0980084E89C /* ShellScript */,
 				331EC641250BB9470084E89C /* Sources */,
 				331EC642250BB9470084E89C /* Frameworks */,
 				331EC643250BB9470084E89C /* Resources */,
+				752186997A12CD8256BC7B31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -442,6 +471,7 @@
 				331EC65F250BBDB30084E89C /* .gitignore in Resources */,
 				331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */,
 				339B6900250D024000578B7E /* Assets.xcassets in Resources */,
+				334AF3502539F20C001A666B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +493,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#exit\nif which swiftlint >/dev/null; then\n swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from #https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		752186997A12CD8256BC7B31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chatterbox/Pods-chatterbox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chatterbox/Pods-chatterbox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chatterbox/Pods-chatterbox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E63898B1758128B9B1AC768F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chatterbox-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -654,6 +723,7 @@
 		};
 		331EC65A250BB94B0084E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 322273BCF0DE40F0D8889461 /* Pods-chatterbox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -664,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandr-Lazarev.Stocks.chatterbox";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -673,6 +743,7 @@
 		};
 		331EC65B250BB94B0084E89C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D2F2229F47041E821CB446B /* Pods-chatterbox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -683,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Alexandr-Lazarev.Stocks.chatterbox";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
