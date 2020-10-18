@@ -1,25 +1,17 @@
 import Foundation
 
 struct ConversationCellModel {
-    let name: String
-    let message: String
-    let date: Date
-    let isOnline: Bool
-    let hasUnreadMessages: Bool
+    var channel: Channel
 
-    var dateString: String {
+    var dateString: String? {
+        guard let lastActivity = channel.lastActivity else { return nil }
         let formatter = DateFormatter()
         let calendar = Calendar.current
-        if calendar.isDateInToday(date) {
+        if calendar.isDateInToday(lastActivity) {
             formatter.dateFormat = "HH:mm"
         } else {
             formatter.dateFormat = "dd MMM"
         }
-        return formatter.string(from: date)
-    }
-
-    var statusString: String {
-        let statusString = isOnline ? "Online" : "Offline"
-        return NSLocalizedString(statusString, comment: "")
+        return formatter.string(from: lastActivity)
     }
 }

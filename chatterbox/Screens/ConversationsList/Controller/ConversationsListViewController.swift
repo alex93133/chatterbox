@@ -8,6 +8,13 @@ class ConversationsListViewController: UIViewController {
         return view
     }()
 
+    var manager = FirebaseManager()
+    var cellModels = [ConversationCellModel]() {
+        didSet {
+            conversationsListView.tableView.reloadData()
+        }
+    }
+
     // MARK: - VC Lifecycle
     override func loadView() {
         view = conversationsListView
@@ -17,6 +24,7 @@ class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupNavigationBar()
+        getData()
     }
 
     // MARK: - Functions
@@ -38,11 +46,30 @@ class ConversationsListViewController: UIViewController {
         settingsUIBarButtonItem.tintColor = ThemesManager.shared.barItemColor
         navigationItem.leftBarButtonItem = settingsUIBarButtonItem
 
+        let createChannelAction = UIBarButtonItem(barButtonSystemItem: .add,
+                                                  target: self,
+                                                  action: #selector(createChannel))
+
         let image = UserManager.shared.userModel.accountIcon
         let accountButton = UIBarButtonItem.roundedButton(from: image,
                                                           target: self,
                                                           action: #selector(accountItemPressed))
-        navigationItem.rightBarButtonItem = accountButton
+        navigationItem.rightBarButtonItems = [accountButton, createChannelAction]
+    }
+
+    private func getData() {
+        manager.getChannels { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let channels):
+                var models = channels.map { ConversationCellModel(channel: $0) }
+                models.sort { $0.channel.lastActivity ?? .distantPast > $1.channel.lastActivity ?? .distantPast }
+                self.cellModels = models
+
+            case .failure(let error):
+                Logger.shared.printLogs(text: "Unable to get data from Firebase. Error: \(error.localizedDescription)")
+            }
+        }
     }
 
     // MARK: - Actions
@@ -52,6 +79,34 @@ class ConversationsListViewController: UIViewController {
         let themesViewController = ThemesViewController(with: theme)
         themesViewController.delegate = self
         navigationController?.pushViewController(themesViewController, animated: true)
+    }
+
+    @objc
+    private func createChannel() {
+        let alertController = UIAlertController(title: NSLocalizedString("Create a new channel", comment: ""),
+                                                message: NSLocalizedString("Please type the new channel name", comment: ""),
+                                                preferredStyle: .alert)
+
+        alertController.addTextField { (textField: UITextField) in
+            textField.placeholder = NSLocalizedString("Channel name", comment: "")
+            textField.autocapitalizationType = .sentences
+        }
+
+        let createAction = UIAlertAction(title: NSLocalizedString("Create", comment: ""),
+                                         style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            guard let textField = alertController.textFields?.first else { return }
+            guard let text = textField.text, !text.isEmpty else { return }
+            self.manager.createChannel(name: text)
+        }
+
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
+                                         style: .cancel)
+
+        alertController.addAction(createAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
     @objc
@@ -74,30 +129,26 @@ class ConversationsListViewController: UIViewController {
 // MARK: - Delegates
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return HardcodedStorage.shared.sections.count
-    }
-
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return HardcodedStorage.shared.sections[section].title
+        return NSLocalizedString("Channels", comment: "")
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return HardcodedStorage.shared.sections[section].conversations.count
+        return cellModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.conversationCell,
                                                        for: indexPath) as? ConversationTableViewCell else { return UITableViewCell() }
-        let cellModel = HardcodedStorage.shared.sections[indexPath.section].conversations[indexPath.row]
+        let cellModel = cellModels[indexPath.row]
         cell.configure(with: cellModel)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedModel = HardcodedStorage.shared.sections[indexPath.section].conversations[indexPath.row]
-        let conversationViewController = ConversationViewController(with: selectedModel)
+        let selectedModel = cellModels[indexPath.row]
+        let conversationViewController = ConversationViewController(with: selectedModel.channel)
         navigationController?.pushViewController(conversationViewController, animated: true)
     }
 

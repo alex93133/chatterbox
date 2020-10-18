@@ -18,8 +18,6 @@ class ConversationsListView: UIView {
 
     // MARK: - Constraints
     private func setupTableViewConstraints() {
-        addSubview(tableView)
-
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

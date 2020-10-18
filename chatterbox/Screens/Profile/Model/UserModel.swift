@@ -6,6 +6,7 @@ struct UserModel: Equatable {
     var name: String
     var description: String
     var theme: ThemeModel
+    var uuID: String
 
     var initials: String {
         let namesArray = name.split(separator: " ")

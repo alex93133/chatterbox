@@ -1,6 +1,6 @@
 import Foundation
 
 struct MessageCellModel {
-    let text: String
+    let message: Message
     var isIncoming: Bool
 }

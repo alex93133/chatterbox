@@ -30,20 +30,19 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     }
 
     func configure(with model: ConfigurationModel) {
-        outgoingMessageLabel.text = model.text
+        outgoingMessageLabel.text = model.message.content
     }
 
     private func setupUIElements() {
         selectionStyle = .none
         backgroundColor = .clear
+        addSubviews(overlayView, outgoingMessageLabel)
         setupOverlayViewConstraints()
         setupOutgoingMessageLabelConstraints()
     }
 
     // MARK: - Constraints
     private func setupOverlayViewConstraints() {
-        addSubview(overlayView)
-
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             overlayView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
@@ -54,8 +53,6 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     }
 
     private func setupOutgoingMessageLabelConstraints() {
-        overlayView.addSubview(outgoingMessageLabel)
-
         outgoingMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             outgoingMessageLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),

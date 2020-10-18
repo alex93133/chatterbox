@@ -12,6 +12,13 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
         return overlayView
     }()
 
+    lazy var senderNameLabel: UILabel = {
+        let senderNameLabel = UILabel()
+        senderNameLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        senderNameLabel.textColor = .systemBlue
+        return senderNameLabel
+    }()
+
     lazy var incomingMessageLabel: UILabel = {
         let incomingMessageLabel = UILabel()
         incomingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
@@ -30,21 +37,21 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     func configure(with model: ConfigurationModel) {
-        incomingMessageLabel.text = model.text
+        senderNameLabel.text = model.message.senderName
+        incomingMessageLabel.text = model.message.content
     }
 
     private func setupUIElements() {
         selectionStyle = .none
         backgroundColor = .clear
-        addSubviews(overlayView, incomingMessageLabel)
+        addSubviews(overlayView, senderNameLabel, incomingMessageLabel)
         setupOverlayViewConstraints()
+        setupSenderNameLabelConstraints()
         setupIncomingMessageLabelConstraints()
     }
 
     // MARK: - Constraints
     private func setupOverlayViewConstraints() {
-        addSubview(overlayView)
-
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             overlayView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
@@ -54,14 +61,21 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
         ])
     }
 
-    private func setupIncomingMessageLabelConstraints() {
-        overlayView.addSubview(incomingMessageLabel)
+    private func setupSenderNameLabelConstraints() {
+        senderNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            senderNameLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: 5),
+            senderNameLabel.bottomAnchor.constraint(equalTo: incomingMessageLabel.topAnchor, constant: -5),
+            senderNameLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 12),
+            senderNameLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -8)
+        ])
+    }
 
+    private func setupIncomingMessageLabelConstraints() {
         incomingMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             incomingMessageLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),
             incomingMessageLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -8),
-            incomingMessageLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: 5),
             incomingMessageLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -5)
         ])
     }

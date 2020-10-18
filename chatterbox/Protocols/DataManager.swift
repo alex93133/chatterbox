@@ -22,16 +22,18 @@ extension DataManager {
            let name = dictionary.object(forKey: "name") as? String,
            let description = dictionary.object(forKey: "description") as? String,
            let themeString = dictionary.object(forKey: "theme") as? String,
-           let theme = ThemeModel(rawValue: themeString) {
+           let theme = ThemeModel(rawValue: themeString),
+           let uuid = dictionary.object(forKey: "uuid") as? String {
             let photo = getPhoto()
 
             let userModel = UserModel(photo: photo,
                                       name: name,
                                       description: description,
-                                      theme: theme)
+                                      theme: theme,
+                                      uuID: uuid)
             return userModel
         } else {
-            return UserModel(photo: nil, name: "User", description: "", theme: .classic)
+            return UserModel(photo: nil, name: "User", description: "", theme: .classic, uuID: "")
         }
     }
 
@@ -50,7 +52,8 @@ extension DataManager {
         let data: [String: String] = [
             "name": model.name,
             "description": model.description,
-            "theme": model.theme.rawValue
+            "theme": model.theme.rawValue,
+            "uuid": model.uuID
         ]
         let dictionary = NSDictionary(dictionary: data)
         let isCreated = dictionary.write(toFile: plistURL.path, atomically: true)

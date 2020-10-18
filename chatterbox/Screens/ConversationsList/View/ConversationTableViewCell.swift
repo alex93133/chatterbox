@@ -27,7 +27,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.layer.cornerRadius = 24
         photoImageView.clipsToBounds = true
-        photoImageView.backgroundColor = .red
+        photoImageView.backgroundColor = .purple
         return photoImageView
     }()
 
@@ -66,15 +66,14 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     func configure(with model: ConfigurationModel) {
-        nameLabel.text = model.name
-        lastMessageLabel.text = model.message
-        dateLabel.text = model.dateString
+        nameLabel.text = model.channel.name
+        lastMessageLabel.text = model.channel.lastMessage
 
-        if model.hasUnreadMessages {
-            lastMessageLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        if let dateString = model.dateString {
+            dateLabel.text = dateString
         }
 
-        if model.message.isEmpty {
+        if model.channel.lastMessage == nil {
             lastMessageLabel.text = NSLocalizedString("No messages yet", comment: "")
             lastMessageLabel.font = .italicSystemFont(ofSize: 15)
             dateLabel.isHidden = true
@@ -88,8 +87,6 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
 
     // MARK: - Constraints
     private func setupNameLabelConstraints() {
-        addSubview(nameLabel)
-
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 76),
@@ -100,8 +97,6 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupLastMessageLabelConstraints() {
-        addSubview(lastMessageLabel)
-
         lastMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             lastMessageLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 76),
@@ -112,8 +107,6 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupPhotoImageViewConstraints() {
-        addSubview(photoImageView)
-
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             photoImageView.heightAnchor.constraint(equalToConstant: 48),
@@ -124,8 +117,6 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     private func setupDateLabelConstraints() {
-        addSubview(dateLabel)
-
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dateLabel.trailingAnchor.constraint(equalTo: lastMessageLabel.trailingAnchor),
