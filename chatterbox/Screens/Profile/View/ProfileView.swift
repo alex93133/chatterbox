@@ -1,10 +1,5 @@
 import UIKit
 
-protocol ProfileViewDelegate: class {
-    func editButtonPressed()
-    func saveButtonPressed()
-}
-
 class ProfileView: UIView {
 
     // MARK: - UI
@@ -16,56 +11,73 @@ class ProfileView: UIView {
         return photoImageView
     }()
 
-    lazy var editButton: UIButton = {
-        let editButton              = UIButton()
-        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        editButton.setTitleColor(UIColor.systemBlue, for: .normal)
-        editButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
-        return editButton
+    lazy var editPhotoButton: UIButton = {
+        let editPhotoButton              = UIButton()
+        editPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        editPhotoButton.setTitleColor(UIColor.systemBlue, for: .normal)
+        editPhotoButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
+        return editPhotoButton
     }()
 
-    lazy var nameLabel: UILabel = {
-        let nameLabel           = UILabel()
-        nameLabel.textColor     = ThemesManager.shared.textColor
-        nameLabel.font          = .systemFont(ofSize: 24, weight: .bold)
-        nameLabel.textAlignment = .center
-        nameLabel.numberOfLines = 0
-        return nameLabel
+    lazy var nameTextView: UITextView = {
+        let nameTextView                = UITextView()
+        nameTextView.textColor          = ThemesManager.shared.textColor
+        nameTextView.font               = .systemFont(ofSize: 24, weight: .bold)
+        nameTextView.isSelectable       = false
+        nameTextView.isScrollEnabled    = false
+        nameTextView.isEditable         = false
+        nameTextView.returnKeyType      = .done
+        nameTextView.backgroundColor    = .clear
+        nameTextView.textAlignment      = .center
+        nameTextView.layer.cornerRadius = 8
+        return nameTextView
     }()
 
     lazy var descriptionTextView: UITextView = {
-        let descriptionTextView             = UITextView()
-        descriptionTextView.textColor       = ThemesManager.shared.textColor
-        descriptionTextView.font            = .systemFont(ofSize: 16, weight: .regular)
-        descriptionTextView.isEditable      = false
-        descriptionTextView.isSelectable    = false
-        descriptionTextView.backgroundColor = ThemesManager.shared.mainBGColor
+        let descriptionTextView                = UITextView()
+        descriptionTextView.textColor          = ThemesManager.shared.textColor
+        descriptionTextView.font               = .systemFont(ofSize: 16, weight: .regular)
+        descriptionTextView.isSelectable       = false
+        descriptionTextView.isEditable         = false
+        descriptionTextView.returnKeyType      = .done
+        descriptionTextView.backgroundColor    = .clear
+        descriptionTextView.layer.cornerRadius = 8
         return descriptionTextView
     }()
 
-    lazy var saveButton: UIButton = {
-        let saveButton                = UIButton()
-        saveButton.titleLabel?.font   = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        saveButton.backgroundColor    = UIColor.systemGray.withAlphaComponent(0.2)
-        saveButton.layer.cornerRadius = 14
-        saveButton.setTitleColor(UIColor.systemBlue, for: .normal)
-        saveButton.setTitle(NSLocalizedString(NSLocalizedString("Save", comment: ""), comment: ""), for: .normal)
-        return saveButton
+    lazy var saveButtonGCD: SaveButton = {
+        let saveButtonGCD = SaveButton(title: "GCD")
+        saveButtonGCD.isEnabled = false
+        return saveButtonGCD
     }()
 
-    weak var delegate: ProfileViewDelegate?
+    lazy var saveButtonOperation: SaveButton = {
+        let saveButtonOperation  = SaveButton(title: "Operation")
+        saveButtonOperation.isEnabled = false
+        return saveButtonOperation
+    }()
+
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
 
     func setupUIElements() {
         addSubviews(photoImageView,
-                    editButton,
-                    nameLabel,
+                    editPhotoButton,
+                    nameTextView,
                     descriptionTextView,
-                    saveButton)
+                    saveButtonGCD,
+                    saveButtonOperation,
+                    activityIndicator)
         setupPhotoImageViewConstraints()
-        setupEditButtonConstraints()
-        setupNameLabelConstraints()
+        setupEditPhotoButtonConstraints()
+        setupNameTextViewConstraints()
         setupDescriptionTextViewConstraints()
-        setupSaveButtonConstraints()
+        setupSaveButtonGCDConstraints()
+        setupSaveButtonOperationConstraints()
+        setupActivityIndicatorConstraints()
     }
 
     // MARK: - Constraints
@@ -79,43 +91,61 @@ class ProfileView: UIView {
         ])
     }
 
-    private func setupEditButtonConstraints() {
-        editButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setupEditPhotoButtonConstraints() {
+        editPhotoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            editButton.widthAnchor.constraint(equalToConstant: 40),
-            editButton.heightAnchor.constraint(equalToConstant: 40),
-            editButton.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor),
-            editButton.firstBaselineAnchor.constraint(equalTo: photoImageView.bottomAnchor)
+            editPhotoButton.widthAnchor.constraint(equalToConstant: 40),
+            editPhotoButton.heightAnchor.constraint(equalToConstant: 40),
+            editPhotoButton.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor),
+            editPhotoButton.firstBaselineAnchor.constraint(equalTo: photoImageView.bottomAnchor)
         ])
     }
 
-    private func setupNameLabelConstraints() {
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func setupNameTextViewConstraints() {
+        nameTextView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            nameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            nameLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 32),
-            nameLabel.bottomAnchor.constraint(equalTo: descriptionTextView.topAnchor, constant: -32)
+            nameTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            nameTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            nameTextView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 32),
+            nameTextView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 
     private func setupDescriptionTextViewConstraints() {
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            descriptionTextView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            descriptionTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
-            descriptionTextView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 32),
-            descriptionTextView.bottomAnchor.constraint(greaterThanOrEqualTo: saveButton.topAnchor, constant: -32)
+            descriptionTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            descriptionTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            descriptionTextView.topAnchor.constraint(equalTo: nameTextView.bottomAnchor, constant: 32),
+            descriptionTextView.bottomAnchor.constraint(greaterThanOrEqualTo: saveButtonGCD.topAnchor, constant: -32)
         ])
     }
 
-    private func setupSaveButtonConstraints() {
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setupSaveButtonGCDConstraints() {
+        saveButtonGCD.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            saveButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 56),
-            saveButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -56),
-            saveButton.heightAnchor.constraint(equalToConstant: 40),
-            saveButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            saveButtonGCD.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            saveButtonGCD.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: -8),
+            saveButtonGCD.heightAnchor.constraint(equalToConstant: 40),
+            saveButtonGCD.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+        ])
+    }
+
+    private func setupSaveButtonOperationConstraints() {
+        saveButtonOperation.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            saveButtonOperation.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            saveButtonOperation.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 8),
+            saveButtonOperation.heightAnchor.constraint(equalToConstant: 40),
+            saveButtonOperation.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30)
+        ])
+    }
+
+    private func setupActivityIndicatorConstraints() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
     }
 }

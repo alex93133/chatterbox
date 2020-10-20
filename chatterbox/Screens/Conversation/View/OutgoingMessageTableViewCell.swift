@@ -29,7 +29,7 @@ class OutgoingMessageTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    func configure(with model: MessageCellModel) {
+    func configure(with model: ConfigurationModel) {
         outgoingMessageLabel.text = model.text
     }
 

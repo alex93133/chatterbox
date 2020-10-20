@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupStartScreen()
         disableDarkMode()
         setupNavigationBar()
-        setDefaultTheme()
+        setDefaultUser()
         return true
     }
 
@@ -45,8 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
     }
 
-    private func setDefaultTheme() {
+    private func setDefaultUser() {
         guard !isLaunchedBefore else { return }
-        ThemesManager.shared.theme = .classic
+        let user = UserModel(photo: nil,
+                             name: "Daria Mikhal",
+                             description: "Middle data analytic",
+                             theme: .classic)
+        let dataManager = GCDDataManager()
+        dataManager.createUser(model: user)
     }
 }

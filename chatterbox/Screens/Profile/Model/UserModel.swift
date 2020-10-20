@@ -1,13 +1,15 @@
 import UIKit
 
-struct ProfileModel {
+struct UserModel: Equatable {
+
     var photo: UIImage?
     var name: String
     var description: String
+    var theme: ThemeModel
 
     var initials: String {
         let namesArray = name.split(separator: " ")
-        guard namesArray.count == 2 else { return "" }
+        guard 1 ... 2 ~= namesArray.count else { return "" }
         let firstCharacters = namesArray.compactMap { $0.first }
         return String(firstCharacters)
     }
