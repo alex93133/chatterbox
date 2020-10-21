@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIBarButtonItem {
-
     class func roundedButton(from image: UIImage, target: Any, action: Selector) -> UIBarButtonItem {
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 35, height: 35)

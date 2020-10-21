@@ -16,6 +16,7 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
         let senderNameLabel = UILabel()
         senderNameLabel.font = .systemFont(ofSize: 13, weight: .regular)
         senderNameLabel.textColor = .systemBlue
+        senderNameLabel.numberOfLines = 0
         return senderNameLabel
     }()
 
@@ -65,8 +66,8 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
         senderNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             senderNameLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: 5),
-            senderNameLabel.bottomAnchor.constraint(equalTo: incomingMessageLabel.topAnchor, constant: -5),
-            senderNameLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 12),
+            senderNameLabel.bottomAnchor.constraint(equalTo: incomingMessageLabel.topAnchor, constant: -2),
+            senderNameLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),
             senderNameLabel.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -8)
         ])
     }

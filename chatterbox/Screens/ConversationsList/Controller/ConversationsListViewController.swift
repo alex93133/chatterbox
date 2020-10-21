@@ -8,8 +8,8 @@ class ConversationsListViewController: UIViewController {
         return view
     }()
 
-    var manager = FirebaseManager()
-    var cellModels = [ConversationCellModel]() {
+    private var manager = FirebaseManager()
+    private var cellModels = [ConversationCellModel]() {
         didSet {
             conversationsListView.tableView.reloadData()
         }
@@ -84,28 +84,10 @@ class ConversationsListViewController: UIViewController {
     @objc
     private func createChannel() {
         let alertController = UIAlertController(title: NSLocalizedString("Create a new channel", comment: ""),
-                                                message: NSLocalizedString("Please type the new channel name", comment: ""),
-                                                preferredStyle: .alert)
-
-        alertController.addTextField { (textField: UITextField) in
-            textField.placeholder = NSLocalizedString("Channel name", comment: "")
-            textField.autocapitalizationType = .sentences
+                                                placeholder: NSLocalizedString("Channel name", comment: "")) { [weak self] text in
+                                                    guard let self = self else { return }
+                                                    self.manager.createChannel(name: text)
         }
-
-        let createAction = UIAlertAction(title: NSLocalizedString("Create", comment: ""),
-                                         style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            guard let textField = alertController.textFields?.first else { return }
-            guard let text = textField.text, !text.isEmpty else { return }
-            self.manager.createChannel(name: text)
-        }
-
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
-                                         style: .cancel)
-
-        alertController.addAction(createAction)
-        alertController.addAction(cancelAction)
-
         present(alertController, animated: true, completion: nil)
     }
 

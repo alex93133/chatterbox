@@ -7,9 +7,9 @@ class ConversationViewController: UIViewController, ConfigurableView {
         let view = ConversationView(frame: UIScreen.main.bounds)
         return view
     }()
-    var channelModel: Channel
-    let manager = FirebaseManager()
-    var cellModels = [MessageCellModel]() {
+    private var channelModel: Channel
+    private let manager = FirebaseManager()
+    private var cellModels = [MessageCellModel]() {
         didSet {
             conversationView.tableView.reloadData()
             scrollTableViewToLast()
@@ -92,28 +92,10 @@ class ConversationViewController: UIViewController, ConfigurableView {
     @objc
     private func sendMessage() {
         let alertController = UIAlertController(title: NSLocalizedString("Send message", comment: ""),
-                                                message: nil,
-                                                preferredStyle: .alert)
-
-        alertController.addTextField { (textField: UITextField) in
-            textField.placeholder = NSLocalizedString("Message text", comment: "")
-            textField.autocapitalizationType = .sentences
+                                                placeholder: NSLocalizedString("Message text", comment: "")) { [weak self] text in
+                                                    guard let self = self else { return }
+                                                    self.manager.sendMessage(content: text, identifier: self.channelModel.identifier)
         }
-
-        let createAction = UIAlertAction(title: NSLocalizedString("Send", comment: ""),
-                                         style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            guard let textField = alertController.textFields?.first else { return }
-            guard let text = textField.text, !text.isEmpty else { return }
-            self.manager.sendMessage(content: text, identifier: self.channelModel.identifier)
-        }
-
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
-                                         style: .cancel)
-
-        alertController.addAction(createAction)
-        alertController.addAction(cancelAction)
-
         present(alertController, animated: true, completion: nil)
     }
 }

@@ -12,10 +12,10 @@ class ThemesViewController: UIViewController, ConfigurableView {
         return view
     }()
 
-    var themeModel: ThemeModel
-    lazy var buttons = [themesView.classicThemeButton,
-                        themesView.dayThemeButton,
-                        themesView.nightThemeButton]
+    private var themeModel: ThemeModel
+    private lazy var buttons = [themesView.classicThemeButton,
+                                themesView.dayThemeButton,
+                                themesView.nightThemeButton]
 
     typealias ConfigurationModel = ThemeModel
 
@@ -80,9 +80,10 @@ class ThemesViewController: UIViewController, ConfigurableView {
     }
 
     private func applyNewTheme() {
-        UIView.animate(withDuration: 0.3) { [self] in
-            view.backgroundColor = ThemesManager.shared.outgoingMessageBGColor
-            buttons.forEach { $0.interactiveTitle.textColor = ThemesManager.shared.outgoingMessageTextColor }
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.backgroundColor = ThemesManager.shared.outgoingMessageBGColor
+            self.buttons.forEach { $0.interactiveTitle.textColor = ThemesManager.shared.outgoingMessageTextColor }
             ThemesManager.shared.setupNavigationBar(target: self)
         }
     }

@@ -1,6 +1,6 @@
 "Camera" = "Камера";
 "Cancel" = "Отмена";
-"Channel name" = "Название чата";
+"Channel name" = "Название канала";
 "Channels" = "Каналы";
 "Classic" = "Классическая";
 "Create a new channel" = "Создать новый канал";
@@ -14,12 +14,11 @@
 "Maybe later" = "В другой раз";
 "Message text" = "Текст сообщения";
 "Night" = "Ночная";
-"No messages yet" = "Сообщений пока не;";
+"No messages yet" = "Сообщений пока нет";
 "Oops!" = "Упс!";
 "Open Settings" = "Открыть настройки";
 "Photo library" = "Библиотека";
 "Please note" = "Пожалуйста, обратите внимание";
-"Please type the new channel name" = "Введите название чата";
 "Retry" = "Повторить";
 "Save" = "Сохранить";
 "Send message" = "Отправить сообщение";

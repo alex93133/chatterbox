@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNavigationBar()
         setDefaultUser()
         FirebaseApp.configure()
+        UserManager.shared.loadUser()
         return true
     }
 
@@ -55,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                              description: "Junior iOS dev",
                              theme: .classic,
                              uuID: uuid)
-        let dataManager = GCDDataManager()
-        dataManager.createUser(model: user)
+        UserManager.shared.dataManager.createUser(model: user)
     }
 }

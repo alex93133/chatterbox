@@ -11,6 +11,10 @@
 		3302E123252714C700BF8EEE /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E122252714C700BF8EEE /* ThemesView.swift */; };
 		3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E1262527168E00BF8EEE /* ThemeButton.swift */; };
 		3309F7872517CA52004C6015 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3309F7892517CA52004C6015 /* Localizable.strings */; };
+		330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFDFD253A0BB20025BF39 /* Channel.swift */; };
+		330EFE02253A0CE00025BF39 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFE01253A0CE00025BF39 /* FirebaseManager.swift */; };
+		330EFE05253A0DFB0025BF39 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFE04253A0DFB0025BF39 /* Message.swift */; };
+		330EFE0B253B3D650025BF39 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFE0A253B3D650025BF39 /* FetchResult.swift */; };
 		331EC649250BB9470084E89C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331EC648250BB9470084E89C /* AppDelegate.swift */; };
 		331EC655250BB94B0084E89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331EC653250BB94B0084E89C /* LaunchScreen.storyboard */; };
 		331EC65F250BBDB30084E89C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 331EC65E250BBDB30084E89C /* .gitignore */; };
@@ -25,7 +29,6 @@
 		33265576251F694A00C16D5E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33265575251F694A00C16D5E /* UserModel.swift */; };
 		3326557E251F775300C16D5E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326557D251F775300C16D5E /* UIImage.swift */; };
 		33265581251F866900C16D5E /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33265580251F866900C16D5E /* UIBarButtonItem.swift */; };
-		33265587251FA6C400C16D5E /* HardcodedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33265586251FA6C400C16D5E /* HardcodedStorage.swift */; };
 		332655932520A27E00C16D5E /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332655922520A27E00C16D5E /* ConversationViewController.swift */; };
 		332655982520A2CB00C16D5E /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332655972520A2CB00C16D5E /* ConversationView.swift */; };
 		3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */; };
@@ -60,6 +63,10 @@
 		3302E1262527168E00BF8EEE /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		3309F7882517CA52004C6015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3309F78C2517CA70004C6015 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		330EFDFD253A0BB20025BF39 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		330EFE01253A0CE00025BF39 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		330EFE04253A0DFB0025BF39 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		330EFE0A253B3D650025BF39 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		331EC645250BB9470084E89C /* chatterbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatterbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		331EC648250BB9470084E89C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		331EC654250BB94B0084E89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,7 +83,6 @@
 		33265575251F694A00C16D5E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3326557D251F775300C16D5E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		33265580251F866900C16D5E /* UIBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItem.swift; sourceTree = "<group>"; };
-		33265586251FA6C400C16D5E /* HardcodedStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardcodedStorage.swift; sourceTree = "<group>"; };
 		332655922520A27E00C16D5E /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		332655972520A2CB00C16D5E /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -221,7 +227,9 @@
 		33265568251F5B0600C16D5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				330EFDFD253A0BB20025BF39 /* Channel.swift */,
 				33265569251F5B1F00C16D5E /* ConversationCellModel.swift */,
+				330EFE0A253B3D650025BF39 /* FetchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,9 +246,9 @@
 		33265579251F6CD700C16D5E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				33265586251FA6C400C16D5E /* HardcodedStorage.swift */,
 				335DDC8B2534A28C00004193 /* UserManager.swift */,
 				3373ED8425276830001EDE7E /* ThemesManager.swift */,
+				330EFE01253A0CE00025BF39 /* FirebaseManager.swift */,
 				33E9B3412533483C0061CABC /* GCDDataManager.swift */,
 				335DDC8F2534C10200004193 /* OperationDataManager.swift */,
 			);
@@ -278,6 +286,7 @@
 		332655912520A1E100C16D5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				330EFE04253A0DFB0025BF39 /* Message.swift */,
 				331F7D602520AD07005E7666 /* MessageCellModel.swift */,
 			);
 			path = Model;
@@ -438,6 +447,7 @@
 				TargetAttributes = {
 					331EC644250BB9470084E89C = {
 						CreatedOnToolsVersion = 11.7;
+						LastSwiftMigration = 1170;
 					};
 				};
 			};
@@ -548,6 +558,7 @@
 				331F7D612520AD07005E7666 /* MessageCellModel.swift in Sources */,
 				3302E123252714C700BF8EEE /* ThemesView.swift in Sources */,
 				3326556E251F63AA00C16D5E /* ConversationsListView.swift in Sources */,
+				330EFE05253A0DFB0025BF39 /* Message.swift in Sources */,
 				3326556A251F5B1F00C16D5E /* ConversationCellModel.swift in Sources */,
 				33E9B34B253353D40061CABC /* UIViewController.swift in Sources */,
 				3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */,
@@ -560,16 +571,18 @@
 				335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */,
 				33265581251F866900C16D5E /* UIBarButtonItem.swift in Sources */,
 				3373ED7B25273D92001EDE7E /* ThemeModel.swift in Sources */,
-				33265587251FA6C400C16D5E /* HardcodedStorage.swift in Sources */,
+				330EFE0B253B3D650025BF39 /* FetchResult.swift in Sources */,
 				33265572251F660800C16D5E /* Images.swift in Sources */,
 				3302E1202527149F00BF8EEE /* ThemesViewController.swift in Sources */,
 				3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */,
 				335DDC8C2534A28C00004193 /* UserManager.swift in Sources */,
+				330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */,
 				3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */,
 				3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */,
 				332655932520A27E00C16D5E /* ConversationViewController.swift in Sources */,
 				331EC649250BB9470084E89C /* AppDelegate.swift in Sources */,
 				33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */,
+				330EFE02253A0CE00025BF39 /* FirebaseManager.swift in Sources */,
 				33F4648C252324E300ACA297 /* UIView.swift in Sources */,
 				33265565251F5A8600C16D5E /* ConfigurableView.swift in Sources */,
 				33E9B34825334BCD0061CABC /* SaveButton.swift in Sources */,
@@ -726,6 +739,7 @@
 			baseConfigurationReference = 322273BCF0DE40F0D8889461 /* Pods-chatterbox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";
@@ -736,6 +750,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -746,6 +761,7 @@
 			baseConfigurationReference = 9D2F2229F47041E821CB446B /* Pods-chatterbox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = "chatterbox/Supporting files/Info.plist";

@@ -25,8 +25,8 @@ class OperationDataManager: DataManager {
         let completionOperation = BlockOperation { [weak self] in
             guard let self = self else { return }
             self.getUserModel { newModel in
-                if success {
-                    UserManager.shared.userModel = newModel
+                if success, let model = newModel {
+                    UserManager.shared.userModel = model
                     handler(.success)
                 } else {
                     handler(.error)
@@ -41,7 +41,7 @@ class OperationDataManager: DataManager {
         operationQueue.addOperation(completionOperation)
     }
 
-    func getUserModel(handler: @escaping (UserModel) -> Void) {
+    func getUserModel(handler: @escaping (UserModel?) -> Void) {
         var userModel: UserModel!
 
         let readingOperation = BlockOperation { [weak self] in

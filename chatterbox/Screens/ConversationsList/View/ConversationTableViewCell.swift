@@ -22,15 +22,6 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
         return lastMessageLabel
     }()
 
-    lazy var photoImageView: UIImageView = {
-        let photoImageView = UIImageView()
-        photoImageView.contentMode = .scaleAspectFill
-        photoImageView.layer.cornerRadius = 24
-        photoImageView.clipsToBounds = true
-        photoImageView.backgroundColor = .purple
-        return photoImageView
-    }()
-
     lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = .systemFont(ofSize: 15, weight: .regular)
@@ -58,10 +49,9 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
         accessoryType = .disclosureIndicator
         selectionStyle = .none
         backgroundColor = .clear
-        addSubviews(nameLabel, lastMessageLabel, photoImageView, dateLabel)
+        addSubviews(nameLabel, lastMessageLabel, dateLabel)
         setupNameLabelConstraints()
         setupLastMessageLabelConstraints()
-        setupPhotoImageViewConstraints()
         setupDateLabelConstraints()
     }
 
@@ -89,7 +79,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     private func setupNameLabelConstraints() {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 76),
+            nameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             nameLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: -8),
             nameLabel.heightAnchor.constraint(equalToConstant: 20)
@@ -99,20 +89,10 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     private func setupLastMessageLabelConstraints() {
         lastMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            lastMessageLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 76),
+            lastMessageLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             lastMessageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             lastMessageLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -36),
             lastMessageLabel.heightAnchor.constraint(equalToConstant: 36)
-        ])
-    }
-
-    private func setupPhotoImageViewConstraints() {
-        photoImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            photoImageView.heightAnchor.constraint(equalToConstant: 48),
-            photoImageView.widthAnchor.constraint(equalToConstant: 48),
-            photoImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            photoImageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
         ])
     }
 
