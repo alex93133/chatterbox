@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         disableDarkMode()
         setupNavigationBar()
         setDefaultUser()
+        setupCoreData()
         FirebaseApp.configure()
         UserManager.shared.loadUser()
         return true
@@ -57,5 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                              theme: .classic,
                              uuID: uuid)
         UserManager.shared.dataManager.createUser(model: user)
+    }
+
+    private func setupCoreData() {
+        CoreDataManager.shared.coreDataStack.enableObservers()
+        CoreDataManager.shared.coreDataStack.didUpdateDataBase = { stack in
+            stack.printDataBaseStatistics()
+        }
     }
 }

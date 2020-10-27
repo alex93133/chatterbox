@@ -5,8 +5,9 @@ class UserManager {
     static let shared = UserManager()
     private init() {}
 
-    private var gcdManager: DataManager = GCDDataManager()
-    private var operationManager: DataManager = OperationDataManager()
+    // MARK: - Proprties
+    private lazy var gcdManager: DataManager = GCDDataManager()
+    private lazy var operationManager: DataManager = OperationDataManager()
     private var currentDataManager: DataManager!
     var dataManager: DataManager {
         get {
@@ -25,6 +26,7 @@ class UserManager {
                               theme: .classic,
                               uuID: "")
 
+    // MARK: - Functions
     func loadUser() {
         dataManager.getUserModel { [weak self] model in
             guard let self = self,
