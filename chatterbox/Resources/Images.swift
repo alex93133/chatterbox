@@ -5,4 +5,5 @@ enum Images {
     static let classicTheme = UIImage(named: "Classic")!
     static let dayTheme = UIImage(named: "Day")!
     static let nightTheme = UIImage(named: "Night")!
+    static let send = UIImage(named: "Send")!
 }

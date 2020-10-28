@@ -33,6 +33,7 @@
 		332655982520A2CB00C16D5E /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332655972520A2CB00C16D5E /* ConversationView.swift */; };
 		3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */; };
 		3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */; };
+		333AB13925487A5500F99ADB /* InputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333AB13825487A5500F99ADB /* InputBarView.swift */; };
 		334AF3502539F20C001A666B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334AF34F2539F20C001A666B /* GoogleService-Info.plist */; };
 		335DDC8C2534A28C00004193 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8B2534A28C00004193 /* UserManager.swift */; };
 		335DDC902534C10200004193 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8F2534C10200004193 /* OperationDataManager.swift */; };
@@ -91,6 +92,7 @@
 		332655972520A2CB00C16D5E /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		333AB13825487A5500F99ADB /* InputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBarView.swift; sourceTree = "<group>"; };
 		334AF34F2539F20C001A666B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		335DDC8B2534A28C00004193 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		335DDC8F2534C10200004193 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				332655972520A2CB00C16D5E /* ConversationView.swift */,
+				333AB13825487A5500F99ADB /* InputBarView.swift */,
 				3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */,
 				3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */,
 			);
@@ -523,7 +526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		752186997A12CD8256BC7B31 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -572,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33265576251F694A00C16D5E /* UserModel.swift in Sources */,
+				333AB13925487A5500F99ADB /* InputBarView.swift in Sources */,
 				33EDF6FB2545829400C1660B /* Chat.xcdatamodeld in Sources */,
 				33E9B3452533488A0061CABC /* DataManager.swift in Sources */,
 				33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */,

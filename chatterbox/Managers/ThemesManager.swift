@@ -89,6 +89,26 @@ class ThemesManager {
             return .white
         }
     }
+    
+    var barColor: UIColor {
+        switch theme {
+        case .classic, .day:
+            return UIColor(hex: "#F5F5F5")
+
+        case .night:
+            return UIColor(hex: "#1E1E1E")
+        }
+    }
+    
+    var keyBoard: UIKeyboardAppearance {
+        switch theme {
+        case .classic, .day:
+            return .light
+            
+        case .night:
+            return .dark
+        }
+    }
 
     // MARK: - Functions
     func saveThemeSettings(theme: ThemeModel, handler: @escaping (Result) -> Void) {

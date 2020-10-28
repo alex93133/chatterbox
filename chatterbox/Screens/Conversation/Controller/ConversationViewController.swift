@@ -37,17 +37,26 @@ class ConversationViewController: UIViewController, ConfigurableView {
         setupView()
         setupNavigationBar()
         configure(with: channelModel)
+        setTextViewPlaceHolder()
         getData()
+        hideKeyboardWhenTappedOutside()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObserver()
     }
 
     // MARK: - Functions
     private func setupView() {
         conversationView.setupUIElements()
-        conversationView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationView.backgroundColor = ThemesManager.shared.barColor
         conversationView.tableView.delegate = self
         conversationView.tableView.dataSource = self
+        conversationView.inputBarView.inputTextView.delegate = self
         conversationView.tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
         conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
+        conversationView.inputBarView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
     private func setupNavigationBar() {
@@ -60,6 +69,11 @@ class ConversationViewController: UIViewController, ConfigurableView {
     func configure(with model: ConfigurationModel) {
         let title = model.name
         navigationItem.title = title
+    }
+    
+    private func setTextViewPlaceHolder() {
+        conversationView.inputBarView.inputTextView.text = NSLocalizedString("Send message", comment: "")
+        conversationView.inputBarView.inputTextView.textColor = UIColor.lightGray
     }
 
     private func getData() {
@@ -91,12 +105,11 @@ class ConversationViewController: UIViewController, ConfigurableView {
     // MARK: - Actions
     @objc
     private func sendMessage() {
-        let alertController = UIAlertController(title: NSLocalizedString("Send message", comment: ""),
-                                                placeholder: NSLocalizedString("Message text", comment: "")) { [weak self] text in
-                                                    guard let self = self else { return }
-                                                    self.manager.sendMessage(content: text, identifier: self.channelModel.identifier)
-        }
-        present(alertController, animated: true, completion: nil)
+        guard let text = conversationView.inputBarView.inputTextView.text,
+            !text.isEmpty else { return }
+        manager.sendMessage(content: text, identifier: channelModel.identifier)
+        conversationView.inputBarView.inputTextView.text = ""
+        view.endEditing(true)
     }
 }
 
@@ -123,5 +136,30 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         return UITableViewCell()
+    }
+}
+
+extension ConversationViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.contentSize.height >= conversationView.inputBarView.maxContentHeight {
+            textView.isScrollEnabled = true
+        }
+        else {
+            textView.frame.size.height = textView.contentSize.height
+            textView.isScrollEnabled = false
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = ThemesManager.shared.textColor
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            setTextViewPlaceHolder()
+        }
     }
 }
