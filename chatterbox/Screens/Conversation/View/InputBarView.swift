@@ -1,7 +1,7 @@
 import UIKit
 
 class InputBarView: UIView {
-    
+
     // MARK: - Properties
     lazy var inputTextView: UITextView = {
         let inputTextField = UITextView()
@@ -10,33 +10,32 @@ class InputBarView: UIView {
         inputTextField.isScrollEnabled = false
         inputTextField.font = .systemFont(ofSize: 17, weight: .regular)
         inputTextField.layer.cornerRadius = 16
-        inputTextField.sizeToFit()
         return inputTextField
     }()
-    
+
     lazy var sendButton: UIButton = {
         let sendButton = UIButton()
         sendButton.setImage(Images.send, for: .normal)
         return sendButton
     }()
-    
+
     lazy var splitLineView: UIView = {
-      let splitLineView = UIView()
+        let splitLineView = UIView()
         splitLineView.backgroundColor = UIColor.systemGray.withAlphaComponent(0.2)
         return splitLineView
     }()
-    
+
     let maxContentHeight: CGFloat = 150
-    
+
     init() {
         super.init(frame: .zero)
         setupUIElements()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupUIElements() {
         addSubviews(inputTextView,
                     sendButton,
@@ -45,7 +44,7 @@ class InputBarView: UIView {
         setupSendButtonConstraints()
         setupSplitLineViewConstraints()
     }
-    
+
     // MARK: - Constraints
     private func setupInputTextViewConstraints() {
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +56,7 @@ class InputBarView: UIView {
             inputTextView.heightAnchor.constraint(lessThanOrEqualToConstant: maxContentHeight)
         ])
     }
-    
+
     private func setupSendButtonConstraints() {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -67,7 +66,7 @@ class InputBarView: UIView {
             sendButton.centerYAnchor.constraint(equalTo: inputTextView.centerYAnchor)
         ])
     }
-    
+
     private func setupSplitLineViewConstraints() {
         splitLineView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

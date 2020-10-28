@@ -89,7 +89,7 @@ class ThemesManager {
             return .white
         }
     }
-    
+
     var barColor: UIColor {
         switch theme {
         case .classic, .day:
@@ -99,12 +99,12 @@ class ThemesManager {
             return UIColor(hex: "#1E1E1E")
         }
     }
-    
+
     var keyBoard: UIKeyboardAppearance {
         switch theme {
         case .classic, .day:
             return .light
-            
+
         case .night:
             return .dark
         }

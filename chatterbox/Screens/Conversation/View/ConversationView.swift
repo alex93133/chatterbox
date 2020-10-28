@@ -1,7 +1,7 @@
 import UIKit
 
 class ConversationView: UIView {
-    
+
     // MARK: - UI
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -11,15 +11,15 @@ class ConversationView: UIView {
         tableView.backgroundColor = ThemesManager.shared.mainBGColor
         return tableView
     }()
-    
+
     lazy var inputBarView = InputBarView()
-    
+
     func setupUIElements() {
         addSubviews(tableView, inputBarView)
         setupTableViewConstraints()
         setupInputBarViewConstraints()
     }
-    
+
     // MARK: - Constraints
     private func setupTableViewConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class ConversationView: UIView {
             tableView.bottomAnchor.constraint(equalTo: inputBarView.topAnchor)
         ])
     }
-    
+
     private func setupInputBarViewConstraints() {
         inputBarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
