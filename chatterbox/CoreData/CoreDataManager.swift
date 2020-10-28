@@ -6,7 +6,7 @@ class CoreDataManager {
     static let shared = CoreDataManager()
     private init() {}
 
-    // MARK: - Proprties
+    // MARK: - Properties
     let coreDataStack = CoreDataStack()
 
     // MARK: - Functions
