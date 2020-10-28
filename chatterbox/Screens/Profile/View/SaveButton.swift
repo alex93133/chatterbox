@@ -13,8 +13,8 @@ class SaveButton: UIButton {
 
     convenience init(title: String) {
         self.init(frame: .zero)
-        titleLabel?.font   = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        backgroundColor    = UIColor.systemGray.withAlphaComponent(0.2)
+        titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+        backgroundColor = UIColor.systemGray.withAlphaComponent(0.2)
         layer.cornerRadius = 14
         setTitleColor(UIColor.systemBlue, for: .normal)
         setTitle(title, for: .normal)

@@ -4,10 +4,10 @@ class ConversationView: UIView {
 
     // MARK: - UI
     lazy var tableView: UITableView = {
-        let tableView             = UITableView()
+        let tableView = UITableView()
         tableView.tableFooterView = UIView()
-        tableView.rowHeight       = UITableView.automaticDimension
-        tableView.separatorStyle  = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
         tableView.backgroundColor = ThemesManager.shared.mainBGColor
         return tableView
     }()
@@ -19,8 +19,6 @@ class ConversationView: UIView {
 
     // MARK: - Constraints
     private func setupTableViewConstraints() {
-        addSubview(tableView)
-
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

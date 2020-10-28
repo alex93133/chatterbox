@@ -5,30 +5,31 @@ class UserManager {
     static let shared = UserManager()
     private init() {}
 
-    var dataManager: DataManager = GCDDataManager()
-    //    var dataManager: DataManager = OperationDataManager()
-
-    let semaphore = DispatchSemaphore(value: 0)
-
-    private var currentModel: UserModel?
-    var userModel: UserModel {
+    private var gcdManager: DataManager = GCDDataManager()
+    private var operationManager: DataManager = OperationDataManager()
+    private var currentDataManager: DataManager!
+    var dataManager: DataManager {
         get {
-            if let currentModel = currentModel {
-                return currentModel
-            } else {
-                var model: UserModel!
-                dataManager.getUserModel { [weak self] userModel in
-                    guard let self = self else { return }
-                    self.currentModel = userModel
-                    model = userModel
-                    self.semaphore.signal()
-                }
-                semaphore.wait()
-                return model
-            }
+            let randomIndex = Int.random(in: 0...1)
+            let managers = [gcdManager, operationManager]
+            currentDataManager = managers[randomIndex]
+            return currentDataManager
+        } set {
+            currentDataManager = newValue
         }
-        set {
-            currentModel = newValue
+    }
+
+    var userModel = UserModel(photo: nil,
+                              name: "User",
+                              description: "",
+                              theme: .classic,
+                              uuID: "")
+
+    func loadUser() {
+        dataManager.getUserModel { [weak self] model in
+            guard let self = self,
+                let model = model else { return }
+            self.userModel = model
         }
     }
 }

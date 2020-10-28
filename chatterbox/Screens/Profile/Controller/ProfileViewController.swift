@@ -8,12 +8,13 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         return view
     }()
 
-    var profileModel: UserModel
+    private var profileModel: UserModel
     private var updatedModel: UserModel
-    typealias ConfigurationModel = UserModel
     var updateUserIcon: (() -> Void)?
 
-    var isTextViewEditable: Bool = false {
+    typealias ConfigurationModel = UserModel
+
+    private var isTextViewEditable: Bool = false {
         willSet(isEditable) {
             let textViewBGColor: UIColor
             if isEditable {
@@ -25,29 +26,29 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
             }
             UIView.animate(withDuration: 0.3) { [weak self] in
                 guard let self = self else { return }
-                self.profileView.nameTextView.backgroundColor        = textViewBGColor
+                self.profileView.nameTextView.backgroundColor = textViewBGColor
                 self.profileView.descriptionTextView.backgroundColor = textViewBGColor
-                self.profileView.nameTextView.isEditable             = isEditable
-                self.profileView.descriptionTextView.isEditable      = isEditable
+                self.profileView.nameTextView.isEditable = isEditable
+                self.profileView.descriptionTextView.isEditable = isEditable
             }
         }
     }
 
-    var isSaving: Bool = false {
+    private var isSaving: Bool = false {
         willSet(isSaving) {
             if isSaving {
                 profileView.activityIndicator.startAnimating()
             } else {
                 profileView.activityIndicator.stopAnimating()
             }
-            profileView.saveButtonGCD.isEnabled       = !isSaving
+            profileView.saveButtonGCD.isEnabled = !isSaving
             profileView.saveButtonOperation.isEnabled = !isSaving
         }
     }
 
-    var isAbleToSave: Bool = false {
+    private var isAbleToSave: Bool = false {
         willSet {
-            profileView.saveButtonGCD.isEnabled       = newValue
+            profileView.saveButtonGCD.isEnabled = newValue
             profileView.saveButtonOperation.isEnabled = newValue
         }
     }
@@ -85,16 +86,12 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         profileView.photoImageView.layer.cornerRadius = profileView.photoImageView.frame.size.width / 2
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: - Functions
     private func setupView() {
         profileView.setupUIElements()
-        profileView.backgroundColor               = ThemesManager.shared.mainBGColor
-        profileView.nameTextView.delegate         = self
-        profileView.descriptionTextView.delegate  = self
+        profileView.backgroundColor = ThemesManager.shared.mainBGColor
+        profileView.nameTextView.delegate = self
+        profileView.descriptionTextView.delegate = self
 
         profileView.editPhotoButton.addTarget(self, action: #selector(editPhotoButtonPressed), for: .touchUpInside)
         profileView.saveButtonGCD.addTarget(self, action: #selector(saveButtonGCDPressed), for: .touchUpInside)
@@ -112,14 +109,14 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         editInfoButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                                   for: .normal)
 
-        navigationItem.leftBarButtonItem  = closeButtonItem
+        navigationItem.leftBarButtonItem = closeButtonItem
         navigationItem.rightBarButtonItem = editInfoButtonItem
         ThemesManager.shared.setupNavigationBar(target: self)
     }
 
     func configure(with model: ConfigurationModel) {
-        profileView.photoImageView.image     = model.accountIcon
-        profileView.nameTextView.text        = model.name
+        profileView.photoImageView.image = model.accountIcon
+        profileView.nameTextView.text = model.name
         profileView.descriptionTextView.text = model.description
     }
 
@@ -130,22 +127,22 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
 
         let photoLibraryAction = UIAlertAction(title: NSLocalizedString("Photo library", comment: ""),
                                                style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.presentImagePicker(sourceType: .photoLibrary)
+                                                guard let self = self else { return }
+                                                self.presentImagePicker(sourceType: .photoLibrary)
         }
 
         let cameraAction = UIAlertAction(title: NSLocalizedString("Camera", comment: ""),
                                          style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            let accessChecker = AccessChecker()
-            accessChecker.checkCameraAccess(target: self) { result in
-                #if targetEnvironment(simulator)
-                return
-                #else
-                guard result != .error else { return }
-                self.presentImagePicker(sourceType: .camera)
-                #endif
-            }
+                                            guard let self = self else { return }
+                                            let accessChecker = AccessChecker()
+                                            accessChecker.checkCameraAccess(target: self) { result in
+                                                #if targetEnvironment(simulator)
+                                                return
+                                                #else
+                                                guard result != .error else { return }
+                                                self.presentImagePicker(sourceType: .camera)
+                                                #endif
+                                            }
         }
 
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
@@ -161,32 +158,32 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     }
 
     private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
-        let imagePicker        = UIImagePickerController()
-        imagePicker.delegate   = self
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true)
     }
 
     private func textViewValidate() {
         guard let name = profileView.nameTextView.text,
-              let description = profileView.descriptionTextView.text,
-              !profileView.nameTextView.text.isEmpty,
-              !profileView.descriptionTextView.text.isEmpty
-        else { return }
+            let description = profileView.descriptionTextView.text,
+            !profileView.nameTextView.text.isEmpty,
+            !profileView.descriptionTextView.text.isEmpty
+            else { return }
 
         let state = (name != profileModel.name || description != profileModel.description) ? true : false
-        updatedModel.name        = name
+        updatedModel.name = name
         updatedModel.description = description
-        isAbleToSave             = state
+        isAbleToSave = state
     }
 
     private func saveData() {
-        isSaving     = true
+        isSaving = true
         isAbleToSave = false
         UserManager.shared.dataManager.updateModel(with: updatedModel) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.isSaving           = false
+                self.isSaving = false
                 self.isTextViewEditable = false
                 switch result {
                 case .success:
@@ -222,8 +219,8 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
 
         let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment: ""),
                                         style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.saveData()
+                                            guard let self = self else { return }
+                                            self.saveData()
         }
 
         alertController.addAction(okAction)
@@ -266,7 +263,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage,
-           let resizedImage = image.resizeImage(image: image, newWidth: 300) {
+            let resizedImage = image.resizeImage(image: image, newWidth: 300) {
             profileView.photoImageView.image = resizedImage
             updatedModel.photo = resizedImage
             isAbleToSave = true

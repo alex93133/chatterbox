@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         disableDarkMode()
         setupNavigationBar()
         setDefaultUser()
+        FirebaseApp.configure()
+        UserManager.shared.loadUser()
         return true
     }
 
@@ -47,11 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setDefaultUser() {
         guard !isLaunchedBefore else { return }
+        let uuid = UUID().uuidString
         let user = UserModel(photo: nil,
-                             name: "Daria Mikhal",
-                             description: "Middle data analytic",
-                             theme: .classic)
-        let dataManager = GCDDataManager()
-        dataManager.createUser(model: user)
+                             name: "Alexander Lazarev",
+                             description: "Junior iOS dev",
+                             theme: .classic,
+                             uuID: uuid)
+        UserManager.shared.dataManager.createUser(model: user)
     }
 }

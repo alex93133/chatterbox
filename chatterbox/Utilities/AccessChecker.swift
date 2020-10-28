@@ -10,7 +10,7 @@ enum AccessResult {
 struct AccessChecker {
 
     func checkCameraAccess(target: UIViewController, handler: @escaping (AccessResult) -> Void) {
-        let statusOfCamera  = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        let statusOfCamera = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 
         if statusOfCamera == .notDetermined {
             presentViewWithWarning(target: target) { success -> Void in

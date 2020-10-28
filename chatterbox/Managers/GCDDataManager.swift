@@ -14,22 +14,22 @@ struct GCDDataManager: DataManager {
 
         group.enter()
         queue.async {
-            let resultOfInfoSaving = saveInfoToFile(model: model)
+            let resultOfInfoSaving = self.saveInfoToFile(model: model)
             success = resultOfInfoSaving
-            group.leave()
+            self.group.leave()
         }
 
         group.enter()
         queue.async {
-            let resultOfPhotoSaving = savePhotoToFile(model: model)
+            let resultOfPhotoSaving = self.savePhotoToFile(model: model)
             success = resultOfPhotoSaving
-            group.leave()
+            self.group.leave()
         }
 
         group.notify(queue: .main) {
             self.getUserModel { newModel in
-                if success {
-                    UserManager.shared.userModel = newModel
+                if success, let model = newModel {
+                    UserManager.shared.userModel = model
                     handler(.success)
                 } else {
                     handler(.error)
@@ -38,7 +38,7 @@ struct GCDDataManager: DataManager {
         }
     }
 
-    func getUserModel(handler: @escaping (UserModel) -> Void) {
+    func getUserModel(handler: @escaping (UserModel?) -> Void) {
         queue.sync {
             handler(readUserModel())
         }

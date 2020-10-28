@@ -6,16 +6,16 @@ class OutgoingMessageTableViewCell: UITableViewCell {
 
     // MARK: - UI
     private lazy var overlayView: UIView = {
-        let overlayView                = UIView()
-        overlayView.backgroundColor    = ThemesManager.shared.outgoingMessageBGColor
+        let overlayView = UIView()
+        overlayView.backgroundColor = ThemesManager.shared.outgoingMessageBGColor
         overlayView.layer.cornerRadius = 8
         return overlayView
     }()
 
     lazy var outgoingMessageLabel: UILabel = {
-        let outgoingMessageLabel           = UILabel()
-        outgoingMessageLabel.font          = .systemFont(ofSize: 16, weight: .regular)
-        outgoingMessageLabel.textColor     = ThemesManager.shared.outgoingMessageTextColor
+        let outgoingMessageLabel = UILabel()
+        outgoingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        outgoingMessageLabel.textColor = ThemesManager.shared.outgoingMessageTextColor
         outgoingMessageLabel.numberOfLines = 0
         return outgoingMessageLabel
     }()
@@ -30,20 +30,19 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     }
 
     func configure(with model: ConfigurationModel) {
-        outgoingMessageLabel.text = model.text
+        outgoingMessageLabel.text = model.message.content
     }
 
     private func setupUIElements() {
-        selectionStyle  = .none
+        selectionStyle = .none
         backgroundColor = .clear
+        addSubviews(overlayView, outgoingMessageLabel)
         setupOverlayViewConstraints()
         setupOutgoingMessageLabelConstraints()
     }
 
     // MARK: - Constraints
     private func setupOverlayViewConstraints() {
-        addSubview(overlayView)
-
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             overlayView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
@@ -54,8 +53,6 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     }
 
     private func setupOutgoingMessageLabelConstraints() {
-        overlayView.addSubview(outgoingMessageLabel)
-
         outgoingMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             outgoingMessageLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 8),
