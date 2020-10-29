@@ -10,6 +10,7 @@ class InputBarView: UIView {
         inputTextField.isScrollEnabled = false
         inputTextField.font = .systemFont(ofSize: 17, weight: .regular)
         inputTextField.layer.cornerRadius = 16
+        inputTextField.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         return inputTextField
     }()
 
@@ -25,7 +26,7 @@ class InputBarView: UIView {
         return splitLineView
     }()
 
-    let maxContentHeight: CGFloat = 150
+    var textViewHeightConstraint: NSLayoutConstraint!
 
     init() {
         super.init(frame: .zero)
@@ -48,12 +49,13 @@ class InputBarView: UIView {
     // MARK: - Constraints
     private func setupInputTextViewConstraints() {
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
+        textViewHeightConstraint = inputTextView.heightAnchor.constraint(equalToConstant: 36)
         NSLayoutConstraint.activate([
             inputTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 19),
             inputTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
             inputTextView.topAnchor.constraint(equalTo: topAnchor, constant: 17),
             inputTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -19),
-            inputTextView.heightAnchor.constraint(lessThanOrEqualToConstant: maxContentHeight)
+            textViewHeightConstraint
         ])
     }
 

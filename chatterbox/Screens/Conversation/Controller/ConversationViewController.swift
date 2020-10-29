@@ -35,7 +35,6 @@ class ConversationViewController: UIViewController, ConfigurableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupNavigationBar()
         configure(with: channelModel)
         setTextViewPlaceHolder()
         getData()
@@ -59,20 +58,13 @@ class ConversationViewController: UIViewController, ConfigurableView {
         conversationView.inputBarView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
-    private func setupNavigationBar() {
-        let send = UIBarButtonItem(barButtonSystemItem: .add,
-                                   target: self,
-                                   action: #selector(sendMessage))
-        navigationItem.rightBarButtonItem = send
-    }
-
     func configure(with model: ConfigurationModel) {
         let title = model.name
         navigationItem.title = title
     }
 
     private func setTextViewPlaceHolder() {
-        conversationView.inputBarView.inputTextView.text = NSLocalizedString("Send message", comment: "")
+        conversationView.inputBarView.inputTextView.text = NSLocalizedString("Message text", comment: "")
         conversationView.inputBarView.inputTextView.textColor = UIColor.lightGray
     }
 
@@ -108,10 +100,9 @@ class ConversationViewController: UIViewController, ConfigurableView {
         let textView = conversationView.inputBarView.inputTextView
         guard let text = textView.text,
             !text.isEmpty else { return }
-        //        manager.sendMessage(content: text, identifier: channelModel.identifier)
+        manager.sendMessage(content: text, identifier: channelModel.identifier)
         textView.text = ""
-        setTextViewPlaceHolder()
-        view.endEditing(true)
+        adjustTextViewHeight()
     }
 }
 
@@ -142,10 +133,36 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension ConversationViewController: UITextViewDelegate {
+    private func adjustTextViewHeight() {
+        let maxHeight: CGFloat = view.frame.height / 4
+        let textView = conversationView.inputBarView.inputTextView
+
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        if newSize.height >= maxHeight {
+            textView.isScrollEnabled = true
+            conversationView.inputBarView.textViewHeightConstraint.constant = maxHeight
+        } else {
+            textView.isScrollEnabled = false
+            conversationView.inputBarView.textViewHeightConstraint.constant = newSize.height
+        }
+        view.layoutIfNeeded()
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        adjustTextViewHeight()
+    }
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = ThemesManager.shared.textColor
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            setTextViewPlaceHolder()
         }
     }
 }
