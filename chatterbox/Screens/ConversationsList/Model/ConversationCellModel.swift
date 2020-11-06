@@ -1,7 +1,7 @@
 import Foundation
 
 struct ConversationCellModel {
-    var channel: Channel
+    var channel: ChannelDB
 
     var dateString: String? {
         guard let lastActivity = channel.lastActivity else { return nil }

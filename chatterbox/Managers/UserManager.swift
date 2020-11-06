@@ -30,7 +30,7 @@ class UserManager {
     func loadUser() {
         dataManager.getUserModel { [weak self] model in
             guard let self = self,
-                let model = model else { return }
+                  let model = model else { return }
             self.userModel = model
         }
     }

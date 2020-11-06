@@ -3,50 +3,66 @@ import Firebase
 
 class FirebaseManager {
 
+    static let shared = FirebaseManager()
+    private init() {}
+
     // MARK: - Properties
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
 
     // MARK: - Functions
-    func getChannels(handler: @escaping (FetchResult<[Channel], Error>) -> Void) {
+    func getChannels() {
         reference.addSnapshotListener { snapshot, error in
 
             if let error = error {
-                handler(.failure(error))
+                Logger.shared.printLogs(text: "Unable to get data from Firebase. Error: \(error.localizedDescription)")
                 return
             }
 
             guard let snapshot = snapshot else { return }
 
-            let channels = snapshot.documents.compactMap { document -> Channel? in
-                let channel = Channel(data: document.data(), documentID: document.documentID)
-                return channel
-            }
+            var channelsToSave = [Channel]()
+            var channelsToUpdate = [Channel]()
+            var channelsToDelete = [Channel]()
 
-            CoreDataManager.shared.saveChannelsToDB(channels: channels)
-            handler(.success(channels))
+            snapshot.documentChanges.forEach { difference in
+                guard let channel = Channel(data: difference.document.data(), documentID: difference.document.documentID) else { return }
+                switch difference.type {
+                case .added:
+                    channelsToSave.append(channel)
+                case .modified:
+                    channelsToUpdate.append(channel)
+                case .removed:
+                    channelsToDelete.append(channel)
+                }
+            }
+            CoreDataManager.shared.saveChannelsToDB(channelsToSave)
+            CoreDataManager.shared.updateChannelsInDB(channelsToUpdate)
+            CoreDataManager.shared.deleteChannelsFromDB(channelsToDelete)
         }
     }
 
-    func getMessages(identifier: String, handler: @escaping (FetchResult<[Message], Error>) -> Void) {
+    func getMessages(identifier: String) {
         let messagesReference = reference.document(identifier).collection("messages")
-
         messagesReference.addSnapshotListener { snapshot, error in
 
             if let error = error {
-                handler(.failure(error))
+                Logger.shared.printLogs(text: "Unable to get data from Firebase. Error: \(error.localizedDescription)")
                 return
             }
 
             guard let snapshot = snapshot else { return }
 
-            let messages = snapshot.documents.compactMap { document -> Message? in
-                let message = Message(data: document.data(), documentID: document.documentID)
-                return message
+            var messagesToSave = [Message]()
+
+            snapshot.documentChanges.forEach { difference in
+                guard let message = Message(data: difference.document.data(), documentID: difference.document.documentID) else { return }
+                if difference.type == .added {
+                    messagesToSave.append(message)
+                }
             }
 
-            CoreDataManager.shared.saveMessagesToDB(channelID: identifier, messages: messages)
-            handler(.success(messages))
+            CoreDataManager.shared.saveMessagesToDB(channelID: identifier, messages: messagesToSave)
         }
     }
 
@@ -64,5 +80,16 @@ class FirebaseManager {
     func createChannel(name: String) {
         let data = [ "name": name ]
         reference.addDocument(data: data)
+    }
+
+    func deleteChannel(identifier: String) {
+        let channelReference = reference.document(identifier)
+
+        channelReference.delete { error in
+            if let error = error {
+                Logger.shared.printLogs(text: "Unable to delete channel from Firebase. Error: \(error.localizedDescription)")
+                return
+            }
+        }
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChannelDB" representedClassName="ChannelDB" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" attributeType="String"/>
         <attribute name="lastActivity" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastMessage" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageDB" inverseName="channel" inverseEntity="MessageDB"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MessageDB" inverseName="channel" inverseEntity="MessageDB"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
@@ -26,7 +26,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="ChannelDB" positionX="-160.140625" positionY="-39.36328125" width="128" height="28"/>
+        <element name="ChannelDB" positionX="-160.140625" positionY="-39.36328125" width="128" height="118"/>
         <element name="MessageDB" positionX="-421.7578125" positionY="-114.39453125" width="131.53515625" height="133"/>
     </elements>
 </model>
