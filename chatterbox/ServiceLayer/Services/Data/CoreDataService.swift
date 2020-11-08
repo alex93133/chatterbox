@@ -1,0 +1,74 @@
+import Foundation
+import CoreData
+
+class CoreDataService {
+
+    static let shared = CoreDataService()
+    private init() {}
+
+    // MARK: - Properties
+    let coreDataStack = CoreDataStack()
+
+    // MARK: - Functions
+    func saveChannelsToDB(_ channels: [ChannelModel]) {
+        coreDataStack.performSave { context in
+            channels.forEach { channel in
+                let predicate = NSPredicate(format: "identifier == %@", channel.identifier)
+                guard objectIsNotExist(type: ChannelDB.self, predicate: predicate, context: context) else { return }
+                _ = ChannelDB(channel: channel, in: context)
+            }
+        }
+    }
+
+    func deleteChannelsFromDB(_ channels: [ChannelModel]) {
+        coreDataStack.performSave { context in
+            channels.forEach { channel in
+                if let channelDB = getChannel(for: channel.identifier, in: context) {
+                    context.delete(channelDB)
+                }
+            }
+        }
+    }
+
+    func updateChannelsInDB(_ channels: [ChannelModel]) {
+        coreDataStack.performSave { context in
+            channels.forEach { channel in
+                if let channelDB = getChannel(for: channel.identifier, in: context) {
+                    channelDB.lastMessage = channel.lastMessage
+                    channelDB.lastActivity = channel.lastActivity
+                }
+            }
+        }
+    }
+
+    private func getChannel(for identifier: String, in context: NSManagedObjectContext) -> ChannelDB? {
+        let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier)
+        let results = try? context.fetch(fetchRequest)
+        return results?.first
+    }
+
+    func saveMessagesToDB(channelID: String, messages: [MessageModel]) {
+        coreDataStack.performSave { context in
+            if let channelDB = getChannel(for: channelID, in: context) {
+                messages.forEach { message in
+                    let predicate = NSPredicate(format: "identifier == %@", message.identifier)
+                    guard objectIsNotExist(type: MessageDB.self, predicate: predicate, context: context) else { return }
+                    let messageDB = MessageDB(message: message, in: context)
+                    channelDB.addToMessages(messageDB)
+                }
+            }
+        }
+    }
+
+    private func objectIsNotExist<Object: NSManagedObject>(type: Object.Type, predicate: NSPredicate, context: NSManagedObjectContext) -> Bool {
+        let fetchRequest = type.fetchRequest()
+        fetchRequest.predicate = predicate
+        if let results = try? context.fetch(fetchRequest),
+           results.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
+}

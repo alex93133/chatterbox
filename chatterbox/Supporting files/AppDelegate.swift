@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setDefaultUser()
         setupCoreData()
         FirebaseApp.configure()
-        UserManager.shared.loadUser()
+        UserDataService.shared.loadUser()
         return true
     }
 
@@ -57,11 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                              description: "Junior iOS dev",
                              theme: .classic,
                              uuID: uuid)
-        UserManager.shared.dataManager.createUser(model: user)
+        UserDataService.shared.dataManager.createUser(model: user)
     }
 
     private func setupCoreData() {
-        CoreDataManager.shared.coreDataStack.enableObservers()
+        CoreDataService.shared.coreDataStack.enableObservers()
 
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.applicationSupportDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         print(paths[0])
