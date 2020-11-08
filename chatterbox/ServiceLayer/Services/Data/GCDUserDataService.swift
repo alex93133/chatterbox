@@ -1,14 +1,23 @@
 import Foundation
 
-struct GCDUserDataService: UserDataProtocol {
+class GCDUserDataService: UserDataProtocol {
+    
 
     // MARK: - Properties
     let queue = DispatchQueue.global(qos: .default)
     let group = DispatchGroup()
-    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    // MARK: - Dependencies
+//    var userDataService: UserDataServiceProtocol 
+    var fileManagerStack: FileManagerStackProtocol
+    
+    init(userDataService: UserDataServiceProtocol, fileManagerStack: FileManagerStackProtocol) {
+//        self.userDataService = userDataService
+        self.fileManagerStack = fileManagerStack
+    }
 
     // MARK: - Functions
-    func updateModel(with model: UserModel, handler: @escaping (Result) -> Void) {
+    func updateModel(with model: User, handler: @escaping (Result) -> Void) {
 
         var success = false
 
@@ -26,19 +35,20 @@ struct GCDUserDataService: UserDataProtocol {
             self.group.leave()
         }
 
-        group.notify(queue: .main) {
+        group.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }            
             self.getUserModel { newModel in
-                if success, let model = newModel {
-                    UserDataService.shared.userModel = model
-                    handler(.success)
-                } else {
-                    handler(.error)
-                }
+//                if success, let model = newModel {
+//                    self.userDataService.userModel = model
+//                    handler(.success)
+//                } else {
+//                    handler(.error)
+//                }
             }
         }
     }
 
-    func getUserModel(handler: @escaping (UserModel?) -> Void) {
+    func getUserModel(handler: @escaping (User?) -> Void) {
         queue.sync {
             handler(readUserModel())
         }

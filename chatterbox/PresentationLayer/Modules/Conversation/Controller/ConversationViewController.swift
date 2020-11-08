@@ -5,7 +5,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
     
     // MARK: - Properties
     lazy var conversationView: ConversationView = {
-        let view = ConversationView(frame: UIScreen.main.bounds)
+        let view = ConversationView(themesService: model.themesService)
         return view
     }()
     
@@ -13,25 +13,30 @@ class ConversationViewController: UIViewController, ConfigurableView {
     private var identifier: String
     
     lazy var fetchedResultsController: NSFetchedResultsController<MessageDB> = {
-        let context = CoreDataService.shared.coreDataStack.container.viewContext
         let fetchRequest: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
         let predicate = NSPredicate(format: "channel.identifier == %@", identifier)
         let dateDescriptor = NSSortDescriptor(key: "created", ascending: true)
         fetchRequest.sortDescriptors = [dateDescriptor]
         fetchRequest.predicate = predicate
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: "messageCache\(identifier)")
+        let fetchedResultsController = model.frcService.getFRC(fetchRequest: fetchRequest,
+                                                               sectionNameKeyPath: nil,
+                                                               cacheName: "messageCache\(identifier)")
+        
         return fetchedResultsController
     }()
     
     typealias ConfigurationModel = ChannelDB
     
-    init(with channelModel: ChannelDB) {
-        self.channelModel = channelModel
-        self.identifier = channelModel.identifier ?? ""
+    // MARK: - Dependencies
+    var model: ConversationModelProtocol
+    var presentationAssembly: PresentationAssemblyProtocol
+    
+    init(model: ConversationModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
+        self.model = model
+        self.channelModel = model.channelModel
+        self.identifier = model.channelModel.identifier ?? ""
+        self.presentationAssembly = presentationAssembly
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,7 +66,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
     // MARK: - Functions
     private func setupView() {
         conversationView.setupUIElements()
-        conversationView.backgroundColor = ThemesService.shared.barColor
+        conversationView.backgroundColor = model.themesService.barColor
         conversationView.tableView.delegate = self
         conversationView.tableView.dataSource = self
         conversationView.inputBarView.inputTextView.delegate = self
@@ -82,12 +87,12 @@ class ConversationViewController: UIViewController, ConfigurableView {
     }
     
     private func getData() {
-        FirebaseManager.shared.getMessages(identifier: identifier)
+        model.firebaseService.getMessages(identifier: identifier)
         do {
             try fetchedResultsController.performFetch()
             scrollTableViewToLast()
         } catch {
-            LoggerService.shared.printLogs(text: "FRC error: \(error.localizedDescription)")
+            Logger.shared.printLogs(text: "FRC error: \(error.localizedDescription)")
         }
     }
     
@@ -125,7 +130,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
         guard let text = textView.text,
               !text.isEmpty,
               textView.textColor != UIColor.lightGray else { return }
-        FirebaseManager.shared.sendMessage(content: text, identifier: identifier)
+        model.firebaseService.sendMessage(content: text, identifier: identifier)
         textView.text = ""
         adjustTextViewHeight()
     }

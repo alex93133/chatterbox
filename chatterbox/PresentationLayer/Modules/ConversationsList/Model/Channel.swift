@@ -1,14 +1,14 @@
 import Foundation
 import Firebase
 
-struct ChannelModel {
+struct Channel {
     let identifier: String
     let name: String
     let lastMessage: String?
     let lastActivity: Date?
 }
 
-extension ChannelModel {
+extension Channel {
     init?(data: [String: Any], documentID: String) {
         guard let name = data["name"] as? String else { return nil }
         let timestamp = data["lastActivity"] as? Timestamp

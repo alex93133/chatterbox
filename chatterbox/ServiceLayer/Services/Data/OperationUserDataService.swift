@@ -3,11 +3,19 @@ import Foundation
 class OperationUserDataService: UserDataProtocol {
 
     // MARK: - Properties
-    var documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let operationQueue = OperationQueue()
-
+    
+    // MARK: - Dependencies
+//    var userDataService: UserDataServiceProtocol 
+    var fileManagerStack: FileManagerStackProtocol
+    
+    init(userDataService: UserDataServiceProtocol, fileManagerStack: FileManagerStackProtocol) {
+//        self.userDataService = userDataService
+        self.fileManagerStack = fileManagerStack
+    }
+    
     // MARK: - Functions
-    func updateModel(with model: UserModel, handler: @escaping (Result) -> Void) {
+    func updateModel(with model: User, handler: @escaping (Result) -> Void) {
         var success = false
 
         let infoSavingOperation = BlockOperation { [weak self] in
@@ -25,12 +33,12 @@ class OperationUserDataService: UserDataProtocol {
         let completionOperation = BlockOperation { [weak self] in
             guard let self = self else { return }
             self.getUserModel { newModel in
-                if success, let model = newModel {
-                    UserDataService.shared.userModel = model
-                    handler(.success)
-                } else {
-                    handler(.error)
-                }
+//                if success, let model = newModel {
+//                    self.userDataService.userModel = model
+//                    handler(.success)
+//                } else {
+//                    handler(.error)
+//                }
             }
         }
 
@@ -41,8 +49,8 @@ class OperationUserDataService: UserDataProtocol {
         operationQueue.addOperation(completionOperation)
     }
 
-    func getUserModel(handler: @escaping (UserModel?) -> Void) {
-        var userModel: UserModel!
+    func getUserModel(handler: @escaping (User?) -> Void) {
+        var userModel: User!
 
         let readingOperation = BlockOperation { [weak self] in
             guard let self = self else { return }

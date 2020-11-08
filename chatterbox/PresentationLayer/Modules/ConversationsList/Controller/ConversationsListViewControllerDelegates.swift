@@ -19,6 +19,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             let channelDB = fetchedResultsController.object(at: indexPath)
             let cellModel = ConversationCellModel(channel: channelDB)
             cell.configure(with: cellModel)
+            cell.themesService = model.themesService
             return cell
         }
         return UITableViewCell()
@@ -26,14 +27,14 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channelDB = fetchedResultsController.object(at: indexPath)
-        let conversationViewController = ConversationViewController(with: channelDB)
+        let conversationViewController = presentationAssembly.conversationViewController(with: channelDB)
         navigationController?.pushViewController(conversationViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = ThemesService.shared.textColor
-        header.contentView.backgroundColor = ThemesService.shared.mainBGColor.withAlphaComponent(0.8)
+        header.textLabel?.textColor = model.themesService.textColor
+        header.contentView.backgroundColor = model.themesService.mainBGColor.withAlphaComponent(0.8)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -41,7 +42,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             guard let self = self else { return }
             let channelDB = self.fetchedResultsController.object(at: indexPath)
             if let identifier = channelDB.identifier {
-                FirebaseManager.shared.deleteChannel(identifier: identifier)
+                self.model.firebaseService.deleteChannel(identifier: identifier)
             }
         }
         return [deleteAction]
@@ -103,11 +104,11 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
 // MARK: - ThemesPicker
 extension ConversationsListViewController: ThemesPickerDelegate {
     func updateColors() {
-        conversationsListView.tableView.backgroundColor = ThemesService.shared.mainBGColor
-        conversationsListView.backgroundColor = ThemesService.shared.mainBGColor
-        navigationItem.leftBarButtonItem?.tintColor = ThemesService.shared.barItemColor
+        conversationsListView.tableView.backgroundColor = model.themesService.mainBGColor
+        conversationsListView.backgroundColor = model.themesService.mainBGColor
+        navigationItem.leftBarButtonItem?.tintColor = model.themesService.barItemColor
         conversationsListView.tableView.reloadData()
         guard let cells = conversationsListView.tableView.visibleCells as? [ConversationTableViewCell] else { return }
-        cells.forEach { $0.nameLabel.textColor = ThemesService.shared.textColor }
+        cells.forEach { $0.nameLabel.textColor = model.themesService.textColor }
     }
 }

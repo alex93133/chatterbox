@@ -1,7 +1,7 @@
 import Foundation
 import Firebase
 
-struct MessageModel {
+struct Message {
     let identifier: String
     let content: String
     let created: Date
@@ -9,7 +9,7 @@ struct MessageModel {
     let senderName: String
 }
 
-extension MessageModel {
+extension Message {
     init?(data: [String: Any], documentID: String) {
         guard let content = data["content"] as? String,
               let timestamp = data["created"] as? Timestamp,

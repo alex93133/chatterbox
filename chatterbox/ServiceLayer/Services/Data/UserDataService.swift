@@ -1,18 +1,21 @@
 import UIKit
 
-class UserDataService {
+protocol UserDataServiceProtocol {
+    func loadUser()
+    var userModel: User { get set }
+    var dataManager: UserDataProtocol { get set }
+    var gcdUserDataService: UserDataProtocol { get }
+    var operationUserDataService: UserDataProtocol { get }
+}
 
-    static let shared = UserDataService()
-    private init() {}
+class UserDataService: UserDataServiceProtocol {
 
     // MARK: - Proprties
-    private lazy var gcdManager: UserDataProtocol = GCDUserDataService()
-    private lazy var operationManager: UserDataProtocol = OperationUserDataService()
     private var currentDataManager: UserDataProtocol!
     var dataManager: UserDataProtocol {
         get {
             let randomIndex = Int.random(in: 0...1)
-            let managers = [gcdManager, operationManager]
+            let managers = [gcdUserDataService, operationUserDataService]
             currentDataManager = managers[randomIndex]
             return currentDataManager
         } set {
@@ -20,12 +23,21 @@ class UserDataService {
         }
     }
 
-    var userModel = UserModel(photo: nil,
+    var userModel = User(photo: nil,
                               name: "User",
                               description: "",
                               theme: .classic,
                               uuID: "")
-
+    
+    // MARK: - Dependencies
+    var gcdUserDataService: UserDataProtocol
+    var operationUserDataService: UserDataProtocol
+    
+    init(gcdUserDataService: UserDataProtocol, operationUserDataService: UserDataProtocol) {
+        self.gcdUserDataService = gcdUserDataService
+        self.operationUserDataService = operationUserDataService
+    }
+    
     // MARK: - Functions
     func loadUser() {
         dataManager.getUserModel { [weak self] model in

@@ -21,8 +21,8 @@ class ProfileView: UIView {
 
     lazy var nameTextView: UITextView = {
         let nameTextView = UITextView()
-        nameTextView.textColor = ThemesService.shared.textColor
-        nameTextView.keyboardAppearance = ThemesService.shared.keyBoard
+        nameTextView.textColor = themesService.textColor
+        nameTextView.keyboardAppearance = themesService.keyboardStyle
         nameTextView.font = .systemFont(ofSize: 24, weight: .bold)
         nameTextView.isSelectable = false
         nameTextView.isScrollEnabled = false
@@ -36,8 +36,8 @@ class ProfileView: UIView {
 
     lazy var descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
-        descriptionTextView.textColor = ThemesService.shared.textColor
-        descriptionTextView.keyboardAppearance = ThemesService.shared.keyBoard
+        descriptionTextView.textColor = themesService.textColor
+        descriptionTextView.keyboardAppearance = themesService.keyboardStyle
         descriptionTextView.font = .systemFont(ofSize: 16, weight: .regular)
         descriptionTextView.isSelectable = false
         descriptionTextView.isEditable = false
@@ -64,7 +64,19 @@ class ProfileView: UIView {
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
-
+    
+    // MARK: - Dependencies
+       var themesService: ThemesServiceProtocol
+       
+       init(themesService: ThemesServiceProtocol) {
+           self.themesService = themesService
+           super.init(frame: UIScreen.main.bounds)
+       }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupUIElements() {
         addSubviews(photoImageView,
                     editPhotoButton,

@@ -5,25 +5,36 @@ class ConversationsListViewController: UIViewController {
 
     // MARK: - Properties
     lazy var conversationsListView: ConversationsListView = {
-        let view = ConversationsListView(frame: UIScreen.main.bounds)
+        let view = ConversationsListView(themesService: model.themesService)
         return view
     }()
 
     lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
-        let context = CoreDataService.shared.coreDataStack.container.viewContext
         let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
         let nilMessageDescriptor = NilsLastSortDescriptor(key: "lastMessage", ascending: false)
         let dateDescriptor = NSSortDescriptor(key: "lastActivity", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor, nilMessageDescriptor]
-
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: "channelsCache")
+        let fetchedResultsController = model.frcService.getFRC(fetchRequest: fetchRequest,
+                                                               sectionNameKeyPath: nil,
+                                                               cacheName: "channelsCache")
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
-
+    
+    // MARK: - Dependencies
+    var model: ConversationsListModelProtocol
+    var presentationAssembly: PresentationAssemblyProtocol
+    
+    init(model: ConversationsListModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
+        self.model = model
+        self.presentationAssembly = presentationAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - VC Lifecycle
     override func loadView() {
         view = conversationsListView
@@ -39,27 +50,27 @@ class ConversationsListViewController: UIViewController {
     // MARK: - Functions
     private func setupView() {
         conversationsListView.setupUIElements()
-        conversationsListView.backgroundColor = ThemesService.shared.mainBGColor
+        conversationsListView.backgroundColor = model.themesService.mainBGColor
         conversationsListView.tableView.delegate = self
         conversationsListView.tableView.dataSource = self
         conversationsListView.tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationCell)
     }
 
     private func setupNavigationBar() {
-        ThemesService.shared.setupNavigationBar(target: self)
+        model.themesService.setupNavigationBar(target: self)
         navigationItem.title = "Tinkoff Chat"
         let settingsUIBarButtonItem = UIBarButtonItem(image: Images.settings,
                                                       style: .plain,
                                                       target: self,
                                                       action: #selector(settingsItemPressed))
-        settingsUIBarButtonItem.tintColor = ThemesService.shared.barItemColor
+        settingsUIBarButtonItem.tintColor = model.themesService.barItemColor
         navigationItem.leftBarButtonItem = settingsUIBarButtonItem
 
         let createChannelAction = UIBarButtonItem(barButtonSystemItem: .add,
                                                   target: self,
                                                   action: #selector(createChannel))
 
-        let image = UserDataService.shared.userModel.accountIcon
+        let image = model.userDataService.userModel.accountIcon
         let accountButton = UIBarButtonItem.roundedButton(from: image,
                                                           target: self,
                                                           action: #selector(accountItemPressed))
@@ -67,19 +78,19 @@ class ConversationsListViewController: UIViewController {
     }
 
     private func getData() {
-        FirebaseManager.shared.getChannels()
+        model.firebaseService.getChannels()
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            LoggerService.shared.printLogs(text: "FRC error: \(error.localizedDescription)")
+            Logger.shared.printLogs(text: "FRC error: \(error.localizedDescription)")
         }
     }
 
     // MARK: - Actions
     @objc
     private func settingsItemPressed() {
-        let theme = UserDataService.shared.userModel.theme
-        let themesViewController = ThemesViewController(with: theme)
+        let theme = model.userDataService.userModel.theme
+        let themesViewController = presentationAssembly.themesViewController(with: theme)
         themesViewController.delegate = self
         navigationController?.pushViewController(themesViewController, animated: true)
     }
@@ -87,21 +98,22 @@ class ConversationsListViewController: UIViewController {
     @objc
     private func createChannel() {
         let alertController = UIAlertController(title: NSLocalizedString("Create a new channel", comment: ""),
-                                                placeholder: NSLocalizedString("Channel name", comment: "")) { text in
-            FirebaseManager.shared.createChannel(name: text)
+                                                placeholder: NSLocalizedString("Channel name", comment: "")) { [weak self] text in
+            guard let self = self else { return }    
+            self.model.firebaseService.createChannel(name: text)
         }
         present(alertController, animated: true, completion: nil)
     }
 
     @objc
     private func accountItemPressed() {
-        let profileModel = UserDataService.shared.userModel
-        let profileViewController = ProfileViewController(with: profileModel)
+        let profile = model.userDataService.userModel
+        let profileViewController = presentationAssembly.profileViewController(with: profile)
         let navigationController = UINavigationController(rootViewController: profileViewController)
         present(navigationController, animated: true)
         profileViewController.updateUserIcon = { [weak self] in
             guard let self = self else { return }
-            let image = UserDataService.shared.userModel.accountIcon
+            let image = self.model.userDataService.userModel.accountIcon
             let accountButton = UIBarButtonItem.roundedButton(from: image,
                                                               target: self,
                                                               action: #selector(self.accountItemPressed))

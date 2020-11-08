@@ -7,29 +7,36 @@ protocol ThemesPickerDelegate: class {
 class ThemesViewController: UIViewController, ConfigurableView {
 
     // MARK: - Properties
-    private let themesView: ThemesView = {
-        let view = ThemesView(frame: UIScreen.main.bounds)
+    lazy var themesView: ThemesView = {
+        let view = ThemesView(themesService: model.themesService)
         return view
     }()
 
-    private var themeModel: ThemeModel
+    private var themeModel: Theme
     private lazy var buttons = [themesView.classicThemeButton,
                                 themesView.dayThemeButton,
                                 themesView.nightThemeButton]
 
-    typealias ConfigurationModel = ThemeModel
+    typealias ConfigurationModel = Theme
 
     weak var delegate: ThemesPickerDelegate?
+    
+    // MARK: - Dependencies
+    var model: ThemesModelProtocol
+    var presentationAssembly: PresentationAssemblyProtocol
 
-    init(with themeModel: ThemeModel) {
-        self.themeModel = themeModel
+    init(model: ThemesModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
+        self.themeModel = model.theme
+        self.model = model
+        self.presentationAssembly = presentationAssembly
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    
     // MARK: - VC Lifecycle
     override func loadView() {
         view = themesView
@@ -45,7 +52,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     // MARK: - Functions
     private func setupView() {
         themesView.setupUIElements()
-        themesView.backgroundColor = ThemesService.shared.outgoingMessageBGColor
+        themesView.backgroundColor = model.themesService.outgoingMessageBGColor
 
         themesView.classicThemeButton.addTarget(self, action: #selector(classicThemeButtonPressed), for: .touchUpInside)
         themesView.dayThemeButton.addTarget(self, action: #selector(dayThemeButtonPressed), for: .touchUpInside)
@@ -82,9 +89,9 @@ class ThemesViewController: UIViewController, ConfigurableView {
     private func applyNewTheme() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            self.view.backgroundColor = ThemesService.shared.outgoingMessageBGColor
-            self.buttons.forEach { $0.interactiveTitle.textColor = ThemesService.shared.outgoingMessageTextColor }
-            ThemesService.shared.setupNavigationBar(target: self)
+            self.view.backgroundColor = self.model.themesService.outgoingMessageBGColor
+            self.buttons.forEach { $0.interactiveTitle.textColor = self.model.themesService.outgoingMessageTextColor }
+            self.model.themesService.setupNavigationBar(target: self)
         }
     }
 
@@ -94,10 +101,10 @@ class ThemesViewController: UIViewController, ConfigurableView {
             switch result {
             case .success:
                 self.applyNewTheme()
-                LoggerService.shared.printLogs(text: "Theme successfully changed to \(UserDataService.shared.userModel.theme.rawValue)")
+                Logger.shared.printLogs(text: "Theme successfully changed to \(self.model.userDataService.userModel.theme.rawValue)")
 
             case .error:
-                LoggerService.shared.printLogs(text: "Theme changing error")
+                Logger.shared.printLogs(text: "Theme changing error")
             }
         }
     }
@@ -107,7 +114,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     private func classicThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
 
-        ThemesService.shared.saveThemeSettings(theme: .classic) { [weak self] result in
+        model.themesService.saveThemeSettings(theme: .classic) { [weak self] result in
             guard let self = self else { return }
             self.handleThemeSaving(result)
         }
@@ -117,7 +124,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     private func dayThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
 
-        ThemesService.shared.saveThemeSettings(theme: .day) { [weak self] result in
+        model.themesService.saveThemeSettings(theme: .day) { [weak self] result in
             guard let self = self else { return }
             self.handleThemeSaving(result)
         }
@@ -127,7 +134,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     private func nightThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
 
-        ThemesService.shared.saveThemeSettings(theme: .night) { [weak self] result in
+        model.themesService.saveThemeSettings(theme: .night) { [weak self] result in
             guard let self = self else { return }
             self.handleThemeSaving(result)
         }

@@ -8,12 +8,24 @@ class ConversationView: UIView {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
-        tableView.backgroundColor = ThemesService.shared.mainBGColor
+        tableView.backgroundColor = themesService.mainBGColor
         return tableView
     }()
 
-    lazy var inputBarView = InputBarView()
-
+    lazy var inputBarView = InputBarView(themesService: themesService)
+    
+    // MARK: - Dependencies
+       var themesService: ThemesServiceProtocol
+       
+       init(themesService: ThemesServiceProtocol) {
+           self.themesService = themesService
+           super.init(frame: UIScreen.main.bounds)
+       }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupUIElements() {
         addSubviews(tableView, inputBarView)
         setupTableViewConstraints()

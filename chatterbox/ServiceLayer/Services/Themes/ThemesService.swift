@@ -1,19 +1,36 @@
 import UIKit
 
-class ThemesService {
+protocol ThemesServiceProtocol {
+    var mainBGColor: UIColor { get }
+    var incomingMessageBGColor: UIColor { get }
+    var outgoingMessageTextColor: UIColor { get }
+    var outgoingMessageBGColor: UIColor { get }
+    var textColor: UIColor { get }
+    var barItemColor: UIColor { get }
+    var barColor: UIColor { get }
+    var keyboardStyle: UIKeyboardAppearance { get }
+    func saveThemeSettings(theme: Theme, handler: @escaping (Result) -> Void)
+    func setupNavigationBar(target: UIViewController)
+}
 
-    static let shared = ThemesService()
-    private init() {}
+class ThemesService: ThemesServiceProtocol {
 
+    // MARK: - Dependencies
+    var userDataService: UserDataServiceProtocol
+    
+    init(userDataService: UserDataServiceProtocol) {
+        self.userDataService = userDataService
+    }
+    
     // MARK: - Properties
-    private var currentTheme: ThemeModel?
-    private var theme: ThemeModel {
+    private var currentTheme: Theme?
+    private var theme: Theme {
         get {
             if let currentTheme = currentTheme {
                 return currentTheme
             } else {
-                let userModel = UserDataService.shared.userModel
-                guard let themeModel = ThemeModel(rawValue: userModel.theme.rawValue) else { return .classic }
+                let userModel = userDataService.userModel
+                guard let themeModel = Theme(rawValue: userModel.theme.rawValue) else { return .classic }
                 currentTheme = themeModel
                 return themeModel
             }
@@ -100,7 +117,7 @@ class ThemesService {
         }
     }
 
-    var keyBoard: UIKeyboardAppearance {
+    var keyboardStyle: UIKeyboardAppearance {
         switch theme {
         case .classic, .day:
             return .light
@@ -111,15 +128,15 @@ class ThemesService {
     }
 
     // MARK: - Functions
-    func saveThemeSettings(theme: ThemeModel, handler: @escaping (Result) -> Void) {
+    func saveThemeSettings(theme: Theme, handler: @escaping (Result) -> Void) {
         guard theme != currentTheme else { return }
-        var userModel = UserDataService.shared.userModel
+        var userModel = userDataService.userModel
         userModel.theme = theme
-        UserDataService.shared.dataManager.updateModel(with: userModel) { [weak self] result in
+        userDataService.dataManager.updateModel(with: userModel) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
-                self.theme = UserDataService.shared.userModel.theme
+                self.theme = self.userDataService.userModel.theme
 
             case .error:
                 return

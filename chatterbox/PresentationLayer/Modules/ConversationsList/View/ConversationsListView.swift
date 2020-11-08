@@ -7,10 +7,23 @@ class ConversationsListView: UIView {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 88
-        tableView.backgroundColor = ThemesService.shared.mainBGColor
+        tableView.backgroundColor = themesService.mainBGColor
         return tableView
     }()
-
+    
+    
+    // MARK: - Dependencies
+    var themesService: ThemesServiceProtocol
+    
+    init(themesService: ThemesServiceProtocol) {
+        self.themesService = themesService
+        super.init(frame: UIScreen.main.bounds)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupUIElements() {
         addSubviews(tableView)
         setupTableViewConstraints()

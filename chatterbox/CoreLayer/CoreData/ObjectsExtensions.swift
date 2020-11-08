@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 extension ChannelDB {
-    convenience init(channel: ChannelModel, in context: NSManagedObjectContext) {
+    convenience init(channel: Channel, in context: NSManagedObjectContext) {
         self.init(context: context)
         self.identifier = channel.identifier
         self.name = channel.name
@@ -12,7 +12,7 @@ extension ChannelDB {
 }
 
 extension MessageDB {
-    convenience init(message: MessageModel, in context: NSManagedObjectContext) {
+    convenience init(message: Message, in context: NSManagedObjectContext) {
         self.init(context: context)
         self.identifier = message.identifier
         self.content = message.content

@@ -10,19 +10,21 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let messageDB = fetchedResultsController.object(at: indexPath)
-        let cellModel = MessageCellModel(message: messageDB)
+        let cellModel = MessageCellModel(message: messageDB, userDataService: model.userDataService)
 
         if cellModel.isIncoming {
             if let incomingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.incomingMessageCell,
                                                                 for: indexPath) as? IncomingMessageTableViewCell {
                 incomingCell.configure(with: cellModel)
+                incomingCell.themesService = model.themesService
                 return incomingCell
             }
         } else {
-            if let outGoingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.outgoingMessageCell,
+            if let outgoingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.outgoingMessageCell,
                                                                 for: indexPath) as? OutgoingMessageTableViewCell {
-                outGoingCell.configure(with: cellModel)
-                return outGoingCell
+                outgoingCell.configure(with: cellModel)
+                outgoingCell.themesService = model.themesService
+                return outgoingCell
             }
         }
         return UITableViewCell()
@@ -50,7 +52,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
         case .update:
             if let indexPath = indexPath {
                 let messageDB = fetchedResultsController.object(at: indexPath)
-                let cellModel = MessageCellModel(message: messageDB)
+                let cellModel = MessageCellModel(message: messageDB, userDataService: model.userDataService)
                 if cellModel.isIncoming {
                     guard let cell = conversationView.tableView.cellForRow(at: indexPath) as? IncomingMessageTableViewCell else { break }
                     cell.configure(with: cellModel)
@@ -93,7 +95,7 @@ extension ConversationViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = ThemesService.shared.textColor
+            textView.textColor = model.themesService.textColor
         }
     }
 

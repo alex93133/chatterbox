@@ -5,8 +5,8 @@ class InputBarView: UIView {
     // MARK: - Properties
     lazy var inputTextView: UITextView = {
         let inputTextField = UITextView()
-        inputTextField.backgroundColor = ThemesService.shared.mainBGColor
-        inputTextField.keyboardAppearance = ThemesService.shared.keyBoard
+        inputTextField.backgroundColor = themesService.mainBGColor
+        inputTextField.keyboardAppearance = themesService.keyboardStyle
         inputTextField.isScrollEnabled = false
         inputTextField.font = .systemFont(ofSize: 17, weight: .regular)
         inputTextField.layer.cornerRadius = 16
@@ -27,9 +27,13 @@ class InputBarView: UIView {
     }()
 
     var textViewHeightConstraint: NSLayoutConstraint!
+    
+    // MARK: - Dependencies
+       var themesService: ThemesServiceProtocol
 
-    init() {
-        super.init(frame: .zero)
+    init(themesService: ThemesServiceProtocol) {
+        self.themesService = themesService
+        super.init(frame: UIScreen.main.bounds)
         setupUIElements()
     }
 

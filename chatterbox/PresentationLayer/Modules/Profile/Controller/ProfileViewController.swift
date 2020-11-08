@@ -4,21 +4,21 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
 
     // MARK: - Properties
     private lazy var profileView: ProfileView = {
-        let view = ProfileView(frame: UIScreen.main.bounds)
+        let view = ProfileView(themesService: model.themesService)
         return view
     }()
 
-    private var profileModel: UserModel
-    private var updatedModel: UserModel
+    private var profileModel: User
+    private var updatedModel: User
     var updateUserIcon: (() -> Void)?
 
-    typealias ConfigurationModel = UserModel
+    typealias ConfigurationModel = User
 
     private var isTextViewEditable: Bool = false {
         willSet(isEditable) {
             let textViewBGColor: UIColor
             if isEditable {
-                textViewBGColor = ThemesService.shared.incomingMessageBGColor
+                textViewBGColor = model.themesService.incomingMessageBGColor
             } else {
                 configure(with: profileModel)
                 isAbleToSave = false
@@ -52,12 +52,20 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
             profileView.saveButtonOperation.isEnabled = newValue
         }
     }
+    
+    // MARK: - Dependencies
+       var model: ProfileModelProtocol
+       var presentationAssembly: PresentationAssemblyProtocol
 
-    init(with profileModel: UserModel) {
-        self.profileModel = profileModel
+    init(model: ProfileModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
+        self.model = model
+        self.presentationAssembly = presentationAssembly
+        
+        self.profileModel = model.user
         self.updatedModel = profileModel
         super.init(nibName: nil, bundle: nil)
     }
+    
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -89,7 +97,7 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     // MARK: - Functions
     private func setupView() {
         profileView.setupUIElements()
-        profileView.backgroundColor = ThemesService.shared.mainBGColor
+        profileView.backgroundColor = model.themesService.mainBGColor
         profileView.nameTextView.delegate = self
         profileView.descriptionTextView.delegate = self
 
@@ -111,7 +119,7 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
 
         navigationItem.leftBarButtonItem = closeButtonItem
         navigationItem.rightBarButtonItem = editInfoButtonItem
-        ThemesService.shared.setupNavigationBar(target: self)
+        model.themesService.setupNavigationBar(target: self)
     }
 
     func configure(with model: ConfigurationModel) {
@@ -180,7 +188,7 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     private func saveData() {
         isSaving = true
         isAbleToSave = false
-        UserDataService.shared.dataManager.updateModel(with: updatedModel) { [weak self] result in
+        model.userDataService.dataManager.updateModel(with: updatedModel) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.isSaving = false
@@ -191,7 +199,7 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
                     self.updateUserIcon?()
                     self.profileModel = self.updatedModel
                     self.presentSuccessAlert()
-                    LoggerService.shared.printLogs(text: "Model saved and applied")
+                    Logger.shared.printLogs(text: "Model saved and applied")
 
                 case .error:
                     self.presentErrorAlert()
@@ -247,13 +255,13 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
 
     @objc
     private func saveButtonGCDPressed() {
-        UserDataService.shared.dataManager = GCDUserDataService()
+        model.userDataService.dataManager = model.userDataService.gcdUserDataService
         saveData()
     }
 
     @objc
     private func saveButtonOperationPressed() {
-        UserDataService.shared.dataManager = OperationUserDataService()
+        model.userDataService.dataManager = model.userDataService.operationUserDataService
         saveData()
     }
 }

@@ -7,7 +7,7 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     // MARK: - UI
     private lazy var overlayView: UIView = {
         let overlayView = UIView()
-        overlayView.backgroundColor = ThemesService.shared.outgoingMessageBGColor
+        overlayView.backgroundColor = themesService.outgoingMessageBGColor
         overlayView.layer.cornerRadius = 8
         return overlayView
     }()
@@ -15,10 +15,13 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     lazy var outgoingMessageLabel: UILabel = {
         let outgoingMessageLabel = UILabel()
         outgoingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        outgoingMessageLabel.textColor = ThemesService.shared.outgoingMessageTextColor
+        outgoingMessageLabel.textColor = themesService.outgoingMessageTextColor
         outgoingMessageLabel.numberOfLines = 0
         return outgoingMessageLabel
     }()
+    
+    // MARK: - Dependencies
+         var themesService: ThemesServiceProtocol!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

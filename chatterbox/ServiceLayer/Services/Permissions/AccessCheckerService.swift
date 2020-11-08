@@ -1,7 +1,11 @@
 import Photos
 import UIKit
 
-struct AccessCheckerService {
+protocol AccessCheckerServicePorotocol {
+    func checkCameraAccess(target: UIViewController, handler: @escaping (AccessResult) -> Void)
+}
+
+struct AccessCheckerService: AccessCheckerServicePorotocol {
 
     func checkCameraAccess(target: UIViewController, handler: @escaping (AccessResult) -> Void) {
         let statusOfCamera = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)

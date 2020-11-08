@@ -1,8 +1,14 @@
 import Foundation
 
 struct MessageCellModel {
+    
+    // MARK: - Properties
     let message: MessageDB
     var isIncoming: Bool {
-        return UserDataService.shared.userModel.uuID != message.senderId
+        return userDataService.userModel.uuID != message.senderId
     }
+    
+    // MARK: - Dependencies
+    var userDataService: UserDataServiceProtocol
+    
 }

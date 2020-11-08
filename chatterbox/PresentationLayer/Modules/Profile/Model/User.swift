@@ -1,11 +1,11 @@
 import UIKit
 
-struct UserModel: Equatable {
+struct User: Equatable {
 
     var photo: UIImage?
     var name: String
     var description: String
-    var theme: ThemeModel
+    var theme: Theme
     var uuID: String
 
     var initials: String {
