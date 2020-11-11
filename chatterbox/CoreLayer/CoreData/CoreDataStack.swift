@@ -22,19 +22,24 @@ class CoreDataStack: CoreDataStackProtocol {
     }()
 
     var viewContext: NSManagedObjectContext {
-        return container.viewContext
+        let viewContext = container.viewContext
+        viewContext.automaticallyMergesChangesFromParent = true
+        viewContext.mergePolicy = NSOverwriteMergePolicy
+        return viewContext
     }
 
     // MARK: - Save Context
     func performSave(_ handler: (NSManagedObjectContext) -> Void) {
-        viewContext.mergePolicy = NSOverwriteMergePolicy
-        handler(viewContext)
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-                printDataBaseStatistics()
-            } catch {
-                assertionFailure(error.localizedDescription)
+        let context = container.newBackgroundContext()
+        context.performAndWait {
+            handler(context)
+            if context.hasChanges {
+                do {
+                    try context.save()
+                    self.printDataBaseStatistics()
+                } catch {
+                    assertionFailure(error.localizedDescription)
+                }
             }
         }
     }

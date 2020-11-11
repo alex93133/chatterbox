@@ -33,3 +33,20 @@ struct User: Equatable {
         }
     }
 }
+
+extension User {
+    init?(dictionary: NSMutableDictionary, photo: UIImage?) {
+        guard let name = dictionary.object(forKey: "name") as? String,
+              let description = dictionary.object(forKey: "description") as? String,
+              let themeString = dictionary.object(forKey: "theme") as? String,
+              let theme = Theme(rawValue: themeString),
+              let uuid = dictionary.object(forKey: "uuid") as? String
+        else { return nil }
+        
+        self.name = name
+        self.description = description
+        self.theme = theme
+        self.uuID = uuid
+        self.photo = photo
+    }
+}

@@ -16,6 +16,7 @@ class CoreDataService: CoreDataServiceProtocol {
 
     init(coreDataStack: CoreDataStackProtocol) {
         self.coreDataStack = coreDataStack
+        coreDataStack.observeStatistics()
     }
 
     // MARK: - Functions

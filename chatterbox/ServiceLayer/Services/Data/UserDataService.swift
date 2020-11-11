@@ -4,15 +4,11 @@ protocol UserDataServiceProtocol {
     func loadUser()
     var userModel: User { get set }
     var dataManager: UserDataProtocol { get set }
-    var gcdUserDataService: UserDataProtocol! { get set }
-    var operationUserDataService: UserDataProtocol! { get set }
+    var gcdUserDataService: UserDataProtocol { get set }
+    var operationUserDataService: UserDataProtocol { get set }
 }
 
 class UserDataService: UserDataServiceProtocol {
-    
-    static let shared = UserDataService()
-    private init() {
-    }
 
     // MARK: - Proprties
     private var currentDataManager: UserDataProtocol!
@@ -34,8 +30,13 @@ class UserDataService: UserDataServiceProtocol {
                          uuID: "")
 
     // MARK: - Dependencies
-    var gcdUserDataService: UserDataProtocol!
-    var operationUserDataService: UserDataProtocol!
+    var gcdUserDataService: UserDataProtocol
+    var operationUserDataService: UserDataProtocol
+    
+    init(gcdUserDataService: UserDataProtocol, operationUserDataService: UserDataProtocol) {
+        self.gcdUserDataService = gcdUserDataService
+        self.operationUserDataService = operationUserDataService
+    }
 
     // MARK: - Functions
     func loadUser() {

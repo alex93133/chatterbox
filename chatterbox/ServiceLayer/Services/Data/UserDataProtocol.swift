@@ -18,22 +18,9 @@ extension UserDataProtocol {
     
     // MARK: - Functions
     func readUserModel() -> User? {
-        guard let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path),
-              let name = dictionary.object(forKey: "name") as? String,
-              let description = dictionary.object(forKey: "description") as? String,
-              let themeString = dictionary.object(forKey: "theme") as? String,
-              let theme = Theme(rawValue: themeString),
-              let uuid = dictionary.object(forKey: "uuid") as? String
-        else {
-            return nil
-        }
+        guard let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path) else { return nil }
         let photo = getPhoto()
-        
-        let userModel = User(photo: photo,
-                             name: name,
-                             description: description,
-                             theme: theme,
-                             uuID: uuid)
+        let userModel = User(dictionary: dictionary, photo: photo)
         return userModel
     }
     
@@ -47,7 +34,7 @@ extension UserDataProtocol {
     }
     
     func createUser(model: User) {
-        let fileManager = FileManager.default
+        let fileManager = fileManagerStack.fileManager
         guard !fileManager.fileExists(atPath: plistURL.path) else { return }
         let data: [String: String] = [
             "name": model.name,

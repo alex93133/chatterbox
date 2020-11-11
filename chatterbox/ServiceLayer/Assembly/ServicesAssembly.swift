@@ -21,12 +21,8 @@ class ServicesAssembly: ServicesAssemblyProtocol {
 
     lazy var operationUserDataService: UserDataProtocol = OperationUserDataService(fileManagerStack: coreAssembly.fileManagerStack)
 
-    lazy var userDataService: UserDataServiceProtocol = {
-        var userDataService: UserDataServiceProtocol = UserDataService.shared
-        userDataService.gcdUserDataService = gcdUserDataService
-        userDataService.operationUserDataService = operationUserDataService
-        return userDataService
-    }()
+    lazy var userDataService: UserDataServiceProtocol = UserDataService(gcdUserDataService: gcdUserDataService, 
+                                                                        operationUserDataService: operationUserDataService)
 
     lazy var firebaseService: FirebaseServiceProtocol = FirebaseService(coreDataService: coreDataService,
                                                                         userDataService: userDataService)
