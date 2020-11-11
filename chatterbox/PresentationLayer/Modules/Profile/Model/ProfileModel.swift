@@ -10,7 +10,7 @@ class ProfileModel: ProfileModelProtocol {
     var userDataService: UserDataServiceProtocol
     var themesService: ThemesServiceProtocol
     var user: User
-    
+
     init(userDataService: UserDataServiceProtocol,
          themesService: ThemesServiceProtocol,
          user: User) {

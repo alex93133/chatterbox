@@ -10,16 +10,16 @@ protocol ConversationModelProtocol {
 }
 
 class ConversationModel: ConversationModelProtocol {
-    
+
     var userDataService: UserDataServiceProtocol
     var coreDataService: CoreDataServiceProtocol
     var firebaseService: FirebaseServiceProtocol
     var themesService: ThemesServiceProtocol
     var frcService: FRCServiceProtocol
     var channelModel: ChannelDB
-    
+
     init(userDataService: UserDataServiceProtocol,
-        coreDataService: CoreDataServiceProtocol,
+         coreDataService: CoreDataServiceProtocol,
          firebaseService: FirebaseServiceProtocol,
          themesService: ThemesServiceProtocol,
          frcService: FRCServiceProtocol,

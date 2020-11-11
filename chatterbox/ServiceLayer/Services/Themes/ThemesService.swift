@@ -1,6 +1,12 @@
 import UIKit
 
-protocol ThemesServiceProtocol {
+protocol ThemesServiceProtocol: ThemesServiceColorsProtocol {
+    var theme: Theme { get set }
+    var keyboardStyle: UIKeyboardAppearance { get }
+    func setupNavigationBar(target: UIViewController)
+}
+
+protocol ThemesServiceColorsProtocol {
     var mainBGColor: UIColor { get }
     var incomingMessageBGColor: UIColor { get }
     var outgoingMessageTextColor: UIColor { get }
@@ -8,23 +14,20 @@ protocol ThemesServiceProtocol {
     var textColor: UIColor { get }
     var barItemColor: UIColor { get }
     var barColor: UIColor { get }
-    var keyboardStyle: UIKeyboardAppearance { get }
-    func saveThemeSettings(theme: Theme, handler: @escaping (Result) -> Void)
-    func setupNavigationBar(target: UIViewController)
 }
 
 class ThemesService: ThemesServiceProtocol {
 
     // MARK: - Dependencies
     var userDataService: UserDataServiceProtocol
-    
+
     init(userDataService: UserDataServiceProtocol) {
         self.userDataService = userDataService
     }
-    
+
     // MARK: - Properties
     private var currentTheme: Theme?
-    private var theme: Theme {
+    var theme: Theme {
         get {
             if let currentTheme = currentTheme {
                 return currentTheme
@@ -128,23 +131,6 @@ class ThemesService: ThemesServiceProtocol {
     }
 
     // MARK: - Functions
-    func saveThemeSettings(theme: Theme, handler: @escaping (Result) -> Void) {
-        guard theme != currentTheme else { return }
-        var userModel = userDataService.userModel
-        userModel.theme = theme
-        userDataService.dataManager.updateModel(with: userModel) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.theme = self.userDataService.userModel.theme
-
-            case .error:
-                return
-            }
-            handler(result)
-        }
-    }
-
     func setupNavigationBar(target: UIViewController) {
         switch theme {
         case .classic, .day:

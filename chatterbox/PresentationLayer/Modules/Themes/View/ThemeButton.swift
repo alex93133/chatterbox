@@ -1,7 +1,7 @@
 import UIKit
 
 class ThemeButton: UIButton {
-    
+
     // MARK: - UI
     private lazy var themeImageView: UIImageView = {
         let themeImageView = UIImageView()
@@ -11,7 +11,7 @@ class ThemeButton: UIButton {
         themeImageView.layer.cornerRadius = 14
         return themeImageView
     }()
-    
+
     lazy var interactiveTitle: UILabel = {
         let interactiveTitle = UILabel()
         interactiveTitle.textColor = themeService.outgoingMessageTextColor
@@ -19,7 +19,7 @@ class ThemeButton: UIButton {
         interactiveTitle.textAlignment = .center
         return interactiveTitle
     }()
-    
+
     // MARK: - Properties
     override var isSelected: Bool {
         willSet (selected) {
@@ -29,10 +29,10 @@ class ThemeButton: UIButton {
             themeImageView.layer.borderWidth = borderWidth
         }
     }
-    
+
     // MARK: - Dependencies
     var themeService: ThemesServiceProtocol!
-    
+
     convenience init(title: String, image: UIImage, themeService: ThemesServiceProtocol) {
         self.init(frame: .zero)
         self.themeService = themeService
@@ -40,13 +40,13 @@ class ThemeButton: UIButton {
         interactiveTitle.text = title
         themeImageView.image = image
     }
-    
+
     func setupUIElements() {
         addSubviews(themeImageView, interactiveTitle)
         setupThemeImageViewConstraints()
         setupInteractiveTitleConstraints()
     }
-    
+
     // MARK: - Constraints
     func setupBasicConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +57,7 @@ class ThemeButton: UIButton {
             heightAnchor.constraint(equalToConstant: 96)
         ])
     }
-    
+
     private func setupThemeImageViewConstraints() {
         themeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -66,7 +66,7 @@ class ThemeButton: UIButton {
             themeImageView.heightAnchor.constraint(equalToConstant: 57)
         ])
     }
-    
+
     private func setupInteractiveTitleConstraints() {
         interactiveTitle.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

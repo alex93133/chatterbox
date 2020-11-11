@@ -7,7 +7,6 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     // MARK: - UI
     private lazy var overlayView: UIView = {
         let overlayView = UIView()
-        overlayView.backgroundColor = themesService.outgoingMessageBGColor
         overlayView.layer.cornerRadius = 8
         return overlayView
     }()
@@ -15,13 +14,12 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     lazy var outgoingMessageLabel: UILabel = {
         let outgoingMessageLabel = UILabel()
         outgoingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        outgoingMessageLabel.textColor = themesService.outgoingMessageTextColor
         outgoingMessageLabel.numberOfLines = 0
         return outgoingMessageLabel
     }()
-    
+
     // MARK: - Dependencies
-         var themesService: ThemesServiceProtocol!
+    var themesService: ThemesServiceProtocol!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,7 +31,13 @@ class OutgoingMessageTableViewCell: UITableViewCell {
     }
 
     func configure(with model: ConfigurationModel) {
+        updateColors()
         outgoingMessageLabel.text = model.message.content
+    }
+    
+    private func updateColors() {
+        overlayView.backgroundColor = themesService.outgoingMessageBGColor
+        outgoingMessageLabel.textColor = themesService.outgoingMessageTextColor
     }
 
     private func setupUIElements() {

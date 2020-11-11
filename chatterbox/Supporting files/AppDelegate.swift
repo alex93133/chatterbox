@@ -54,13 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard !isLaunchedBefore else { return }
         let uuid = UUID().uuidString
         let user = User(photo: nil,
-                             name: "Alexander Lazarev",
-                             description: "Junior iOS dev",
-                             theme: .classic,
-                             uuID: uuid)
+                        name: "Alexander Lazarev",
+                        description: "Junior iOS dev",
+                        theme: .classic,
+                        uuID: uuid)
         rootAssembly.servicesAssembly.userDataService.dataManager.createUser(model: user)
     }
 
+    #warning("Поправить")
     private func setupCoreData() {
         rootAssembly.servicesAssembly.coreDataService.enableStatisticts()
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.applicationSupportDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)

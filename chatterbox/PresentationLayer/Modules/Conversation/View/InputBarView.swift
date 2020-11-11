@@ -27,9 +27,9 @@ class InputBarView: UIView {
     }()
 
     var textViewHeightConstraint: NSLayoutConstraint!
-    
+
     // MARK: - Dependencies
-       var themesService: ThemesServiceProtocol
+    var themesService: ThemesServiceProtocol
 
     init(themesService: ThemesServiceProtocol) {
         self.themesService = themesService

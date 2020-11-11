@@ -20,21 +20,21 @@ class ConversationsListViewController: UIViewController {
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
-    
+
     // MARK: - Dependencies
     var model: ConversationsListModelProtocol
     var presentationAssembly: PresentationAssemblyProtocol
-    
+
     init(model: ConversationsListModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
         self.model = model
         self.presentationAssembly = presentationAssembly
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - VC Lifecycle
     override func loadView() {
         view = conversationsListView
@@ -99,7 +99,7 @@ class ConversationsListViewController: UIViewController {
     private func createChannel() {
         let alertController = UIAlertController(title: NSLocalizedString("Create a new channel", comment: ""),
                                                 placeholder: NSLocalizedString("Channel name", comment: "")) { [weak self] text in
-            guard let self = self else { return }    
+            guard let self = self else { return }
             self.model.firebaseService.createChannel(name: text)
         }
         present(alertController, animated: true, completion: nil)

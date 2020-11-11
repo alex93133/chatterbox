@@ -20,7 +20,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     typealias ConfigurationModel = Theme
 
     weak var delegate: ThemesPickerDelegate?
-    
+
     // MARK: - Dependencies
     var model: ThemesModelProtocol
     var presentationAssembly: PresentationAssemblyProtocol
@@ -35,8 +35,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     // MARK: - VC Lifecycle
     override func loadView() {
         view = themesView
@@ -87,6 +86,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
     }
 
     private func applyNewTheme() {
+        delegate?.updateColors()
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
             self.view.backgroundColor = self.model.themesService.outgoingMessageBGColor
@@ -94,12 +94,23 @@ class ThemesViewController: UIViewController, ConfigurableView {
             self.model.themesService.setupNavigationBar(target: self)
         }
     }
+    
+    private func saveTheme(newTheme: Theme) {
+        var userModel = model.userDataService.userModel
+        guard newTheme != userModel.theme else { return }
+        userModel.theme = newTheme
+        model.userDataService.dataManager.updateModel(with: userModel) { [weak self] result in
+            guard let self = self else { return }    
+            self.handleThemeSaving(result)
+        }
+    }
 
-    private func handleThemeSaving(_ result: Result) {
+    private func handleThemeSaving(_ result: Result<User>) {
         DispatchQueue.main.async {
-            self.delegate?.updateColors()
             switch result {
-            case .success:
+            case .success (let user):
+                self.model.userDataService.userModel = user
+                self.model.themesService.theme = user.theme
                 self.applyNewTheme()
                 Logger.shared.printLogs(text: "Theme successfully changed to \(self.model.userDataService.userModel.theme.rawValue)")
 
@@ -113,30 +124,18 @@ class ThemesViewController: UIViewController, ConfigurableView {
     @objc
     private func classicThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-
-        model.themesService.saveThemeSettings(theme: .classic) { [weak self] result in
-            guard let self = self else { return }
-            self.handleThemeSaving(result)
-        }
+        saveTheme(newTheme: .classic)
     }
 
     @objc
     private func dayThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-
-        model.themesService.saveThemeSettings(theme: .day) { [weak self] result in
-            guard let self = self else { return }
-            self.handleThemeSaving(result)
-        }
+        saveTheme(newTheme: .day)
     }
 
     @objc
     private func nightThemeButtonPressed(sender: UIButton) {
         radioButtons(sender)
-
-        model.themesService.saveThemeSettings(theme: .night) { [weak self] result in
-            guard let self = self else { return }
-            self.handleThemeSaving(result)
-        }
+        saveTheme(newTheme: .night)
     }
 }

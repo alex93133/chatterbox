@@ -10,15 +10,14 @@ protocol CoreDataServiceProtocol {
 }
 
 class CoreDataService: CoreDataServiceProtocol {
-    
-    
+
     // MARK: - Dependencies
     var coreDataStack: CoreDataStackProtocol
-    
+
     init(coreDataStack: CoreDataStackProtocol) {
         self.coreDataStack = coreDataStack
     }
-    
+
     // MARK: - Functions
     func saveChannelsToDB(_ channels: [Channel]) {
         coreDataStack.performSave { context in
@@ -29,7 +28,7 @@ class CoreDataService: CoreDataServiceProtocol {
             }
         }
     }
-    
+
     func deleteChannelsFromDB(_ channels: [Channel]) {
         coreDataStack.performSave { context in
             channels.forEach { channel in
@@ -39,7 +38,7 @@ class CoreDataService: CoreDataServiceProtocol {
             }
         }
     }
-    
+
     func updateChannelsInDB(_ channels: [Channel]) {
         coreDataStack.performSave { context in
             channels.forEach { channel in
@@ -50,14 +49,14 @@ class CoreDataService: CoreDataServiceProtocol {
             }
         }
     }
-    
+
     private func getChannel(for identifier: String, in context: NSManagedObjectContext) -> ChannelDB? {
         let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier)
         let results = try? context.fetch(fetchRequest)
         return results?.first
     }
-    
+
     func saveMessagesToDB(channelID: String, messages: [Message]) {
         coreDataStack.performSave { context in
             if let channelDB = getChannel(for: channelID, in: context) {
@@ -70,7 +69,7 @@ class CoreDataService: CoreDataServiceProtocol {
             }
         }
     }
-    
+
     private func objectIsNotExist<Object: NSManagedObject>(type: Object.Type, predicate: NSPredicate, context: NSManagedObjectContext) -> Bool {
         let fetchRequest = type.fetchRequest()
         fetchRequest.predicate = predicate
@@ -81,7 +80,7 @@ class CoreDataService: CoreDataServiceProtocol {
             return false
         }
     }
-    
+
     func enableStatisticts() {
         coreDataStack.observeStatistics()
     }

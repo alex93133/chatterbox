@@ -64,19 +64,19 @@ class ProfileView: UIView {
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
-    
+
     // MARK: - Dependencies
-       var themesService: ThemesServiceProtocol
-       
-       init(themesService: ThemesServiceProtocol) {
-           self.themesService = themesService
-           super.init(frame: UIScreen.main.bounds)
-       }
-    
+    var themesService: ThemesServiceProtocol
+
+    init(themesService: ThemesServiceProtocol) {
+        self.themesService = themesService
+        super.init(frame: UIScreen.main.bounds)
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupUIElements() {
         addSubviews(photoImageView,
                     editPhotoButton,

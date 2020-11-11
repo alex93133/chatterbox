@@ -1,9 +1,8 @@
 import UIKit
 
 protocol UserDataProtocol {
-    func updateModel(with model: User, handler:  @escaping (Result) -> Void)
+    func updateModel(with model: User, handler:  @escaping (Result<User>) -> Void)
     func getUserModel(handler: @escaping (User?) -> Void)
-//    var userDataService: UserDataServiceProtocol { get }
     var fileManagerStack: FileManagerStackProtocol { get }
 }
 
@@ -12,11 +11,11 @@ extension UserDataProtocol {
     var photoURL: URL {
         return fileManagerStack.documentDirectory.appendingPathComponent("/photo.png")
     }
-
+    
     var plistURL: URL {
         return fileManagerStack.documentDirectory.appendingPathComponent("/info.plist")
     }
-
+    
     // MARK: - Functions
     func readUserModel() -> User? {
         guard let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path),
@@ -29,15 +28,15 @@ extension UserDataProtocol {
             return nil
         }
         let photo = getPhoto()
-
+        
         let userModel = User(photo: photo,
-                                  name: name,
-                                  description: description,
-                                  theme: theme,
-                                  uuID: uuid)
+                             name: name,
+                             description: description,
+                             theme: theme,
+                             uuID: uuid)
         return userModel
     }
-
+    
     func getPhoto() -> UIImage? {
         do {
             let imageData = try Data(contentsOf: photoURL)
@@ -46,7 +45,7 @@ extension UserDataProtocol {
             return nil
         }
     }
-
+    
     func createUser(model: User) {
         let fileManager = FileManager.default
         guard !fileManager.fileExists(atPath: plistURL.path) else { return }
@@ -60,23 +59,12 @@ extension UserDataProtocol {
         let isCreated = dictionary.write(toFile: plistURL.path, atomically: true)
         Logger.shared.printLogs(text: "User is created: \(isCreated)")
     }
-
+    
     func saveInfoToFile(model: User) -> Bool {
-//        let previousModel = userDataService.userModel
-        let previousModel = model
         if let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path) {
-            if previousModel.name != model.name {
-                dictionary["name"] = model.name
-            }
-
-            if previousModel.description != model.description {
-                dictionary["description"] = model.description
-            }
-
-            if previousModel.theme != model.theme {
-                dictionary["theme"] = model.theme.rawValue
-            }
-
+            dictionary["name"] = model.name
+            dictionary["description"] = model.description
+            dictionary["theme"] = model.theme.rawValue
             do {
                 try dictionary.write(to: plistURL)
                 return true
@@ -86,10 +74,8 @@ extension UserDataProtocol {
         }
         return false
     }
-
+    
     func savePhotoToFile(model: User) -> Bool {
-//        let previousModel = userDataService.userModel
-//        if previousModel.photo != model.photo,
         if let image = model.photo,
            let data = image.pngData() {
             do {

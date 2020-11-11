@@ -59,6 +59,7 @@
 		33BDD1D025582C7E009A5371 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDD1CF25582C7E009A5371 /* ProfileModel.swift */; };
 		33BDD1D42558375E009A5371 /* FRCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDD1D32558375E009A5371 /* FRCService.swift */; };
 		33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C1A1DC2516134200531116 /* UIAlertController.swift */; };
+		33DF253D2559147D000F844D /* ProfileViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF253C2559147D000F844D /* ProfileViewControllerDelegates.swift */; };
 		33E9B3422533483C0061CABC /* GCDUserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B3412533483C0061CABC /* GCDUserDataService.swift */; };
 		33E9B3452533488A0061CABC /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B3442533488A0061CABC /* UserDataProtocol.swift */; };
 		33E9B34825334BCD0061CABC /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B34725334BCD0061CABC /* SaveButton.swift */; };
@@ -131,6 +132,7 @@
 		33BDD1CF25582C7E009A5371 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		33BDD1D32558375E009A5371 /* FRCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCService.swift; sourceTree = "<group>"; };
 		33C1A1DC2516134200531116 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		33DF253C2559147D000F844D /* ProfileViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerDelegates.swift; sourceTree = "<group>"; };
 		33E9B3412533483C0061CABC /* GCDUserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUserDataService.swift; sourceTree = "<group>"; };
 		33E9B3442533488A0061CABC /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		33E9B34725334BCD0061CABC /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				33E9F8312515069D005A6EB8 /* ProfileViewController.swift */,
+				33DF253C2559147D000F844D /* ProfileViewControllerDelegates.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -645,7 +648,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		752186997A12CD8256BC7B31 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -702,6 +705,7 @@
 				33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */,
 				3373ED8525276830001EDE7E /* ThemesService.swift in Sources */,
 				331F7D612520AD07005E7666 /* MessageCellModel.swift in Sources */,
+				33DF253D2559147D000F844D /* ProfileViewControllerDelegates.swift in Sources */,
 				3302E123252714C700BF8EEE /* ThemesView.swift in Sources */,
 				33BDD1D025582C7E009A5371 /* ProfileModel.swift in Sources */,
 				3326556E251F63AA00C16D5E /* ConversationsListView.swift in Sources */,

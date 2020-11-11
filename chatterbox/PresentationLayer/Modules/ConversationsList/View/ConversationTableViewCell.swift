@@ -8,7 +8,7 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .systemFont(ofSize: 15, weight: .semibold)
-        nameLabel.textColor = themesService.textColor
+
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.minimumScaleFactor = 0.9
         nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -30,10 +30,10 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
         dateLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return dateLabel
     }()
-    
+
     // MARK: - Dependencies
-       var themesService: ThemesServiceProtocol!
-       
+    var themesService: ThemesServiceProtocol!
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUIElements()
@@ -59,6 +59,8 @@ class ConversationTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     func configure(with model: ConfigurationModel) {
+        nameLabel.textColor = themesService.textColor
+
         nameLabel.text = model.channel.name
         lastMessageLabel.text = model.channel.lastMessage
 

@@ -7,7 +7,6 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
     // MARK: - UI
     private lazy var overlayView: UIView = {
         let overlayView = UIView()
-        overlayView.backgroundColor = themesService.incomingMessageBGColor
         overlayView.layer.cornerRadius = 8
         return overlayView
     }()
@@ -23,13 +22,12 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
     lazy var incomingMessageLabel: UILabel = {
         let incomingMessageLabel = UILabel()
         incomingMessageLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        incomingMessageLabel.textColor = themesService.textColor
         incomingMessageLabel.numberOfLines = 0
         return incomingMessageLabel
     }()
-    
+
     // MARK: - Dependencies
-       var themesService: ThemesServiceProtocol!
+    var themesService: ThemesServiceProtocol!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,10 +39,16 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
     }
 
     func configure(with model: ConfigurationModel) {
+        updateColors()
         senderNameLabel.text = model.message.senderName
         incomingMessageLabel.text = model.message.content
     }
 
+    private func updateColors() {
+        overlayView.backgroundColor = themesService.incomingMessageBGColor
+        incomingMessageLabel.textColor = themesService.textColor
+    }
+    
     private func setupUIElements() {
         selectionStyle = .none
         backgroundColor = .clear

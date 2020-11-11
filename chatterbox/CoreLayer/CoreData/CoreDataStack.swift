@@ -8,7 +8,7 @@ protocol CoreDataStackProtocol {
 }
 
 class CoreDataStack: CoreDataStackProtocol {
-    
+
     // MARK: - Properties
     private let dataModelName = "Chat"
     lazy var container: NSPersistentContainer = {
@@ -20,11 +20,11 @@ class CoreDataStack: CoreDataStackProtocol {
         }
         return container
     }()
-    
+
     var viewContext: NSManagedObjectContext {
         return container.viewContext
     }
-    
+
     // MARK: - Save Context
     func performSave(_ handler: (NSManagedObjectContext) -> Void) {
         viewContext.mergePolicy = NSOverwriteMergePolicy
@@ -38,7 +38,7 @@ class CoreDataStack: CoreDataStackProtocol {
             }
         }
     }
-    
+
     // MARK: - Observers
     func observeStatistics() {
         let notificationCenter = NotificationCenter.default
@@ -47,27 +47,27 @@ class CoreDataStack: CoreDataStackProtocol {
                                        name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
                                        object: container.viewContext)
     }
-    
+
     @objc
     private func managedObjectContextObjectsDidChanged(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        
+
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
            inserts.count > 0 {
             Logger.shared.printLogs(text: "Inserted objects count: \(inserts.count)")
         }
-        
+
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
            updates.count > 0 {
             Logger.shared.printLogs(text: "Updates objects count: \(updates.count)")
         }
-        
+
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
            deletes.count > 0 {
             Logger.shared.printLogs(text: "Deleted objects count: \(deletes.count)")
         }
     }
-    
+
     // MARK: - Statistics
     func printDataBaseStatistics() {
         container.viewContext.perform {

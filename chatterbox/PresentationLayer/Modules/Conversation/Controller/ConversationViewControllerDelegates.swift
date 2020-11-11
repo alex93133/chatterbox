@@ -15,15 +15,15 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
         if cellModel.isIncoming {
             if let incomingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.incomingMessageCell,
                                                                 for: indexPath) as? IncomingMessageTableViewCell {
-                incomingCell.configure(with: cellModel)
                 incomingCell.themesService = model.themesService
+                incomingCell.configure(with: cellModel)
                 return incomingCell
             }
         } else {
             if let outgoingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.outgoingMessageCell,
                                                                 for: indexPath) as? OutgoingMessageTableViewCell {
-                outgoingCell.configure(with: cellModel)
                 outgoingCell.themesService = model.themesService
+                outgoingCell.configure(with: cellModel)
                 return outgoingCell
             }
         }

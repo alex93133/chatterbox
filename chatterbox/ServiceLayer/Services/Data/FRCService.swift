@@ -8,15 +8,14 @@ protocol FRCServiceProtocol {
 }
 
 class FRCService: FRCServiceProtocol {
-    
+
     // MARK: - Dependencies
     var coreDataStack: CoreDataStackProtocol
-    
+
     init(coreDataStack: CoreDataStackProtocol) {
         self.coreDataStack = coreDataStack
     }
-    
-    
+
     func getFRC<Object: NSManagedObject>(fetchRequest: NSFetchRequest<Object>,
                                          sectionNameKeyPath: String?,
                                          cacheName: String?) -> NSFetchedResultsController<Object> {

@@ -8,14 +8,13 @@ protocol ConversationsListModelProtocol {
     var frcService: FRCServiceProtocol { get }
 }
 
-
 class ConversationsListModel: ConversationsListModelProtocol {
     var userDataService: UserDataServiceProtocol
     var coreDataService: CoreDataServiceProtocol
     var firebaseService: FirebaseServiceProtocol
     var themesService: ThemesServiceProtocol
     var frcService: FRCServiceProtocol
-    
+
     init(userDataService: UserDataServiceProtocol,
          coreDataService: CoreDataServiceProtocol,
          firebaseService: FirebaseServiceProtocol,

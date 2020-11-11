@@ -1,15 +1,15 @@
 import UIKit
 
-class ProfileViewController: UIViewController, ConfigurableView, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, ConfigurableView {
 
     // MARK: - Properties
-    private lazy var profileView: ProfileView = {
+    lazy var profileView: ProfileView = {
         let view = ProfileView(themesService: model.themesService)
         return view
     }()
 
-    private var profileModel: User
-    private var updatedModel: User
+    var profileModel: User
+    var updatedModel: User
     var updateUserIcon: (() -> Void)?
 
     typealias ConfigurationModel = User
@@ -46,26 +46,25 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         }
     }
 
-    private var isAbleToSave: Bool = false {
+    var isAbleToSave: Bool = false {
         willSet {
             profileView.saveButtonGCD.isEnabled = newValue
             profileView.saveButtonOperation.isEnabled = newValue
         }
     }
-    
+
     // MARK: - Dependencies
-       var model: ProfileModelProtocol
-       var presentationAssembly: PresentationAssemblyProtocol
+    var model: ProfileModelProtocol
+    var presentationAssembly: PresentationAssemblyProtocol
 
     init(model: ProfileModelProtocol, presentationAssembly: PresentationAssemblyProtocol) {
         self.model = model
         self.presentationAssembly = presentationAssembly
-        
+
         self.profileModel = model.user
         self.updatedModel = profileModel
         super.init(nibName: nil, bundle: nil)
     }
-    
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -172,19 +171,6 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
         present(imagePicker, animated: true)
     }
 
-    private func textViewValidate() {
-        guard let name = profileView.nameTextView.text,
-              let description = profileView.descriptionTextView.text,
-              !profileView.nameTextView.text.isEmpty,
-              !profileView.descriptionTextView.text.isEmpty
-        else { return }
-
-        let state = (name != profileModel.name || description != profileModel.description) ? true : false
-        updatedModel.name = name
-        updatedModel.description = description
-        isAbleToSave = state
-    }
-
     private func saveData() {
         isSaving = true
         isAbleToSave = false
@@ -194,10 +180,11 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
                 self.isSaving = false
                 self.isTextViewEditable = false
                 switch result {
-                case .success:
-                    self.configure(with: self.updatedModel)
+                case .success (let user):
+                    self.model.userDataService.userModel = user
+                    self.configure(with: user)
                     self.updateUserIcon?()
-                    self.profileModel = self.updatedModel
+                    self.profileModel = user
                     self.presentSuccessAlert()
                     Logger.shared.printLogs(text: "Model saved and applied")
 
@@ -263,32 +250,5 @@ class ProfileViewController: UIViewController, ConfigurableView, UINavigationCon
     private func saveButtonOperationPressed() {
         model.userDataService.dataManager = model.userDataService.operationUserDataService
         saveData()
-    }
-}
-
-// MARK: - Delegates
-extension ProfileViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[.originalImage] as? UIImage,
-           let resizedImage = image.resizeImage(image: image, newWidth: 300) {
-            profileView.photoImageView.image = resizedImage
-            updatedModel.photo = resizedImage
-            isAbleToSave = true
-        }
-        picker.dismiss(animated: true)
-    }
-}
-
-extension ProfileViewController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        textViewValidate()
-    }
-
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-        }
-        return true
     }
 }
