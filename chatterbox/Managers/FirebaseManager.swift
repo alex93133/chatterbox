@@ -23,6 +23,7 @@ class FirebaseManager {
                 return channel
             }
 
+            CoreDataManager.shared.saveChannelsToDB(channels: channels)
             handler(.success(channels))
         }
     }
@@ -40,10 +41,11 @@ class FirebaseManager {
             guard let snapshot = snapshot else { return }
 
             let messages = snapshot.documents.compactMap { document -> Message? in
-                let message = Message(data: document.data())
+                let message = Message(data: document.data(), documentID: document.documentID)
                 return message
             }
 
+            CoreDataManager.shared.saveMessagesToDB(channelID: identifier, messages: messages)
             handler(.success(messages))
         }
     }
@@ -51,11 +53,10 @@ class FirebaseManager {
     func sendMessage(content: String, identifier: String) {
         let messagesReference = reference.document(identifier).collection("messages")
         let user = UserManager.shared.userModel
-        let message = Message(content: content,
-                              created: Date(),
-                              senderId: user.uuID,
-                              senderName: user.name)
-        let data = message.convertToFirebaseData()
+        let data: [String: Any] = [ "content": content,
+                                    "created": Timestamp(date: Date()),
+                                    "senderId": user.uuID,
+                                    "senderName": user.name ]
 
         messagesReference.addDocument(data: data)
     }

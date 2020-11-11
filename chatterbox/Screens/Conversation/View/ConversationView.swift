@@ -12,9 +12,12 @@ class ConversationView: UIView {
         return tableView
     }()
 
+    lazy var inputBarView = InputBarView()
+
     func setupUIElements() {
-        addSubviews(tableView)
+        addSubviews(tableView, inputBarView)
         setupTableViewConstraints()
+        setupInputBarViewConstraints()
     }
 
     // MARK: - Constraints
@@ -24,7 +27,16 @@ class ConversationView: UIView {
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: inputBarView.topAnchor)
+        ])
+    }
+
+    private func setupInputBarViewConstraints() {
+        inputBarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            inputBarView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            inputBarView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            inputBarView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

@@ -22,6 +22,7 @@ class ProfileView: UIView {
     lazy var nameTextView: UITextView = {
         let nameTextView = UITextView()
         nameTextView.textColor = ThemesManager.shared.textColor
+        nameTextView.keyboardAppearance = ThemesManager.shared.keyBoard
         nameTextView.font = .systemFont(ofSize: 24, weight: .bold)
         nameTextView.isSelectable = false
         nameTextView.isScrollEnabled = false
@@ -36,6 +37,7 @@ class ProfileView: UIView {
     lazy var descriptionTextView: UITextView = {
         let descriptionTextView = UITextView()
         descriptionTextView.textColor = ThemesManager.shared.textColor
+        descriptionTextView.keyboardAppearance = ThemesManager.shared.keyBoard
         descriptionTextView.font = .systemFont(ofSize: 16, weight: .regular)
         descriptionTextView.isSelectable = false
         descriptionTextView.isEditable = false

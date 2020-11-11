@@ -35,31 +35,37 @@ class ConversationViewController: UIViewController, ConfigurableView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupNavigationBar()
         configure(with: channelModel)
+        setTextViewPlaceHolder()
         getData()
+        hideKeyboardWhenTappedOutside()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObserver()
     }
 
     // MARK: - Functions
     private func setupView() {
         conversationView.setupUIElements()
-        conversationView.backgroundColor = ThemesManager.shared.mainBGColor
+        conversationView.backgroundColor = ThemesManager.shared.barColor
         conversationView.tableView.delegate = self
         conversationView.tableView.dataSource = self
+        conversationView.inputBarView.inputTextView.delegate = self
         conversationView.tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
         conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
-    }
-
-    private func setupNavigationBar() {
-        let send = UIBarButtonItem(barButtonSystemItem: .add,
-                                   target: self,
-                                   action: #selector(sendMessage))
-        navigationItem.rightBarButtonItem = send
+        conversationView.inputBarView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
     func configure(with model: ConfigurationModel) {
         let title = model.name
         navigationItem.title = title
+    }
+
+    private func setTextViewPlaceHolder() {
+        conversationView.inputBarView.inputTextView.text = NSLocalizedString("Message text", comment: "")
+        conversationView.inputBarView.inputTextView.textColor = UIColor.lightGray
     }
 
     private func getData() {
@@ -91,12 +97,12 @@ class ConversationViewController: UIViewController, ConfigurableView {
     // MARK: - Actions
     @objc
     private func sendMessage() {
-        let alertController = UIAlertController(title: NSLocalizedString("Send message", comment: ""),
-                                                placeholder: NSLocalizedString("Message text", comment: "")) { [weak self] text in
-                                                    guard let self = self else { return }
-                                                    self.manager.sendMessage(content: text, identifier: self.channelModel.identifier)
-        }
-        present(alertController, animated: true, completion: nil)
+        let textView = conversationView.inputBarView.inputTextView
+        guard let text = textView.text,
+            !text.isEmpty else { return }
+        manager.sendMessage(content: text, identifier: channelModel.identifier)
+        textView.text = ""
+        adjustTextViewHeight()
     }
 }
 
@@ -123,5 +129,40 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         return UITableViewCell()
+    }
+}
+
+extension ConversationViewController: UITextViewDelegate {
+    private func adjustTextViewHeight() {
+        let maxHeight: CGFloat = view.frame.height / 4
+        let textView = conversationView.inputBarView.inputTextView
+
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        if newSize.height >= maxHeight {
+            textView.isScrollEnabled = true
+            conversationView.inputBarView.textViewHeightConstraint.constant = maxHeight
+        } else {
+            textView.isScrollEnabled = false
+            conversationView.inputBarView.textViewHeightConstraint.constant = newSize.height
+        }
+        view.layoutIfNeeded()
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        adjustTextViewHeight()
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = ThemesManager.shared.textColor
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            setTextViewPlaceHolder()
+        }
     }
 }
