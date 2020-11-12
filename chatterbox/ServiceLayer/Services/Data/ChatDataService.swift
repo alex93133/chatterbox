@@ -11,18 +11,18 @@ protocol ChatDataServiceProtocol {
 class ChatDataService: ChatDataServiceProtocol {
     
     // MARK: - Dependencies
-    var networkManager: NetworkManagerProtocol
+    var conversationManager: ConversationManagerProtocol
     var storage: StorageProtocol
     var userDataService: UserDataServiceProtocol
     
-    init(networkManager: NetworkManagerProtocol, storage: StorageProtocol, userDataService: UserDataServiceProtocol) {
-        self.networkManager = networkManager
+    init(networkManager: ConversationManagerProtocol, storage: StorageProtocol, userDataService: UserDataServiceProtocol) {
+        self.conversationManager = networkManager
         self.storage = storage
         self.userDataService = userDataService
     }
     
     func getChannels() {
-        networkManager.getChannels { [weak self] dicionarry in
+        conversationManager.getChannels { [weak self] dicionarry in
             guard let self = self else { return }    
             if let channelsToSave = dicionarry["save"] {
                 self.storage.saveChannelsToDB(channelsToSave)
@@ -39,7 +39,7 @@ class ChatDataService: ChatDataServiceProtocol {
     }
     
     func getMessages(identifier: String) {
-        networkManager.getMessages(identifier: identifier) { [weak self] messages in
+        conversationManager.getMessages(identifier: identifier) { [weak self] messages in
             guard let self = self else { return }
             self.storage.saveMessagesToDB(channelID: identifier, messages: messages)
         }
@@ -47,14 +47,14 @@ class ChatDataService: ChatDataServiceProtocol {
     
     func sendMessage(content: String, identifier: String) {
         let user = userDataService.userModel
-        networkManager.sendMessage(sender: user, content: content, identifier: identifier)
+        conversationManager.sendMessage(sender: user, content: content, identifier: identifier)
     }
 
     func createChannel(name: String) {
-        networkManager.createChannel(name: name)
+        conversationManager.createChannel(name: name)
     }
 
     func deleteChannel(identifier: String) {
-        networkManager.deleteChannel(identifier: identifier)
+        conversationManager.deleteChannel(identifier: identifier)
     }
 }

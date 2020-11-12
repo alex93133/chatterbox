@@ -1,7 +1,7 @@
 import Foundation
 import Firebase
 
-protocol NetworkManagerProtocol {
+protocol ConversationManagerProtocol {
     func getChannels(handler: @escaping (Dictionary<String, [Channel]>) -> Void)
     func getMessages(identifier: String, handler: @escaping ([Message]) -> Void)
     func sendMessage(sender: User, content: String, identifier: String)
@@ -9,7 +9,7 @@ protocol NetworkManagerProtocol {
     func deleteChannel(identifier: String)
 }
 
-class FirebaseManager: NetworkManagerProtocol {
+class FirebaseManager: ConversationManagerProtocol {
 
     // MARK: - Properties
     lazy var db = Firestore.firestore()
