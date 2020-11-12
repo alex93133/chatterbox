@@ -1,15 +1,14 @@
 import Foundation
 import CoreData
 
-protocol CoreDataServiceProtocol {
+protocol StorageProtocol {
     func saveChannelsToDB(_ channels: [Channel])
     func deleteChannelsFromDB(_ channels: [Channel])
     func updateChannelsInDB(_ channels: [Channel])
     func saveMessagesToDB(channelID: String, messages: [Message])
-    func enableStatisticts()
 }
 
-class CoreDataService: CoreDataServiceProtocol {
+class CoreDataManager: StorageProtocol {
 
     // MARK: - Dependencies
     var coreDataStack: CoreDataStackProtocol

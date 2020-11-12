@@ -87,7 +87,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
     }
 
     private func getData() {
-        model.firebaseService.getMessages(identifier: identifier)
+        model.chatDataService.getMessages(identifier: identifier)
         do {
             try fetchedResultsController.performFetch()
             scrollTableViewToLast()
@@ -130,7 +130,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
         guard let text = textView.text,
               !text.isEmpty,
               textView.textColor != UIColor.lightGray else { return }
-        model.firebaseService.sendMessage(content: text, identifier: identifier)
+        model.chatDataService.sendMessage(content: text, identifier: identifier)
         textView.text = ""
         adjustTextViewHeight()
     }

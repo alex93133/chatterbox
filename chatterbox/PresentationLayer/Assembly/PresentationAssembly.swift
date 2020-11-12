@@ -18,8 +18,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     // MARK: - ConversationsListViewController
     func conversationListViewController() -> ConversationsListViewController {
         let model = ConversationsListModel(userDataService: serviceAssembly.userDataService,
-                                           coreDataService: serviceAssembly.coreDataService,
-                                           firebaseService: serviceAssembly.firebaseService,
+                                           chatDataService: serviceAssembly.chatDataService,
                                            themesService: serviceAssembly.themesService,
                                            frcService: serviceAssembly.frcService)
         return ConversationsListViewController(model: model, presentationAssembly: self)
@@ -28,8 +27,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     // MARK: - ConversationViewController
     func conversationViewController(with channelDB: ChannelDB) -> ConversationViewController {
         let model = ConversationModel(userDataService: serviceAssembly.userDataService,
-                                      coreDataService: serviceAssembly.coreDataService,
-                                      firebaseService: serviceAssembly.firebaseService,
+                                      chatDataService: serviceAssembly.chatDataService,
                                       themesService: serviceAssembly.themesService,
                                       frcService: serviceAssembly.frcService,
                                       channelModel: channelDB)

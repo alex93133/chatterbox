@@ -2,9 +2,8 @@ import Foundation
 
 protocol ServicesAssemblyProtocol {
     var userDataService: UserDataServiceProtocol { get }
-    var coreDataService: CoreDataServiceProtocol { get }
+    var chatDataService: ChatDataServiceProtocol { get }  
     var frcService: FRCServiceProtocol { get }
-    var firebaseService: FirebaseServiceProtocol { get }
     var themesService: ThemesServiceProtocol { get }
     var accessCheckerService: AccessCheckerServicePorotocol { get }
 }
@@ -23,12 +22,12 @@ class ServicesAssembly: ServicesAssemblyProtocol {
 
     lazy var userDataService: UserDataServiceProtocol = UserDataService(gcdUserDataService: gcdUserDataService, 
                                                                         operationUserDataService: operationUserDataService)
-
-    lazy var firebaseService: FirebaseServiceProtocol = FirebaseService(coreDataService: coreDataService,
+    
+    lazy var chatDataService: ChatDataServiceProtocol = ChatDataService(networkManager: coreAssembly.firebaseManager, 
+                                                                        storage: coreAssembly.coreDataManager, 
                                                                         userDataService: userDataService)
-
-    lazy var coreDataService: CoreDataServiceProtocol = CoreDataService(coreDataStack: coreAssembly.coreDataStck)
-    lazy var frcService: FRCServiceProtocol = FRCService(coreDataStack: coreAssembly.coreDataStck)
+    
+    lazy var frcService: FRCServiceProtocol = FRCService(coreDataStack: coreAssembly.coreDataStack)
     lazy var themesService: ThemesServiceProtocol = ThemesService(userDataService: userDataService)
     lazy var accessCheckerService: AccessCheckerServicePorotocol = AccessCheckerService()
 }

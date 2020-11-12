@@ -1,31 +1,22 @@
 import Foundation
 import Firebase
 
-protocol FirebaseServiceProtocol {
-    func getChannels()
-    func getMessages(identifier: String)
-    func sendMessage(content: String, identifier: String)
+protocol NetworkManagerProtocol {
+    func getChannels(handler: @escaping (Dictionary<String, [Channel]>) -> Void)
+    func getMessages(identifier: String, handler: @escaping ([Message]) -> Void)
+    func sendMessage(sender: User, content: String, identifier: String)
     func createChannel(name: String)
     func deleteChannel(identifier: String)
 }
 
-class FirebaseService: FirebaseServiceProtocol {
+class FirebaseManager: NetworkManagerProtocol {
 
     // MARK: - Properties
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
 
-    // MARK: - Dependencies
-    var coreDataService: CoreDataServiceProtocol
-    var userDataService: UserDataServiceProtocol
-
-    init(coreDataService: CoreDataServiceProtocol, userDataService: UserDataServiceProtocol) {
-        self.coreDataService = coreDataService
-        self.userDataService = userDataService
-    }
-
     // MARK: - Functions
-    func getChannels() {
+    func getChannels(handler: @escaping (Dictionary<String, [Channel]>) -> Void) {
         reference.addSnapshotListener { snapshot, error in
 
             if let error = error {
@@ -50,13 +41,20 @@ class FirebaseService: FirebaseServiceProtocol {
                     channelsToDelete.append(channel)
                 }
             }
-            self.coreDataService.saveChannelsToDB(channelsToSave)
-            self.coreDataService.updateChannelsInDB(channelsToUpdate)
-            self.coreDataService.deleteChannelsFromDB(channelsToDelete)
+            
+            let channelsDictionarry: Dictionary<String, [Channel]> = ["save": channelsToSave,
+                                                                      "update": channelsToUpdate,
+                                                                      "delete": channelsToDelete]
+            handler(channelsDictionarry)
+
         }
     }
+    
+    private func updateDictionary(with channel: Channel, key: String) {
+        
+    }
 
-    func getMessages(identifier: String) {
+    func getMessages(identifier: String, handler: @escaping ([Message]) -> Void) {
         let messagesReference = reference.document(identifier).collection("messages")
         messagesReference.addSnapshotListener { snapshot, error in
 
@@ -76,17 +74,16 @@ class FirebaseService: FirebaseServiceProtocol {
                 }
             }
 
-            self.coreDataService.saveMessagesToDB(channelID: identifier, messages: messagesToSave)
+            handler(messagesToSave)
         }
     }
 
-    func sendMessage(content: String, identifier: String) {
+    func sendMessage(sender: User, content: String, identifier: String) {
         let messagesReference = reference.document(identifier).collection("messages")
-        let user = userDataService.userModel
         let data: [String: Any] = [ "content": content,
                                     "created": Timestamp(date: Date()),
-                                    "senderId": user.uuID,
-                                    "senderName": user.name ]
+                                    "senderId": sender.uuID,
+                                    "senderName": sender.name ]
 
         messagesReference.addDocument(data: data)
     }

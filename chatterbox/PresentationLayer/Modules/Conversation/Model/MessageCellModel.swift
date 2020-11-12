@@ -10,5 +10,4 @@ struct MessageCellModel {
 
     // MARK: - Dependencies
     var userDataService: UserDataServiceProtocol
-
 }

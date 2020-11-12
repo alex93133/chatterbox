@@ -78,7 +78,7 @@ class ConversationsListViewController: UIViewController {
     }
 
     private func getData() {
-        model.firebaseService.getChannels()
+        model.chatDataService.getChannels()
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -100,7 +100,7 @@ class ConversationsListViewController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Create a new channel", comment: ""),
                                                 placeholder: NSLocalizedString("Channel name", comment: "")) { [weak self] text in
             guard let self = self else { return }
-            self.model.firebaseService.createChannel(name: text)
+            self.model.chatDataService.createChannel(name: text)
         }
         present(alertController, animated: true, completion: nil)
     }

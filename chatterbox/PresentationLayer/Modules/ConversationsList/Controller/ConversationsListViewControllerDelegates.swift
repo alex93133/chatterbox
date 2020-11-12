@@ -42,7 +42,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             guard let self = self else { return }
             let channelDB = self.fetchedResultsController.object(at: indexPath)
             if let identifier = channelDB.identifier {
-                self.model.firebaseService.deleteChannel(identifier: identifier)
+                self.model.chatDataService.deleteChannel(identifier: identifier)
             }
         }
         return [deleteAction]
