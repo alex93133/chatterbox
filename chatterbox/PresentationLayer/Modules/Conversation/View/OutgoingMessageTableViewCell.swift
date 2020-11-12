@@ -34,7 +34,7 @@ class OutgoingMessageTableViewCell: UITableViewCell {
         updateColors()
         outgoingMessageLabel.text = model.message.content
     }
-    
+
     private func updateColors() {
         overlayView.backgroundColor = themesService.outgoingMessageBGColor
         outgoingMessageLabel.textColor = themesService.outgoingMessageTextColor

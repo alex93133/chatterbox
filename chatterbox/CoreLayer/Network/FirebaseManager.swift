@@ -2,7 +2,7 @@ import Foundation
 import Firebase
 
 protocol ConversationManagerProtocol {
-    func getChannels(handler: @escaping (Dictionary<String, [Channel]>) -> Void)
+    func getChannels(handler: @escaping ([String: [Channel]]) -> Void)
     func getMessages(identifier: String, handler: @escaping ([Message]) -> Void)
     func sendMessage(sender: User, content: String, identifier: String)
     func createChannel(name: String)
@@ -16,7 +16,7 @@ class FirebaseManager: ConversationManagerProtocol {
     lazy var reference = db.collection("channels")
 
     // MARK: - Functions
-    func getChannels(handler: @escaping (Dictionary<String, [Channel]>) -> Void) {
+    func getChannels(handler: @escaping ([String: [Channel]]) -> Void) {
         reference.addSnapshotListener { snapshot, error in
 
             if let error = error {
@@ -41,17 +41,17 @@ class FirebaseManager: ConversationManagerProtocol {
                     channelsToDelete.append(channel)
                 }
             }
-            
-            let channelsDictionarry: Dictionary<String, [Channel]> = ["save": channelsToSave,
-                                                                      "update": channelsToUpdate,
-                                                                      "delete": channelsToDelete]
-            handler(channelsDictionarry)
+
+            let channelsDictionary: [String: [Channel]] = ["save": channelsToSave,
+                                                                     "update": channelsToUpdate,
+                                                                     "delete": channelsToDelete]
+            handler(channelsDictionary)
 
         }
     }
-    
+
     private func updateDictionary(with channel: Channel, key: String) {
-        
+
     }
 
     func getMessages(identifier: String, handler: @escaping ([Message]) -> Void) {

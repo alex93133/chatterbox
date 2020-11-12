@@ -11,11 +11,11 @@ extension UserDataProtocol {
     var photoURL: URL {
         return fileManagerStack.documentDirectory.appendingPathComponent("/photo.png")
     }
-    
+
     var plistURL: URL {
         return fileManagerStack.documentDirectory.appendingPathComponent("/info.plist")
     }
-    
+
     // MARK: - Functions
     func readUserModel() -> User? {
         guard let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path) else { return nil }
@@ -23,7 +23,7 @@ extension UserDataProtocol {
         let userModel = User(dictionary: dictionary, photo: photo)
         return userModel
     }
-    
+
     func getPhoto() -> UIImage? {
         do {
             let imageData = try Data(contentsOf: photoURL)
@@ -32,7 +32,7 @@ extension UserDataProtocol {
             return nil
         }
     }
-    
+
     func createUser(model: User) {
         let fileManager = fileManagerStack.fileManager
         guard !fileManager.fileExists(atPath: plistURL.path) else { return }
@@ -46,7 +46,7 @@ extension UserDataProtocol {
         let isCreated = dictionary.write(toFile: plistURL.path, atomically: true)
         Logger.shared.printLogs(text: "User is created: \(isCreated)")
     }
-    
+
     func saveInfoToFile(model: User) -> Bool {
         if let dictionary = NSMutableDictionary(contentsOfFile: plistURL.path) {
             dictionary["name"] = model.name
@@ -61,7 +61,7 @@ extension UserDataProtocol {
         }
         return false
     }
-    
+
     func savePhotoToFile(model: User) -> Bool {
         if let image = model.photo,
            let data = image.pngData() {

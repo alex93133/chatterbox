@@ -32,7 +32,7 @@ class UserDataService: UserDataServiceProtocol {
     // MARK: - Dependencies
     var gcdUserDataService: UserDataProtocol
     var operationUserDataService: UserDataProtocol
-    
+
     init(gcdUserDataService: UserDataProtocol, operationUserDataService: UserDataProtocol) {
         self.gcdUserDataService = gcdUserDataService
         self.operationUserDataService = operationUserDataService

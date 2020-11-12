@@ -9,42 +9,42 @@ protocol ChatDataServiceProtocol {
 }
 
 class ChatDataService: ChatDataServiceProtocol {
-    
+
     // MARK: - Dependencies
     var conversationManager: ConversationManagerProtocol
     var storage: StorageProtocol
     var userDataService: UserDataServiceProtocol
-    
+
     init(networkManager: ConversationManagerProtocol, storage: StorageProtocol, userDataService: UserDataServiceProtocol) {
         self.conversationManager = networkManager
         self.storage = storage
         self.userDataService = userDataService
     }
-    
+
     func getChannels() {
-        conversationManager.getChannels { [weak self] dicionarry in
-            guard let self = self else { return }    
-            if let channelsToSave = dicionarry["save"] {
+        conversationManager.getChannels { [weak self] dictionary in
+            guard let self = self else { return }
+            if let channelsToSave = dictionary["save"] {
                 self.storage.saveChannelsToDB(channelsToSave)
             }
-            
-            if let channelsToUpdate = dicionarry["update"] {
+
+            if let channelsToUpdate = dictionary["update"] {
                 self.storage.updateChannelsInDB(channelsToUpdate)
             }
-            
-            if let channelsToDelete = dicionarry["delete"] {
+
+            if let channelsToDelete = dictionary["delete"] {
                 self.storage.deleteChannelsFromDB(channelsToDelete)
             }
         }
     }
-    
+
     func getMessages(identifier: String) {
         conversationManager.getMessages(identifier: identifier) { [weak self] messages in
             guard let self = self else { return }
             self.storage.saveMessagesToDB(channelID: identifier, messages: messages)
         }
     }
-    
+
     func sendMessage(content: String, identifier: String) {
         let user = userDataService.userModel
         conversationManager.sendMessage(sender: user, content: content, identifier: identifier)

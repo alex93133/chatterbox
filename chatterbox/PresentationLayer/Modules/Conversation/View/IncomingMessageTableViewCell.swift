@@ -48,7 +48,7 @@ class IncomingMessageTableViewCell: UITableViewCell, ConfigurableView {
         overlayView.backgroundColor = themesService.incomingMessageBGColor
         incomingMessageLabel.textColor = themesService.textColor
     }
-    
+
     private func setupUIElements() {
         selectionStyle = .none
         backgroundColor = .clear

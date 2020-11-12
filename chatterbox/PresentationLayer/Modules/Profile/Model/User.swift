@@ -42,7 +42,7 @@ extension User {
               let theme = Theme(rawValue: themeString),
               let uuid = dictionary.object(forKey: "uuid") as? String
         else { return nil }
-        
+
         self.name = name
         self.description = description
         self.theme = theme

@@ -21,7 +21,7 @@ extension RootAssembly: AppLoadingProtocol {
                         uuID: uuid)
         servicesAssembly.userDataService.dataManager.createUser(model: user)
     }
-    
+
     func loadUser() {
         servicesAssembly.userDataService.loadUser()
     }

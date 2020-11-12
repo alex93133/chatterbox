@@ -94,13 +94,13 @@ class ThemesViewController: UIViewController, ConfigurableView {
             self.model.themesService.setupNavigationBar(target: self)
         }
     }
-    
+
     private func saveTheme(newTheme: Theme) {
         var userModel = model.userDataService.userModel
         guard newTheme != userModel.theme else { return }
         userModel.theme = newTheme
         model.userDataService.dataManager.updateModel(with: userModel) { [weak self] result in
-            guard let self = self else { return }    
+            guard let self = self else { return }
             self.handleThemeSaving(result)
         }
     }
