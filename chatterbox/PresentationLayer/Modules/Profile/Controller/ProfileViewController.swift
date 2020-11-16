@@ -151,12 +151,21 @@ class ProfileViewController: UIViewController, ConfigurableView {
                 #endif
             }
         }
+        
+        let imagesListAction = UIAlertAction(title: NSLocalizedString("Upload", comment: ""),
+                                             style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            let imagesListViewController = self.presentationAssembly.imagesListViewController()
+            let navigationController = UINavigationController(rootViewController: imagesListViewController)
+            self.present(navigationController, animated: true)
+        }
 
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
                                          style: .cancel)
 
         alertController.addAction(photoLibraryAction)
         alertController.addAction(cameraAction)
+        alertController.addAction(imagesListAction)
         alertController.addAction(cancelAction)
 
         alertController.pruneNegativeWidthConstraints()
