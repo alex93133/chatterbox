@@ -14,17 +14,17 @@ extension UIViewController {
 
     func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
+                                               selector: #selector(keyboardHandler),
                                                name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
+                                               selector: #selector(keyboardHandler),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
 
     @objc
-    func keyboardWillShow(_ notification: Notification) {
+    func keyboardHandler(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             var newHeight: CGFloat
             let duration: TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0

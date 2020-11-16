@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setupCoreData() {
         CoreDataManager.shared.coreDataStack.enableObservers()
-        CoreDataManager.shared.coreDataStack.didUpdateDataBase = { stack in
-            stack.printDataBaseStatistics()
-        }
+
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.applicationSupportDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        print(paths[0])
     }
 }

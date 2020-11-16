@@ -1,6 +1,8 @@
 import Foundation
 
 struct MessageCellModel {
-    let message: Message
-    var isIncoming: Bool
+    let message: MessageDB
+    var isIncoming: Bool {
+        return UserManager.shared.userModel.uuID != message.senderId
+    }
 }

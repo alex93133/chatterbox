@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class ConversationViewController: UIViewController, ConfigurableView {
 
@@ -7,19 +8,30 @@ class ConversationViewController: UIViewController, ConfigurableView {
         let view = ConversationView(frame: UIScreen.main.bounds)
         return view
     }()
-    private var channelModel: Channel
-    private let manager = FirebaseManager()
-    private var cellModels = [MessageCellModel]() {
-        didSet {
-            conversationView.tableView.reloadData()
-            scrollTableViewToLast()
-        }
-    }
 
-    typealias ConfigurationModel = Channel
+    private var channelModel: ChannelDB
+    private var identifier: String
 
-    init(with channelModel: Channel) {
+    private lazy var fetchedResultsController: NSFetchedResultsController<MessageDB> = {
+        let context = CoreDataManager.shared.coreDataStack.container.viewContext
+        let fetchRequest: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
+        let predicate = NSPredicate(format: "channel.identifier == %@", identifier)
+        let dateDescriptor = NSSortDescriptor(key: "created", ascending: true)
+        fetchRequest.sortDescriptors = [dateDescriptor]
+        fetchRequest.predicate = predicate
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: "messageCache\(identifier)")
+        return fetchedResultsController
+    }()
+
+    typealias ConfigurationModel = ChannelDB
+
+    init(with channelModel: ChannelDB) {
         self.channelModel = channelModel
+        self.identifier = channelModel.identifier ?? ""
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,6 +68,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
         conversationView.tableView.register(IncomingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.incomingMessageCell)
         conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
         conversationView.inputBarView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        fetchedResultsController.delegate = self
     }
 
     func configure(with model: ConfigurationModel) {
@@ -69,27 +82,22 @@ class ConversationViewController: UIViewController, ConfigurableView {
     }
 
     private func getData() {
-        manager.getMessages(identifier: channelModel.identifier) {  [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let messages):
-                let models = messages.map { message -> MessageCellModel in
-                    let isIncoming = UserManager.shared.userModel.uuID == message.senderId ? false : true
-                    return MessageCellModel(message: message, isIncoming: isIncoming)
-                }
-                self.cellModels = models.sorted { $0.message.created < $1.message.created }
-
-            case .failure(let error):
-                Logger.shared.printLogs(text: "Unable to get data from Firebase. Error: \(error.localizedDescription)")
-            }
+        FirebaseManager.shared.getMessages(identifier: identifier)
+        do {
+            try fetchedResultsController.performFetch()
+            scrollTableViewToLast()
+        } catch {
+            Logger.shared.printLogs(text: "FRC error: \(error.localizedDescription)")
         }
     }
 
     private func scrollTableViewToLast() {
-        guard !cellModels.isEmpty else { return }
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let lastIndexPath = IndexPath(row: self.cellModels.count - 1, section: 0)
+            guard let self = self,
+                  let messagesCount = self.fetchedResultsController.fetchedObjects?.count,
+                  messagesCount > 0 else { return }
+
+            let lastIndexPath = IndexPath(row: messagesCount - 1, section: 0)
             self.conversationView.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
         }
     }
@@ -99,8 +107,9 @@ class ConversationViewController: UIViewController, ConfigurableView {
     private func sendMessage() {
         let textView = conversationView.inputBarView.inputTextView
         guard let text = textView.text,
-            !text.isEmpty else { return }
-        manager.sendMessage(content: text, identifier: channelModel.identifier)
+              !text.isEmpty,
+              textView.textColor != UIColor.lightGray else { return }
+        FirebaseManager.shared.sendMessage(content: text, identifier: identifier)
         textView.text = ""
         adjustTextViewHeight()
     }
@@ -109,11 +118,13 @@ class ConversationViewController: UIViewController, ConfigurableView {
 // MARK: - Delegates
 extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellModels.count
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = cellModels[indexPath.row]
+        let messageDB = fetchedResultsController.object(at: indexPath)
+        let cellModel = MessageCellModel(message: messageDB)
 
         if cellModel.isIncoming {
             if let incomingCell = tableView.dequeueReusableCell(withIdentifier: Identifiers.incomingMessageCell,
@@ -129,6 +140,60 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
         return UITableViewCell()
+    }
+}
+
+extension ConversationViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        conversationView.tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                conversationView.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+
+        case .update:
+            if let indexPath = indexPath {
+                let messageDB = fetchedResultsController.object(at: indexPath)
+                let cellModel = MessageCellModel(message: messageDB)
+                if cellModel.isIncoming {
+                    guard let cell = conversationView.tableView.cellForRow(at: indexPath) as? IncomingMessageTableViewCell else { break }
+                    cell.configure(with: cellModel)
+                } else {
+                    guard let cell = conversationView.tableView.cellForRow(at: indexPath) as? OutgoingMessageTableViewCell else { break }
+                    cell.configure(with: cellModel)
+                }
+            }
+
+        case .move:
+            if let indexPath = indexPath {
+                conversationView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                conversationView.tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+
+        case .delete:
+            if let indexPath = indexPath {
+                conversationView.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        conversationView.tableView.endUpdates()
+        scrollTableViewToLast()
     }
 }
 

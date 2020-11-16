@@ -10,7 +10,7 @@ extension UIAlertController {
 
         let createAction = UIAlertAction(title: NSLocalizedString("Create", comment: ""),
                                          style: .default) { _ in
-                                            actionHandler(textFieldText)
+            actionHandler(textFieldText)
         }
 
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
