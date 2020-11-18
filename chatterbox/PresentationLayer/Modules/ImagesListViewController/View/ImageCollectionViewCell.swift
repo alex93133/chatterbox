@@ -1,43 +1,44 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell, ConfigurableView {
-    
+
     typealias ConfigurationModel = ImageCellModel
-    
+
     // MARK: - UI
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Images.imagePlaceHolder
         imageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.75)
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
-    
+
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .white)
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUIElements()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupUIElements() {
         addSubviews(imageView, activityIndicator)
         setupImageViewConstraints()
         setupActivityIndicatorConstraints()
     }
-    
+
     func configure(with model: ConfigurationModel) {
         imageView.image = model.image
+        activityIndicator.stopAnimating()
     }
-    
+
     // MARK: - Constraints
     private func setupImageViewConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +49,7 @@ class ImageCollectionViewCell: UICollectionViewCell, ConfigurableView {
             imageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
+
     private func setupActivityIndicatorConstraints() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

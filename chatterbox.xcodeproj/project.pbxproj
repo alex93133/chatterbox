@@ -11,6 +11,7 @@
 		3302E123252714C700BF8EEE /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E122252714C700BF8EEE /* ThemesView.swift */; };
 		3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E1262527168E00BF8EEE /* ThemeButton.swift */; };
 		3309F7872517CA52004C6015 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3309F7892517CA52004C6015 /* Localizable.strings */; };
+		330C51852562B6AC00B6EE0A /* ImageDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330C51842562B6AC00B6EE0A /* ImageDataModels.swift */; };
 		330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFDFD253A0BB20025BF39 /* Channel.swift */; };
 		330EFE05253A0DFB0025BF39 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFE04253A0DFB0025BF39 /* Message.swift */; };
 		331273222555815300CC201B /* AccessResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331273212555815300CC201B /* AccessResult.swift */; };
@@ -43,12 +44,16 @@
 		335DDC902534C10200004193 /* OperationUserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8F2534C10200004193 /* OperationUserDataService.swift */; };
 		335E8B4C2517B045005B11EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E8B4B2517B045005B11EC /* ProfileView.swift */; };
 		335FA512255573E70021457E /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FA511255573E70021457E /* RootAssembly.swift */; };
+		337185432564483D0072525F /* FileManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337185422564483D0072525F /* FileManagerError.swift */; };
 		3373ED7B25273D92001EDE7E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED7A25273D92001EDE7E /* Theme.swift */; };
 		3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED8125275D4D001EDE7E /* UIColor.swift */; };
 		3373ED8525276830001EDE7E /* ThemesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3373ED8425276830001EDE7E /* ThemesService.swift */; };
 		337BDFDB25624C56005E9626 /* ImagesListViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFDA25624C56005E9626 /* ImagesListViewControllerDelegates.swift */; };
 		337BDFDE25624D11005E9626 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFDD25624D11005E9626 /* ImageCollectionViewCell.swift */; };
 		337BDFE125624D88005E9626 /* ImageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFE025624D88005E9626 /* ImageCellModel.swift */; };
+		337BDFE425628643005E9626 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFE325628643005E9626 /* NetworkManager.swift */; };
+		337BDFE7256287DE005E9626 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFE6256287DE005E9626 /* Parser.swift */; };
+		337BDFEB25628D8A005E9626 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337BDFEA25628D8A005E9626 /* ImageLoaderService.swift */; };
 		337DC2582545861400FB49C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337DC2572545861400FB49C8 /* CoreDataStack.swift */; };
 		337DC25A2545927E00FB49C8 /* ObjectsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337DC2592545927E00FB49C8 /* ObjectsExtensions.swift */; };
 		337DC25C2545958900FB49C8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337DC25B2545958900FB49C8 /* CoreDataManager.swift */; };
@@ -69,7 +74,6 @@
 		33E9B3452533488A0061CABC /* UserDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B3442533488A0061CABC /* UserDataProtocol.swift */; };
 		33E9B34825334BCD0061CABC /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B34725334BCD0061CABC /* SaveButton.swift */; };
 		33E9B34B253353D40061CABC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B34A253353D40061CABC /* UIViewController.swift */; };
-		33E9B35625336B920061CABC /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9B35525336B920061CABC /* Result.swift */; };
 		33E9F8322515069D005A6EB8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F8312515069D005A6EB8 /* ProfileViewController.swift */; };
 		33E9F84025152BF0005A6EB8 /* AccessCheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F83F25152BF0005A6EB8 /* AccessCheckerService.swift */; };
 		33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4466251E011400DA3401 /* ConversationsListViewController.swift */; };
@@ -89,6 +93,7 @@
 		3302E1262527168E00BF8EEE /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		3309F7882517CA52004C6015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3309F78C2517CA70004C6015 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		330C51842562B6AC00B6EE0A /* ImageDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModels.swift; sourceTree = "<group>"; };
 		330EFDFD253A0BB20025BF39 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		330EFE04253A0DFB0025BF39 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		331273212555815300CC201B /* AccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessResult.swift; sourceTree = "<group>"; };
@@ -123,12 +128,16 @@
 		335DDC8F2534C10200004193 /* OperationUserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationUserDataService.swift; sourceTree = "<group>"; };
 		335E8B4B2517B045005B11EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		335FA511255573E70021457E /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		337185422564483D0072525F /* FileManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerError.swift; sourceTree = "<group>"; };
 		3373ED7A25273D92001EDE7E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3373ED8125275D4D001EDE7E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		3373ED8425276830001EDE7E /* ThemesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesService.swift; sourceTree = "<group>"; };
 		337BDFDA25624C56005E9626 /* ImagesListViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerDelegates.swift; sourceTree = "<group>"; };
 		337BDFDD25624D11005E9626 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		337BDFE025624D88005E9626 /* ImageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellModel.swift; sourceTree = "<group>"; };
+		337BDFE325628643005E9626 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		337BDFE6256287DE005E9626 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		337BDFEA25628D8A005E9626 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		337DC2572545861400FB49C8 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		337DC2592545927E00FB49C8 /* ObjectsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsExtensions.swift; sourceTree = "<group>"; };
 		337DC25B2545958900FB49C8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -149,7 +158,6 @@
 		33E9B3442533488A0061CABC /* UserDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProtocol.swift; sourceTree = "<group>"; };
 		33E9B34725334BCD0061CABC /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		33E9B34A253353D40061CABC /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		33E9B35525336B920061CABC /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		33E9F8312515069D005A6EB8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		33E9F83F25152BF0005A6EB8 /* AccessCheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCheckerService.swift; sourceTree = "<group>"; };
 		33EA4466251E011400DA3401 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +219,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		330C518225628F0100B6EE0A /* FRCService */ = {
+			isa = PBXGroup;
+			children = (
+				33BDD1D32558375E009A5371 /* FRCService.swift */,
+			);
+			path = FRCService;
+			sourceTree = "<group>";
+		};
 		3312731F25557E4600CC201B /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +244,6 @@
 				33E9B3442533488A0061CABC /* UserDataProtocol.swift */,
 				335DDC8F2534C10200004193 /* OperationUserDataService.swift */,
 				33E9B3412533483C0061CABC /* GCDUserDataService.swift */,
-				33BDD1D32558375E009A5371 /* FRCService.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -245,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				33B08EB625558B43009CAB56 /* FileManagerStack.swift */,
+				337185422564483D0072525F /* FileManagerError.swift */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -318,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				33265575251F694A00C16D5E /* User.swift */,
-				33E9B35525336B920061CABC /* Result.swift */,
 				33BDD1CF25582C7E009A5371 /* ProfileModel.swift */,
 			);
 			path = Model;
@@ -451,8 +466,10 @@
 		335FA515255574090021457E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				330C518225628F0100B6EE0A /* FRCService */,
 				33127325255581A300CC201B /* Data */,
 				331273282555820500CC201B /* Themes */,
+				337BDFE925628D69005E9626 /* ImageLoaderService */,
 				3312731F25557E4600CC201B /* Permissions */,
 			);
 			path = Services;
@@ -495,6 +512,14 @@
 				3324CDFF2555777800AC89E0 /* ConversationsListViewControllerDelegates.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		337BDFE925628D69005E9626 /* ImageLoaderService */ = {
+			isa = PBXGroup;
+			children = (
+				337BDFEA25628D8A005E9626 /* ImageLoaderService.swift */,
+			);
+			path = ImageLoaderService;
 			sourceTree = "<group>";
 		};
 		337DC256254585F600FB49C8 /* CoreData */ = {
@@ -542,6 +567,7 @@
 			children = (
 				33B62C3D2562441C0016319E /* ImagesListModel.swift */,
 				337BDFE025624D88005E9626 /* ImageCellModel.swift */,
+				330C51842562B6AC00B6EE0A /* ImageDataModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -590,6 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				33F28335255D79A500E1FBB0 /* FirebaseManager.swift */,
+				337BDFE325628643005E9626 /* NetworkManager.swift */,
+				337BDFE6256287DE005E9626 /* Parser.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -749,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				337BDFE7256287DE005E9626 /* Parser.swift in Sources */,
 				33265576251F694A00C16D5E /* User.swift in Sources */,
 				333AB13925487A5500F99ADB /* InputBarView.swift in Sources */,
 				337BDFDE25624D11005E9626 /* ImageCollectionViewCell.swift in Sources */,
@@ -773,7 +802,6 @@
 				33E9B34B253353D40061CABC /* UIViewController.swift in Sources */,
 				3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */,
 				33E9B3422533483C0061CABC /* GCDUserDataService.swift in Sources */,
-				33E9B35625336B920061CABC /* Result.swift in Sources */,
 				33BDD1D42558375E009A5371 /* FRCService.swift in Sources */,
 				337BDFE125624D88005E9626 /* ImageCellModel.swift in Sources */,
 				33E9F84025152BF0005A6EB8 /* AccessCheckerService.swift in Sources */,
@@ -797,7 +825,9 @@
 				3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */,
 				335DDC8C2534A28C00004193 /* UserDataService.swift in Sources */,
 				330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */,
+				337BDFE425628643005E9626 /* NetworkManager.swift in Sources */,
 				3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */,
+				337185432564483D0072525F /* FileManagerError.swift in Sources */,
 				3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */,
 				332655932520A27E00C16D5E /* ConversationViewController.swift in Sources */,
 				33B08EB725558B43009CAB56 /* FileManagerStack.swift in Sources */,
@@ -809,11 +839,13 @@
 				33265565251F5A8600C16D5E /* ConfigurableView.swift in Sources */,
 				33E9B34825334BCD0061CABC /* SaveButton.swift in Sources */,
 				33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */,
+				337BDFEB25628D8A005E9626 /* ImageLoaderService.swift in Sources */,
 				337DC25A2545927E00FB49C8 /* ObjectsExtensions.swift in Sources */,
 				33265561251F576700C16D5E /* Identifiers.swift in Sources */,
 				33BDD1C8255822D6009A5371 /* ThemesModel.swift in Sources */,
 				3326555D251F570F00C16D5E /* ConversationTableViewCell.swift in Sources */,
 				335DDC902534C10200004193 /* OperationUserDataService.swift in Sources */,
+				330C51852562B6AC00B6EE0A /* ImageDataModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

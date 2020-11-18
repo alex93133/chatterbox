@@ -50,10 +50,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                                  user: user)
         return ProfileViewController(model: model, presentationAssembly: self)
     }
-    
+
     // MARK: - ImagesListViewController
     func imagesListViewController() -> ImagesListViewController {
-        let model = ImagesListModel(themesService: serviceAssembly.themesService)
+        let model = ImagesListModel(themesService: serviceAssembly.themesService,
+                                    imageLoaderService: serviceAssembly.imageLoaderService)
         return ImagesListViewController(model: model, presentationAssembly: self)
     }
 }

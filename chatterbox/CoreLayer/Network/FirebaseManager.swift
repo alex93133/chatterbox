@@ -43,8 +43,8 @@ class FirebaseManager: ConversationManagerProtocol {
             }
 
             let channelsDictionary: [String: [Channel]] = ["save": channelsToSave,
-                                                                     "update": channelsToUpdate,
-                                                                     "delete": channelsToDelete]
+                                                           "update": channelsToUpdate,
+                                                           "delete": channelsToDelete]
             handler(channelsDictionary)
 
         }

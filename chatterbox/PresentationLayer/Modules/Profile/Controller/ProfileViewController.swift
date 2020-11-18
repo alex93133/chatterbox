@@ -151,13 +151,11 @@ class ProfileViewController: UIViewController, ConfigurableView {
                 #endif
             }
         }
-        
+
         let imagesListAction = UIAlertAction(title: NSLocalizedString("Upload", comment: ""),
                                              style: .default) { [weak self] _ in
             guard let self = self else { return }
-            let imagesListViewController = self.presentationAssembly.imagesListViewController()
-            let navigationController = UINavigationController(rootViewController: imagesListViewController)
-            self.present(navigationController, animated: true)
+            self.presentImageList()
         }
 
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
@@ -171,6 +169,13 @@ class ProfileViewController: UIViewController, ConfigurableView {
         alertController.pruneNegativeWidthConstraints()
 
         present(alertController, animated: true)
+    }
+
+    private func presentImageList() {
+        let imagesListViewController = presentationAssembly.imagesListViewController()
+        imagesListViewController.delegate = self
+        let navigationController = UINavigationController(rootViewController: imagesListViewController)
+        present(navigationController, animated: true)
     }
 
     private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
@@ -197,7 +202,7 @@ class ProfileViewController: UIViewController, ConfigurableView {
                     self.presentSuccessAlert()
                     Logger.shared.printLogs(text: "Model saved and applied")
 
-                case .error:
+                case .failure:
                     self.presentErrorAlert()
                 }
             }

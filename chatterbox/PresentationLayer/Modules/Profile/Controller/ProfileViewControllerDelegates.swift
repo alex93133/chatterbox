@@ -39,3 +39,11 @@ extension ProfileViewController: UITextViewDelegate {
         return true
     }
 }
+
+extension ProfileViewController: ImagesListViewControllerDelegate {
+    func handleSelection(_ image: UIImage) {
+        profileView.photoImageView.image = image
+        updatedModel.photo = image
+        isAbleToSave = true
+    }
+}

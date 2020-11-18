@@ -1,13 +1,25 @@
 import UIKit
 
+protocol ImagesListViewControllerDelegate: class {
+    func handleSelection(_ image: UIImage)
+}
+
 class ImagesListViewController: UIViewController {
-    
+
     // MARK: - Properties
     lazy var imagesListView: ImagesListView = {
         let view = ImagesListView(themesService: model.themesService)
         return view
     }()
-    
+
+    var imageDataModels = [ImageDataModel]() {
+        willSet {
+            imagesListView.collectionView.reloadData()
+        }
+    }
+
+    weak var delegate: ImagesListViewControllerDelegate?
+
     // MARK: - Dependencies
     var model: ImagesListModel
     var presentationAssembly: PresentationAssemblyProtocol
@@ -26,13 +38,14 @@ class ImagesListViewController: UIViewController {
     override func loadView() {
         view = imagesListView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupNavigationBar()
+        getURLs()
     }
-    
+
     // MARK: - Functions
     private func setupView() {
         imagesListView.setupUIElements()
@@ -41,7 +54,7 @@ class ImagesListViewController: UIViewController {
         imagesListView.collectionView.dataSource = self
         imagesListView.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: Identifiers.imageCell)
     }
-    
+
     private func setupNavigationBar() {
         let closeButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
                                               target: self,
@@ -50,7 +63,14 @@ class ImagesListViewController: UIViewController {
         navigationItem.leftBarButtonItem = closeButtonItem
         model.themesService.setupNavigationBar(target: self)
     }
-    
+
+    private func getURLs() {
+        model.imageLoaderService.loadImageDataModel { [weak self] imageDataModel in
+            guard let self = self else { return }
+            self.imageDataModels += imageDataModel.imageDataModels
+        }
+    }
+
     // MARK: - Actions
     @objc
     private func closeButtonPressed() {
