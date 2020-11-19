@@ -10,12 +10,19 @@ class NetworkManager: NetworkManagerProtocol {
     let apiKey = "12742223-d39d519f28327ba3c61b0e13b"
 
     func getData(request: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: request) { data, _, error -> Void in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in
+
+            if let httpResponse = response as? HTTPURLResponse,
+               !(200..<300 ~= httpResponse.statusCode) {
+                let error = NSError(domain: "", code: httpResponse.statusCode, userInfo: nil)
+                handler(.failure(error))
+            }
 
             if let error = error {
                 handler(.failure(error))
                 return
             }
+
             guard let data = data else { return }
             handler(.success(data))
         }

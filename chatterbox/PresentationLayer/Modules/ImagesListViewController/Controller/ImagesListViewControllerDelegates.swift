@@ -11,17 +11,22 @@ extension ImagesListViewController: UICollectionViewDelegate,
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.imageCell,
                                                          for: indexPath) as? ImageCollectionViewCell {
             let imageDataModel = imageDataModels[indexPath.item]
+            cell.taskURLString = imageDataModel.urlString
+            cell.imageLoaderService = model.imageLoaderService
 
             if let image = imageDataModels[indexPath.item].image {
                 cell.configure(with: ImageCellModel(image: image))
             } else {
-                cell.configure(with: ImageCellModel(image: Images.imagePlaceHolder))
                 cell.activityIndicator.startAnimating()
 
                 model.imageLoaderService.loadImage(urlString: imageDataModel.urlString) { image in
-                    cell.activityIndicator.stopAnimating()
-                    self.imageDataModels[indexPath.item].image = image
-                    cell.configure(with: ImageCellModel(image: image))
+                    DispatchQueue.main.async {
+                        cell.activityIndicator.stopAnimating()
+                        if let image = image {
+                            self.imageDataModels[indexPath.item].image = image
+                            cell.configure(with: ImageCellModel(image: image))
+                        }
+                    }
                 }
             }
             return cell

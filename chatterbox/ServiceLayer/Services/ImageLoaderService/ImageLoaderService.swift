@@ -2,13 +2,14 @@ import UIKit
 
 protocol ImageLoaderServiceProtocol {
     func loadImageDataModel(handler: @escaping (ImageDataModels) -> Void)
-    func loadImage(urlString: String, handler: @escaping (UIImage) -> Void)
+    func loadImage(urlString: String, handler: @escaping (UIImage?) -> Void)
+    func cancelTaskWithUrl(urlString: String)
 }
 
 class ImageLoaderService: ImageLoaderServiceProtocol {
 
     // MARK: - Properties
-    let queue = DispatchQueue.global(qos: .default)
+    let queue = DispatchQueue.global(qos: .utility)
 
     // MARK: - Dependencies
     var parser: ParserProtocol
@@ -21,14 +22,14 @@ class ImageLoaderService: ImageLoaderServiceProtocol {
 
     func loadImageDataModel(handler: @escaping (ImageDataModels) -> Void) {
         guard var url = URL(string: "https://pixabay.com/api/") else { return }
-        let URLParams = [
+        let urlParams = [
             "key": networkManager.apiKey,
             "image_type": "photo",
-            "per_page": "30",
+            "per_page": "150",
             "q": "people",
             "pretty": "true"
         ]
-        url = url.appendingQueryParameters(URLParams)
+        url = url.appendingQueryParameters(urlParams)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
@@ -38,9 +39,7 @@ class ImageLoaderService: ImageLoaderServiceProtocol {
                 switch result {
                 case .success(let data):
                     if let imageDataModel = self.parser.decodeData(type: ImageDataModels.self, data: data) {
-                        DispatchQueue.main.async {
-                            handler(imageDataModel)
-                        }
+                        handler(imageDataModel)
                     }
 
                 case .failure(let error):
@@ -50,7 +49,7 @@ class ImageLoaderService: ImageLoaderServiceProtocol {
         }
     }
 
-    func loadImage(urlString: String, handler: @escaping (UIImage) -> Void) {
+    func loadImage(urlString: String, handler: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else { return }
         let request = URLRequest(url: url)
 
@@ -59,15 +58,23 @@ class ImageLoaderService: ImageLoaderServiceProtocol {
             self.networkManager.getData(request: request) { result in
                 switch result {
                 case .success(let data):
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            handler(image)
-                        }
-                    }
+                    let image = UIImage(data: data)
+                    handler(image)
 
                 case .failure(let error):
+                    handler(nil)
                     Logger.shared.printLogs(text: "Network data task has been failed: \(error.localizedDescription)")
                 }
+            }
+        }
+    }
+
+    func cancelTaskWithUrl(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.getAllTasks { tasks in
+            let runningTasks = tasks.filter { $0.state == .running }
+            if let task = runningTasks.filter({ $0.originalRequest?.url == url }).first {
+                task.cancel()
             }
         }
     }

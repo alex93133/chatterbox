@@ -10,6 +10,7 @@ class ImageCollectionViewCell: UICollectionViewCell, ConfigurableView {
         imageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.75)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.image = Images.imagePlaceHolder
         return imageView
     }()
 
@@ -19,6 +20,10 @@ class ImageCollectionViewCell: UICollectionViewCell, ConfigurableView {
         return activityIndicator
     }()
 
+    // MARK: - Dependencies
+    var imageLoaderService: ImageLoaderServiceProtocol?
+    var taskURLString: String?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUIElements()
@@ -26,6 +31,15 @@ class ImageCollectionViewCell: UICollectionViewCell, ConfigurableView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = Images.imagePlaceHolder
+
+        if let taskURLString = taskURLString {
+            imageLoaderService?.cancelTaskWithUrl(urlString: taskURLString)
+        }
     }
 
     private func setupUIElements() {

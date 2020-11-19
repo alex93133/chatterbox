@@ -12,11 +12,7 @@ class ImagesListViewController: UIViewController {
         return view
     }()
 
-    var imageDataModels = [ImageDataModel]() {
-        willSet {
-            imagesListView.collectionView.reloadData()
-        }
-    }
+    var imageDataModels = [ImageDataModel]()
 
     weak var delegate: ImagesListViewControllerDelegate?
 
@@ -67,7 +63,10 @@ class ImagesListViewController: UIViewController {
     private func getURLs() {
         model.imageLoaderService.loadImageDataModel { [weak self] imageDataModel in
             guard let self = self else { return }
-            self.imageDataModels += imageDataModel.imageDataModels
+            self.imageDataModels = imageDataModel.imageDataModels
+            DispatchQueue.main.async {
+                self.imagesListView.collectionView.reloadData()
+            }
         }
     }
 
