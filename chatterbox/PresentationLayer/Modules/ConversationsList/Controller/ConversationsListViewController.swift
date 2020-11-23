@@ -9,6 +9,11 @@ class ConversationsListViewController: UIViewController {
         return view
     }()
 
+    lazy var logoEmitter: LogoEmitterAnimation = {
+        let logoEmitter = LogoEmitterAnimation(target: conversationsListView)
+        return logoEmitter
+    }()
+
     lazy var fetchedResultsController: NSFetchedResultsController<ChannelDB> = {
         let fetchRequest: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
         let nilMessageDescriptor = NilsLastSortDescriptor(key: "lastMessage", ascending: false)
@@ -54,6 +59,7 @@ class ConversationsListViewController: UIViewController {
         conversationsListView.tableView.delegate = self
         conversationsListView.tableView.dataSource = self
         conversationsListView.tableView.register(ConversationTableViewCell.self, forCellReuseIdentifier: Identifiers.conversationCell)
+        logoEmitter.addLogoEmitter()
     }
 
     private func setupNavigationBar() {
@@ -109,8 +115,6 @@ class ConversationsListViewController: UIViewController {
     private func accountItemPressed() {
         let profile = model.userDataService.userModel
         let profileViewController = presentationAssembly.profileViewController(with: profile)
-        let navigationController = UINavigationController(rootViewController: profileViewController)
-        present(navigationController, animated: true)
         profileViewController.updateUserIcon = { [weak self] in
             guard let self = self else { return }
             let image = self.model.userDataService.userModel.accountIcon
@@ -119,5 +123,11 @@ class ConversationsListViewController: UIViewController {
                                                               action: #selector(self.accountItemPressed))
             self.navigationItem.rightBarButtonItem = accountButton
         }
+
+        let navigationController = UINavigationController(rootViewController: profileViewController)
+        navigationController.transitioningDelegate = self
+        navigationController.modalPresentationStyle = .custom
+
+        present(navigationController, animated: true)
     }
 }

@@ -112,3 +112,14 @@ extension ConversationsListViewController: ThemesPickerDelegate {
         cells.forEach { $0.nameLabel.textColor = model.themesService.textColor }
     }
 }
+
+extension ConversationsListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let transition = ProfileTransition()
+        return transition
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+}

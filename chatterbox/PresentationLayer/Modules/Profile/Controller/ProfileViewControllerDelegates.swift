@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - Delegates
+// MARK: - Picker
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -14,6 +14,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
 }
 
+// MARK: - TextView
 extension ProfileViewController: UITextViewDelegate {
     private func textViewValidate() {
         guard let name = profileView.nameTextView.text,
@@ -40,6 +41,7 @@ extension ProfileViewController: UITextViewDelegate {
     }
 }
 
+// MARK: - ImagesList
 extension ProfileViewController: ImagesListViewControllerDelegate {
     func handleSelection(_ image: UIImage) {
         profileView.photoImageView.image = image

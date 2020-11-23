@@ -12,6 +12,11 @@ class ImagesListViewController: UIViewController {
         return view
     }()
 
+    lazy var logoEmitter: LogoEmitterAnimation = {
+        let logoEmitter = LogoEmitterAnimation(target: imagesListView)
+        return logoEmitter
+    }()
+
     var imageDataModels = [ImageDataModel]()
 
     weak var delegate: ImagesListViewControllerDelegate?
@@ -49,6 +54,7 @@ class ImagesListViewController: UIViewController {
         imagesListView.collectionView.delegate = self
         imagesListView.collectionView.dataSource = self
         imagesListView.collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: Identifiers.imageCell)
+        logoEmitter.addLogoEmitter()
     }
 
     private func setupNavigationBar() {

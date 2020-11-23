@@ -9,6 +9,11 @@ class ConversationViewController: UIViewController, ConfigurableView {
         return view
     }()
 
+    lazy var logoEmitter: LogoEmitterAnimation = {
+        let logoEmitter = LogoEmitterAnimation(target: conversationView)
+        return logoEmitter
+    }()
+
     private var channelModel: ChannelDB
     private var identifier: String
 
@@ -74,6 +79,7 @@ class ConversationViewController: UIViewController, ConfigurableView {
         conversationView.tableView.register(OutgoingMessageTableViewCell.self, forCellReuseIdentifier: Identifiers.outgoingMessageCell)
         conversationView.inputBarView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         fetchedResultsController.delegate = self
+        logoEmitter.addLogoEmitter()
     }
 
     func configure(with model: ConfigurationModel) {

@@ -81,7 +81,7 @@ class CoreDataManager: StorageProtocol {
         }
     }
 
-    func enableStatisticts() {
+    func enableStatistics() {
         coreDataStack.observeStatistics()
     }
 }
