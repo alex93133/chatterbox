@@ -6,6 +6,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Properties
     var window: UIWindow?
+    private let rootAssembly = RootAssembly()
     var isLaunchedBefore: Bool {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore {
@@ -23,16 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         disableDarkMode()
         setupNavigationBar()
         setDefaultUser()
-        setupCoreData()
+        rootAssembly.loadUser()
         FirebaseApp.configure()
-        UserManager.shared.loadUser()
         return true
     }
 
     // MARK: - Functions
     private func setupStartScreen() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let conversationsListViewController = ConversationsListViewController()
+        let conversationsListViewController = rootAssembly.presentationAssembly.conversationListViewController()
         let navigationController = UINavigationController(rootViewController: conversationsListViewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -51,19 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setDefaultUser() {
         guard !isLaunchedBefore else { return }
-        let uuid = UUID().uuidString
-        let user = UserModel(photo: nil,
-                             name: "Alexander Lazarev",
-                             description: "Junior iOS dev",
-                             theme: .classic,
-                             uuID: uuid)
-        UserManager.shared.dataManager.createUser(model: user)
-    }
-
-    private func setupCoreData() {
-        CoreDataManager.shared.coreDataStack.enableObservers()
-
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.applicationSupportDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        print(paths[0])
+        rootAssembly.createDefaultUser()
     }
 }
