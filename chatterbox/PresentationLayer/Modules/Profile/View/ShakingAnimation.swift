@@ -44,11 +44,11 @@ class ShakingAnimation {
 
         let rotateAnimation = CAKeyframeAnimation(keyPath: "transform.rotation")
 
-        rotateAnimation.values = [degreesToRadians(0),
-                                  degreesToRadians(angle),
-                                  degreesToRadians(0),
-                                  degreesToRadians(-angle),
-                                  degreesToRadians(0)]
+        rotateAnimation.values = [0.degreesToRadians,
+                                  (angle).degreesToRadians,
+                                  0.degreesToRadians,
+                                  (-angle.degreesToRadians),
+                                  0.degreesToRadians]
 
         let group = CAAnimationGroup()
         group.duration = duration
@@ -74,7 +74,7 @@ class ShakingAnimation {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
 
         rotateAnimation.fromValue = currentAngle
-        rotateAnimation.toValue = degreesToRadians(0)
+        rotateAnimation.toValue = 0.degreesToRadians
 
         let group = CAAnimationGroup()
         group.duration = duration / 4
@@ -82,9 +82,5 @@ class ShakingAnimation {
         group.fillMode = .forwards
 
         target.layer.add(group, forKey: nil)
-    }
-
-    private func degreesToRadians(_ degrees: Double) -> Double {
-        return (degrees * Double.pi) / 180
     }
 }
