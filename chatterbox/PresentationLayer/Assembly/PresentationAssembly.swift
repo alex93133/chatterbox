@@ -6,6 +6,7 @@ protocol PresentationAssemblyProtocol {
     func conversationViewController(with channelDB: ChannelDB) -> ConversationViewController
     func themesViewController(with theme: Theme) -> ThemesViewController
     func profileViewController(with user: User) -> ProfileViewController
+    func imagesListViewController() -> ImagesListViewController
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -48,5 +49,12 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                                  themesService: serviceAssembly.themesService,
                                  user: user)
         return ProfileViewController(model: model, presentationAssembly: self)
+    }
+
+    // MARK: - ImagesListViewController
+    func imagesListViewController() -> ImagesListViewController {
+        let model = ImagesListModel(themesService: serviceAssembly.themesService,
+                                    imageLoaderService: serviceAssembly.imageLoaderService)
+        return ImagesListViewController(model: model, presentationAssembly: self)
     }
 }

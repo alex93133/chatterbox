@@ -1,7 +1,7 @@
 import UIKit
 
 protocol UserDataProtocol {
-    func updateModel(with model: User, handler:  @escaping (Result<User>) -> Void)
+    func updateModel(with model: User, handler:  @escaping (Result<User, FileManagerError>) -> Void)
     func getUserModel(handler: @escaping (User?) -> Void)
     var fileManagerStack: FileManagerStackProtocol { get }
 }

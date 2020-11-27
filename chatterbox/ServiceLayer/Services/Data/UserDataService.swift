@@ -10,7 +10,7 @@ protocol UserDataServiceProtocol {
 
 class UserDataService: UserDataServiceProtocol {
 
-    // MARK: - Proprties
+    // MARK: - Properties
     private var currentDataManager: UserDataProtocol!
     var dataManager: UserDataProtocol {
         get {

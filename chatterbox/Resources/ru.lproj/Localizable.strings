@@ -24,5 +24,6 @@
 "Save" = "Сохранить";
 "Settings" = "Настройки";
 "Unable to save data" = "Не удалось сохранить данные";
+"Upload" = "Загрузить";
 "Looks like you forgot to turn on the camera access. To continue, you'll need to fix it in the Settings" = "Похоже вы не предоставили доступ к камере. Чтобы продолжить, необходимо включить доступ в Настройках";
 "For the full application, you will need a smartphone camera. Please allow access" = "Для полноценной работы приложения, Вам необходимо предоставить доступ к камере";

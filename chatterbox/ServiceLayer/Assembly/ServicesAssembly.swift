@@ -5,7 +5,8 @@ protocol ServicesAssemblyProtocol {
     var chatDataService: ChatDataServiceProtocol { get }
     var frcService: FRCServiceProtocol { get }
     var themesService: ThemesServiceProtocol { get }
-    var accessCheckerService: AccessCheckerServicePorotocol { get }
+    var accessCheckerService: AccessCheckerServiceProtocol { get }
+    var imageLoaderService: ImageLoaderServiceProtocol { get }
 }
 
 class ServicesAssembly: ServicesAssemblyProtocol {
@@ -27,7 +28,10 @@ class ServicesAssembly: ServicesAssemblyProtocol {
                                                                         storage: coreAssembly.coreDataManager,
                                                                         userDataService: userDataService)
 
+    lazy var imageLoaderService: ImageLoaderServiceProtocol = ImageLoaderService(parser: coreAssembly.parser,
+                                                                                 networkManager: coreAssembly.networkManager)
+
     lazy var frcService: FRCServiceProtocol = FRCService(coreDataStack: coreAssembly.coreDataStack)
     lazy var themesService: ThemesServiceProtocol = ThemesService(userDataService: userDataService)
-    lazy var accessCheckerService: AccessCheckerServicePorotocol = AccessCheckerService()
+    lazy var accessCheckerService: AccessCheckerServiceProtocol = AccessCheckerService()
 }

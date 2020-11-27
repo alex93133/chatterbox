@@ -105,7 +105,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
         }
     }
 
-    private func handleThemeSaving(_ result: Result<User>) {
+    private func handleThemeSaving(_ result: Result<User, FileManagerError>) {
         DispatchQueue.main.async {
             switch result {
             case .success (let user):
@@ -114,8 +114,8 @@ class ThemesViewController: UIViewController, ConfigurableView {
                 self.applyNewTheme()
                 Logger.shared.printLogs(text: "Theme successfully changed to \(self.model.userDataService.userModel.theme.rawValue)")
 
-            case .error:
-                Logger.shared.printLogs(text: "Theme changing error")
+            case .failure(let error):
+                Logger.shared.printLogs(text: "Theme changing error: \(error.localizedDescription)")
             }
         }
     }

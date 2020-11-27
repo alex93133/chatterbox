@@ -13,7 +13,7 @@ class OperationUserDataService: UserDataProtocol {
     }
 
     // MARK: - Functions
-    func updateModel(with model: User, handler: @escaping (Result<User>) -> Void) {
+    func updateModel(with model: User, handler: @escaping (Result<User, FileManagerError>) -> Void) {
         var success = false
 
         let infoSavingOperation = BlockOperation { [weak self] in
@@ -34,7 +34,7 @@ class OperationUserDataService: UserDataProtocol {
                 if success, let user = user {
                     handler(.success(user))
                 } else {
-                    handler(.error)
+                    handler(.failure(.invalidDataAfterSaving))
                 }
             }
         }
