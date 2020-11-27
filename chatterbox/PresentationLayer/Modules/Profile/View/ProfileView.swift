@@ -24,6 +24,7 @@ class ProfileView: UIView {
         nameTextView.backgroundColor = .clear
         nameTextView.textAlignment = .center
         nameTextView.layer.cornerRadius = 8
+        nameTextView.accessibilityIdentifier = "nameTextView"
         return nameTextView
     }()
 
@@ -37,6 +38,7 @@ class ProfileView: UIView {
         descriptionTextView.returnKeyType = .done
         descriptionTextView.backgroundColor = .clear
         descriptionTextView.layer.cornerRadius = 8
+        descriptionTextView.accessibilityIdentifier = "descriptionTextView"
         return descriptionTextView
     }()
 
