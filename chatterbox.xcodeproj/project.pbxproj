@@ -64,6 +64,9 @@
 		337DC25C2545958900FB49C8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337DC25B2545958900FB49C8 /* CoreDataManager.swift */; };
 		33873128254C1F65000C14D2 /* NilsLastSortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33873127254C1F65000C14D2 /* NilsLastSortDescriptor.swift */; };
 		339B6900250D024000578B7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 339B68FF250D024000578B7E /* Assets.xcassets */; };
+		33A0F0C82577F75800D635E6 /* ConversationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A0F0C72577F75800D635E6 /* ConversationManagerMock.swift */; };
+		33A0F0CD2577F7D500D635E6 /* StorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A0F0CC2577F7D500D635E6 /* StorageMock.swift */; };
+		33A0F0D52577F7F100D635E6 /* UserDataServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A0F0D42577F7F100D635E6 /* UserDataServiceMock.swift */; };
 		33B08EC025581A2D009CAB56 /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B08EBF25581A2D009CAB56 /* ConversationsListModel.swift */; };
 		33B62C37256243A20016319E /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B62C36256243A20016319E /* ImagesListViewController.swift */; };
 		33B62C3B256243F70016319E /* ImagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B62C3A256243F70016319E /* ImagesListView.swift */; };
@@ -82,7 +85,7 @@
 		33E9F84025152BF0005A6EB8 /* AccessCheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9F83F25152BF0005A6EB8 /* AccessCheckerService.swift */; };
 		33EA4467251E011400DA3401 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4466251E011400DA3401 /* ConversationsListViewController.swift */; };
 		33EA446F251E016600DA3401 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA446E251E016600DA3401 /* Logger.swift */; };
-		33EC6FEE2573BE98008DF9DA /* chatterboxUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC6FED2573BE98008DF9DA /* chatterboxUnitTests.swift */; };
+		33EC6FEE2573BE98008DF9DA /* СhatDataServiceUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EC6FED2573BE98008DF9DA /* СhatDataServiceUnitTests.swift */; };
 		33EDF6FB2545829400C1660B /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33EDF6F92545829400C1660B /* Chat.xcdatamodeld */; };
 		33F28336255D79A500E1FBB0 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F28335255D79A500E1FBB0 /* FirebaseManager.swift */; };
 		33F28339255D7A7900E1FBB0 /* ChatDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F28338255D7A7900E1FBB0 /* ChatDataService.swift */; };
@@ -172,6 +175,9 @@
 		337DC25B2545958900FB49C8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		33873127254C1F65000C14D2 /* NilsLastSortDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilsLastSortDescriptor.swift; sourceTree = "<group>"; };
 		339B68FF250D024000578B7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		33A0F0C72577F75800D635E6 /* ConversationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationManagerMock.swift; sourceTree = "<group>"; };
+		33A0F0CC2577F7D500D635E6 /* StorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMock.swift; sourceTree = "<group>"; };
+		33A0F0D42577F7F100D635E6 /* UserDataServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataServiceMock.swift; sourceTree = "<group>"; };
 		33B08EBF25581A2D009CAB56 /* ConversationsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		33B62C36256243A20016319E /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
 		33B62C3A256243F70016319E /* ImagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListView.swift; sourceTree = "<group>"; };
@@ -191,7 +197,7 @@
 		33EA4466251E011400DA3401 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		33EA446E251E016600DA3401 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		33EC6FEB2573BE97008DF9DA /* chatterboxUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chatterboxUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		33EC6FED2573BE98008DF9DA /* chatterboxUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatterboxUnitTests.swift; sourceTree = "<group>"; };
+		33EC6FED2573BE98008DF9DA /* СhatDataServiceUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СhatDataServiceUnitTests.swift"; sourceTree = "<group>"; };
 		33EC6FEF2573BE98008DF9DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33EDF6FA2545829400C1660B /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		33F28335255D79A500E1FBB0 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -668,7 +674,10 @@
 		33EC6FEC2573BE98008DF9DA /* chatterboxUnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				33EC6FED2573BE98008DF9DA /* chatterboxUnitTests.swift */,
+				33EC6FED2573BE98008DF9DA /* СhatDataServiceUnitTests.swift */,
+				33A0F0C72577F75800D635E6 /* ConversationManagerMock.swift */,
+				33A0F0CC2577F7D500D635E6 /* StorageMock.swift */,
+				33A0F0D42577F7F100D635E6 /* UserDataServiceMock.swift */,
 				33EC6FEF2573BE98008DF9DA /* Info.plist */,
 			);
 			path = chatterboxUnitTests;
@@ -851,7 +860,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		752186997A12CD8256BC7B31 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -986,7 +995,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33EC6FEE2573BE98008DF9DA /* chatterboxUnitTests.swift in Sources */,
+				33A0F0D52577F7F100D635E6 /* UserDataServiceMock.swift in Sources */,
+				33A0F0C82577F75800D635E6 /* ConversationManagerMock.swift in Sources */,
+				33EC6FEE2573BE98008DF9DA /* СhatDataServiceUnitTests.swift in Sources */,
+				33A0F0CD2577F7D500D635E6 /* StorageMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
