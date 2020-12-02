@@ -17,14 +17,13 @@ class ServicesAssembly: ServicesAssemblyProtocol {
         self.coreAssembly = coreAssembly
     }
 
-    lazy var gcdUserDataService: UserDataProtocol = GCDUserDataService(fileManagerStack: coreAssembly.fileManagerStack)
-
-    lazy var operationUserDataService: UserDataProtocol = OperationUserDataService(fileManagerStack: coreAssembly.fileManagerStack)
+    lazy var gcdUserDataService: UserDataProtocol = GCDUserDataService()
+    lazy var operationUserDataService: UserDataProtocol = OperationUserDataService()
 
     lazy var userDataService: UserDataServiceProtocol = UserDataService(gcdUserDataService: gcdUserDataService,
                                                                         operationUserDataService: operationUserDataService)
 
-    lazy var chatDataService: ChatDataServiceProtocol = ChatDataService(networkManager: coreAssembly.firebaseManager,
+    lazy var chatDataService: ChatDataServiceProtocol = ChatDataService(conversationManager: coreAssembly.firebaseManager,
                                                                         storage: coreAssembly.coreDataManager,
                                                                         userDataService: userDataService)
 

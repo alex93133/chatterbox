@@ -15,8 +15,8 @@ class ChatDataService: ChatDataServiceProtocol {
     var storage: StorageProtocol
     var userDataService: UserDataServiceProtocol
 
-    init(networkManager: ConversationManagerProtocol, storage: StorageProtocol, userDataService: UserDataServiceProtocol) {
-        self.conversationManager = networkManager
+    init(conversationManager: ConversationManagerProtocol, storage: StorageProtocol, userDataService: UserDataServiceProtocol) {
+        self.conversationManager = conversationManager
         self.storage = storage
         self.userDataService = userDataService
     }

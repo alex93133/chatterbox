@@ -3,17 +3,24 @@ import UIKit
 protocol UserDataProtocol {
     func updateModel(with model: User, handler:  @escaping (Result<User, FileManagerError>) -> Void)
     func getUserModel(handler: @escaping (User?) -> Void)
-    var fileManagerStack: FileManagerStackProtocol { get }
 }
 
 extension UserDataProtocol {
     // MARK: - Properties
+    var fileManager: FileManager {
+        return FileManager.default
+    }
+
+    var documentDirectory: URL {
+        return fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+
     var photoURL: URL {
-        return fileManagerStack.documentDirectory.appendingPathComponent("/photo.png")
+        return documentDirectory.appendingPathComponent("/photo.png")
     }
 
     var plistURL: URL {
-        return fileManagerStack.documentDirectory.appendingPathComponent("/info.plist")
+        return documentDirectory.appendingPathComponent("/info.plist")
     }
 
     // MARK: - Functions
@@ -33,8 +40,7 @@ extension UserDataProtocol {
         }
     }
 
-    func createUser(model: User) {
-        let fileManager = fileManagerStack.fileManager
+    func createUser(_ model: User) {
         guard !fileManager.fileExists(atPath: plistURL.path) else { return }
         let data: [String: String] = [
             "name": model.name,

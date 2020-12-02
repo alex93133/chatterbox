@@ -6,13 +6,6 @@ class GCDUserDataService: UserDataProtocol {
     let queue = DispatchQueue.global(qos: .default)
     let group = DispatchGroup()
 
-    // MARK: - Dependencies
-    var fileManagerStack: FileManagerStackProtocol
-
-    init(fileManagerStack: FileManagerStackProtocol) {
-        self.fileManagerStack = fileManagerStack
-    }
-
     // MARK: - Functions
     func updateModel(with model: User, handler: @escaping (Result<User, FileManagerError>) -> Void) {
 

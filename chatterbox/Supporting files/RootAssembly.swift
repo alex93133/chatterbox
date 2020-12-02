@@ -19,7 +19,7 @@ extension RootAssembly: AppLoadingProtocol {
                         description: "Junior iOS dev",
                         theme: .classic,
                         uuID: uuid)
-        servicesAssembly.userDataService.dataManager.createUser(model: user)
+        servicesAssembly.userDataService.createUser(user: user)
     }
 
     func loadUser() {

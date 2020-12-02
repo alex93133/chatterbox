@@ -105,7 +105,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
         var userModel = model.userDataService.userModel
         guard newTheme != userModel.theme else { return }
         userModel.theme = newTheme
-        model.userDataService.dataManager.updateModel(with: userModel) { [weak self] result in
+        model.userDataService.updateModel(user: userModel, service: nil) { [weak self] result in
             guard let self = self else { return }
             self.handleThemeSaving(result)
         }
