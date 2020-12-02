@@ -8,15 +8,8 @@ class ProfileView: UIView {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.clipsToBounds = true
         photoImageView.backgroundColor = UIColor(hex: "#E4E82B")
+        photoImageView.isUserInteractionEnabled = true
         return photoImageView
-    }()
-
-    lazy var editPhotoButton: UIButton = {
-        let editPhotoButton = UIButton()
-        editPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        editPhotoButton.setTitleColor(UIColor.systemBlue, for: .normal)
-        editPhotoButton.setTitle(NSLocalizedString(NSLocalizedString("Edit", comment: ""), comment: ""), for: .normal)
-        return editPhotoButton
     }()
 
     lazy var nameTextView: UITextView = {
@@ -79,19 +72,28 @@ class ProfileView: UIView {
 
     func setupUIElements() {
         addSubviews(photoImageView,
-                    editPhotoButton,
                     nameTextView,
                     descriptionTextView,
                     saveButtonGCD,
                     saveButtonOperation,
                     activityIndicator)
         setupPhotoImageViewConstraints()
-        setupEditPhotoButtonConstraints()
         setupNameTextViewConstraints()
         setupDescriptionTextViewConstraints()
         setupSaveButtonGCDConstraints()
         setupSaveButtonOperationConstraints()
         setupActivityIndicatorConstraints()
+    }
+
+    // MARK: - Animations
+    func animateInputs(isEditable: Bool, bgColor: UIColor) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.nameTextView.backgroundColor = bgColor
+            self.descriptionTextView.backgroundColor = bgColor
+            self.nameTextView.isEditable = isEditable
+            self.descriptionTextView.isEditable = isEditable
+        }
     }
 
     // MARK: - Constraints
@@ -102,16 +104,6 @@ class ProfileView: UIView {
             photoImageView.heightAnchor.constraint(equalTo: photoImageView.widthAnchor, multiplier: 1),
             photoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 45),
             photoImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
-    }
-
-    private func setupEditPhotoButtonConstraints() {
-        editPhotoButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            editPhotoButton.widthAnchor.constraint(equalToConstant: 40),
-            editPhotoButton.heightAnchor.constraint(equalToConstant: 40),
-            editPhotoButton.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor),
-            editPhotoButton.firstBaselineAnchor.constraint(equalTo: photoImageView.bottomAnchor)
         ])
     }
 

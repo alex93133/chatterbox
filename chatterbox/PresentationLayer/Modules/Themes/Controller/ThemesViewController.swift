@@ -12,6 +12,11 @@ class ThemesViewController: UIViewController, ConfigurableView {
         return view
     }()
 
+    lazy var logoEmitter: LogoEmitterAnimation = {
+        let logoEmitter = LogoEmitterAnimation(target: themesView)
+        return logoEmitter
+    }()
+
     private var themeModel: Theme
     private lazy var buttons = [themesView.classicThemeButton,
                                 themesView.dayThemeButton,
@@ -56,6 +61,7 @@ class ThemesViewController: UIViewController, ConfigurableView {
         themesView.classicThemeButton.addTarget(self, action: #selector(classicThemeButtonPressed), for: .touchUpInside)
         themesView.dayThemeButton.addTarget(self, action: #selector(dayThemeButtonPressed), for: .touchUpInside)
         themesView.nightThemeButton.addTarget(self, action: #selector(nightThemeButtonPressed), for: .touchUpInside)
+        logoEmitter.addLogoEmitter()
     }
 
     private func setupNavigationBar() {

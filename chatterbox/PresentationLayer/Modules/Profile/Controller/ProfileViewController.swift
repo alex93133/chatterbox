@@ -8,9 +8,24 @@ class ProfileViewController: UIViewController, ConfigurableView {
         return view
     }()
 
+    lazy var logoEmitter: LogoEmitterAnimation = {
+        let logoEmitter = LogoEmitterAnimation(target: profileView)
+        return logoEmitter
+    }()
+
+    lazy var shakingAnimation: ShakingAnimation? = {
+        if let buttonView = editInfoButtonItem.customView {
+            let shakingAnimation = ShakingAnimation(target: buttonView)
+            return shakingAnimation
+        } else {
+            return nil
+        }
+    }()
+
     var profileModel: User
     var updatedModel: User
     var updateUserIcon: (() -> Void)?
+    var editInfoButtonItem: UIBarButtonItem!
 
     typealias ConfigurationModel = User
 
@@ -24,13 +39,8 @@ class ProfileViewController: UIViewController, ConfigurableView {
                 isAbleToSave = false
                 textViewBGColor = .clear
             }
-            UIView.animate(withDuration: 0.3) { [weak self] in
-                guard let self = self else { return }
-                self.profileView.nameTextView.backgroundColor = textViewBGColor
-                self.profileView.descriptionTextView.backgroundColor = textViewBGColor
-                self.profileView.nameTextView.isEditable = isEditable
-                self.profileView.descriptionTextView.isEditable = isEditable
-            }
+            profileView.animateInputs(isEditable: isEditable,
+                                      bgColor: textViewBGColor)
         }
     }
 
@@ -100,9 +110,12 @@ class ProfileViewController: UIViewController, ConfigurableView {
         profileView.nameTextView.delegate = self
         profileView.descriptionTextView.delegate = self
 
-        profileView.editPhotoButton.addTarget(self, action: #selector(editPhotoButtonPressed), for: .touchUpInside)
         profileView.saveButtonGCD.addTarget(self, action: #selector(saveButtonGCDPressed), for: .touchUpInside)
         profileView.saveButtonOperation.addTarget(self, action: #selector(saveButtonOperationPressed), for: .touchUpInside)
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editPhotoButtonPressed))
+        profileView.photoImageView.addGestureRecognizer(gestureRecognizer)
+        logoEmitter.addLogoEmitter()
     }
 
     private func setupNavigationBar() {
@@ -110,9 +123,14 @@ class ProfileViewController: UIViewController, ConfigurableView {
                                               target: self,
                                               action: #selector(closeButtonPressed))
 
-        let editInfoButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                 target: self,
-                                                 action: #selector(editInfoButtonPressed))
+        let icon = Images.edit
+        let iconSize = CGRect(origin: .zero, size: icon.size)
+        let iconButton = UIButton(frame: iconSize)
+        iconButton.addTarget(self, action: #selector(editInfoButtonPressed), for: .touchUpInside)
+        iconButton.setBackgroundImage(icon, for: .normal)
+
+        editInfoButtonItem = UIBarButtonItem(customView: iconButton)
+
         editInfoButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue],
                                                   for: .normal)
 
@@ -193,6 +211,7 @@ class ProfileViewController: UIViewController, ConfigurableView {
             DispatchQueue.main.async {
                 self.isSaving = false
                 self.isTextViewEditable = false
+                self.shakingAnimation?.cancel()
                 switch result {
                 case .success (let user):
                     self.model.userDataService.userModel = user
@@ -247,6 +266,13 @@ class ProfileViewController: UIViewController, ConfigurableView {
     @objc
     private func editInfoButtonPressed() {
         isTextViewEditable.toggle()
+
+        if isTextViewEditable {
+            shakingAnimation?.start(angle: 18, offset: 5)
+        } else {
+            shakingAnimation?.cancel()
+        }
+
     }
 
     @objc

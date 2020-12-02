@@ -20,6 +20,7 @@
 		331EC65F250BBDB30084E89C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 331EC65E250BBDB30084E89C /* .gitignore */; };
 		331EC664250BC13A0084E89C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 331EC663250BC13A0084E89C /* .swiftlint.yml */; };
 		331F7D612520AD07005E7666 /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F7D602520AD07005E7666 /* MessageCellModel.swift */; };
+		3321ABDA256BDCFC00A0CB46 /* FloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321ABD9256BDCFC00A0CB46 /* FloatingPoint.swift */; };
 		3324CE002555777800AC89E0 /* ConversationsListViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324CDFF2555777800AC89E0 /* ConversationsListViewControllerDelegates.swift */; };
 		3324CE032555785900AC89E0 /* ConversationViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324CE022555785900AC89E0 /* ConversationViewControllerDelegates.swift */; };
 		3324CE06255579F800AC89E0 /* ServicesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324CE05255579F800AC89E0 /* ServicesAssembly.swift */; };
@@ -38,6 +39,9 @@
 		332655982520A2CB00C16D5E /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332655972520A2CB00C16D5E /* ConversationView.swift */; };
 		3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */; };
 		3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */; };
+		332D063D2569612400665F44 /* ShakingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D063C2569612400665F44 /* ShakingAnimation.swift */; };
+		332D064025696AAB00665F44 /* ProfileTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D063F25696AAB00665F44 /* ProfileTransition.swift */; };
+		332D06432569876700665F44 /* LogoEmitterAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D06422569876700665F44 /* LogoEmitterAnimation.swift */; };
 		333AB13925487A5500F99ADB /* InputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333AB13825487A5500F99ADB /* InputBarView.swift */; };
 		334AF3502539F20C001A666B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334AF34F2539F20C001A666B /* GoogleService-Info.plist */; };
 		335DDC8C2534A28C00004193 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335DDC8B2534A28C00004193 /* UserDataService.swift */; };
@@ -104,6 +108,7 @@
 		331EC65E250BBDB30084E89C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		331EC663250BC13A0084E89C /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		331F7D602520AD07005E7666 /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
+		3321ABD9256BDCFC00A0CB46 /* FloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPoint.swift; sourceTree = "<group>"; };
 		3324CDFF2555777800AC89E0 /* ConversationsListViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewControllerDelegates.swift; sourceTree = "<group>"; };
 		3324CE022555785900AC89E0 /* ConversationViewControllerDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewControllerDelegates.swift; sourceTree = "<group>"; };
 		3324CE05255579F800AC89E0 /* ServicesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAssembly.swift; sourceTree = "<group>"; };
@@ -122,6 +127,9 @@
 		332655972520A2CB00C16D5E /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		3326559A2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3326559D2520A40400C16D5E /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		332D063C2569612400665F44 /* ShakingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakingAnimation.swift; sourceTree = "<group>"; };
+		332D063F25696AAB00665F44 /* ProfileTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTransition.swift; sourceTree = "<group>"; };
+		332D06422569876700665F44 /* LogoEmitterAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoEmitterAnimation.swift; sourceTree = "<group>"; };
 		333AB13825487A5500F99ADB /* InputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputBarView.swift; sourceTree = "<group>"; };
 		334AF34F2539F20C001A666B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		335DDC8B2534A28C00004193 /* UserDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
@@ -394,6 +402,7 @@
 			children = (
 				335E8B4B2517B045005B11EC /* ProfileView.swift */,
 				33E9B34725334BCD0061CABC /* SaveButton.swift */,
+				332D063C2569612400665F44 /* ShakingAnimation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 				33F4648B252324E300ACA297 /* UIView.swift */,
 				3373ED8125275D4D001EDE7E /* UIColor.swift */,
 				33E9B34A253353D40061CABC /* UIViewController.swift */,
+				3321ABD9256BDCFC00A0CB46 /* FloatingPoint.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +618,8 @@
 			children = (
 				3326556D251F63AA00C16D5E /* ConversationsListView.swift */,
 				3326555C251F570F00C16D5E /* ConversationTableViewCell.swift */,
+				332D063F25696AAB00665F44 /* ProfileTransition.swift */,
+				332D06422569876700665F44 /* LogoEmitterAnimation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -792,6 +804,7 @@
 				331F7D612520AD07005E7666 /* MessageCellModel.swift in Sources */,
 				33DF253D2559147D000F844D /* ProfileViewControllerDelegates.swift in Sources */,
 				3302E123252714C700BF8EEE /* ThemesView.swift in Sources */,
+				332D06432569876700665F44 /* LogoEmitterAnimation.swift in Sources */,
 				33BDD1D025582C7E009A5371 /* ProfileModel.swift in Sources */,
 				33B62C3B256243F70016319E /* ImagesListView.swift in Sources */,
 				3326556E251F63AA00C16D5E /* ConversationsListView.swift in Sources */,
@@ -799,12 +812,14 @@
 				3326556A251F5B1F00C16D5E /* ConversationCellModel.swift in Sources */,
 				3324CE0D25557A3E00AC89E0 /* PresentationAssembly.swift in Sources */,
 				3324CE032555785900AC89E0 /* ConversationViewControllerDelegates.swift in Sources */,
+				3321ABDA256BDCFC00A0CB46 /* FloatingPoint.swift in Sources */,
 				33E9B34B253353D40061CABC /* UIViewController.swift in Sources */,
 				3326559E2520A40400C16D5E /* OutgoingMessageTableViewCell.swift in Sources */,
 				33E9B3422533483C0061CABC /* GCDUserDataService.swift in Sources */,
 				33BDD1D42558375E009A5371 /* FRCService.swift in Sources */,
 				337BDFE125624D88005E9626 /* ImageCellModel.swift in Sources */,
 				33E9F84025152BF0005A6EB8 /* AccessCheckerService.swift in Sources */,
+				332D063D2569612400665F44 /* ShakingAnimation.swift in Sources */,
 				33F28339255D7A7900E1FBB0 /* ChatDataService.swift in Sources */,
 				3326557E251F775300C16D5E /* UIImage.swift in Sources */,
 				337DC2582545861400FB49C8 /* CoreDataStack.swift in Sources */,
@@ -825,6 +840,7 @@
 				3373ED8225275D4D001EDE7E /* UIColor.swift in Sources */,
 				335DDC8C2534A28C00004193 /* UserDataService.swift in Sources */,
 				330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */,
+				332D064025696AAB00665F44 /* ProfileTransition.swift in Sources */,
 				337BDFE425628643005E9626 /* NetworkManager.swift in Sources */,
 				3326559B2520A3ED00C16D5E /* IncomingMessageTableViewCell.swift in Sources */,
 				337185432564483D0072525F /* FileManagerError.swift in Sources */,

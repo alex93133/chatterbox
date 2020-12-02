@@ -7,4 +7,6 @@ enum Images {
     static let nightTheme = UIImage(named: "Night")!
     static let send = UIImage(named: "Send")!
     static let imagePlaceHolder = UIImage(named: "ImagePlaceholder")!
+    static let logo = UIImage(named: "Logo")!
+    static let edit = UIImage(named: "Edit")!
 }
