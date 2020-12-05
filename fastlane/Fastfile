@@ -2,6 +2,7 @@ discord_webhook_url = ENV['DISCORD_WEBHOOK_URL']
 
 desc 'Сборка тестов'
 lane :build_for_testing do
+    cocoapods
     scan(
       derived_data_path: "DerivedData",
       build_for_testing: true
