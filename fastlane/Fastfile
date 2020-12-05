@@ -1,10 +1,25 @@
-default_platform(:ios)
+discord_webhook_url = ENV['DISCORD_WEBHOOK_URL']
 
-platform :ios do
-  
-  lane :build_for_testing do
-    scan
-  end
+desc 'Сборка тестов'
+lane :build_for_testing do
+    scan(
+      derived_data_path: "DerivedData",
+      build_for_testing: true
+    )
+end
 
+desc 'Запуск тестов'
+lane :run_test_without_build do
+    scan(
+      derived_data_path: "DerivedData",
+      test_without_building: true
+    )
+end
 
+desc 'Запуск тестов'
+lane :build_and_test do
+    puts discord_webhook_url
+
+    build_for_testing
+    run_test_without_build
 end

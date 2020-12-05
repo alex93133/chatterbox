@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "334E5F8225710DE200FF594B"
+               BlueprintIdentifier = "33EC6FEA2573BE97008DF9DA"
                BuildableName = "chatterboxUnitTests.xctest"
                BlueprintName = "chatterboxUnitTests"
                ReferencedContainer = "container:chatterbox.xcodeproj">

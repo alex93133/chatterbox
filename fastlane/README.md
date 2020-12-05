@@ -15,12 +15,21 @@ Install _fastlane_ using
 or alternatively using `brew install fastlane`
 
 # Available Actions
-## iOS
-### ios build_for_testing
+### build_for_testing
 ```
-fastlane ios build_for_testing
+fastlane build_for_testing
 ```
-
+Сборка тестов
+### run_test_without_build
+```
+fastlane run_test_without_build
+```
+Запуск тестов
+### build_and_test
+```
+fastlane build_and_test
+```
+Запуск тестов
 
 ----
 
