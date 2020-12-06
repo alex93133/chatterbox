@@ -21,7 +21,6 @@ desc 'Запуск тестов'
 lane :build_and_test do
   build_for_testing
   run_test_without_build
-  discord
 end
 
 desc 'Уведомление в Discord'
