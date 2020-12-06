@@ -1,7 +1,7 @@
 excluded:
   - Pods
   - .git
-  - gems
+  - vendor
   - DerivedData
 
 disabled_rules:
