@@ -30,6 +30,11 @@ fastlane run_test_without_build
 fastlane build_and_test
 ```
 Запуск тестов
+### discord
+```
+fastlane discord
+```
+Уведомление в Discord
 
 ----
 

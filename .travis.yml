@@ -5,4 +5,4 @@ before_install:
 install:
   - bundle install
 script:
-  - bundle exec fastlane build_and_test
+  - bundle exec fastlane discord
