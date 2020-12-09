@@ -20,9 +20,9 @@ or alternatively using `brew install fastlane`
 fastlane build_for_testing
 ```
 Сборка тестов
-### run_tests
+### run_tests_without_building
 ```
-fastlane run_tests
+fastlane run_tests_without_building
 ```
 Запуск тестов
 ### build_and_test
