@@ -5,13 +5,6 @@ class OperationUserDataService: UserDataProtocol {
     // MARK: - Properties
     let operationQueue = OperationQueue()
 
-    // MARK: - Dependencies
-    var fileManagerStack: FileManagerStackProtocol
-
-    init(fileManagerStack: FileManagerStackProtocol) {
-        self.fileManagerStack = fileManagerStack
-    }
-
     // MARK: - Functions
     func updateModel(with model: User, handler: @escaping (Result<User, FileManagerError>) -> Void) {
         var success = false

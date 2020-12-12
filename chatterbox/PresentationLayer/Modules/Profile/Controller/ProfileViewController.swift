@@ -203,10 +203,10 @@ class ProfileViewController: UIViewController, ConfigurableView {
         present(imagePicker, animated: true)
     }
 
-    private func saveData() {
+    private func saveData(service: SaveService?) {
         isSaving = true
         isAbleToSave = false
-        model.userDataService.dataManager.updateModel(with: updatedModel) { [weak self] result in
+        model.userDataService.updateModel(user: updatedModel, service: service) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.isSaving = false
@@ -248,7 +248,7 @@ class ProfileViewController: UIViewController, ConfigurableView {
         let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment: ""),
                                         style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.saveData()
+            self.saveData(service: nil)
         }
 
         alertController.addAction(okAction)
@@ -282,13 +282,11 @@ class ProfileViewController: UIViewController, ConfigurableView {
 
     @objc
     private func saveButtonGCDPressed() {
-        model.userDataService.dataManager = model.userDataService.gcdUserDataService
-        saveData()
+        saveData(service: .gcd)
     }
 
     @objc
     private func saveButtonOperationPressed() {
-        model.userDataService.dataManager = model.userDataService.operationUserDataService
-        saveData()
+        saveData(service: .operation)
     }
 }

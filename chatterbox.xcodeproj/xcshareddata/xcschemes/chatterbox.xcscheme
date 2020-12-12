@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "334E5F702571061100FF594B"
+               BuildableName = "chatterboxUITests.xctest"
+               BlueprintName = "chatterboxUITests"
+               ReferencedContainer = "container:chatterbox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "334E5F8225710DE200FF594B"
+               BuildableName = "chatterboxUnitTests.xctest"
+               BlueprintName = "chatterboxUnitTests"
+               ReferencedContainer = "container:chatterbox.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
