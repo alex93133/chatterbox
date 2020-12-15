@@ -7,7 +7,7 @@ protocol NetworkManagerProtocol {
 
 class NetworkManager: NetworkManagerProtocol {
 
-    let apiKey = "12742223-d39d519f28327ba3c61b0e13b"
+    let apiKey = InfoPlistParser.getValue(for: "API_KEY") ?? ""
 
     func getData(request: URLRequest, handler: @escaping (Result<Data, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error -> Void in

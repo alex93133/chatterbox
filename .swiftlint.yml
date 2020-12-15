@@ -1,6 +1,8 @@
 excluded:
   - Pods
   - .git
+  - vendor
+  - DerivedData
 
 disabled_rules:
   - trailing_whitespace

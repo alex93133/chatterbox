@@ -10,6 +10,7 @@
 		3302E1202527149F00BF8EEE /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E11F2527149F00BF8EEE /* ThemesViewController.swift */; };
 		3302E123252714C700BF8EEE /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E122252714C700BF8EEE /* ThemesView.swift */; };
 		3302E1272527168E00BF8EEE /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E1262527168E00BF8EEE /* ThemeButton.swift */; };
+		3304F2572580D121008CA3F6 /* InfoPlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304F2562580D121008CA3F6 /* InfoPlistParser.swift */; };
 		3309F7872517CA52004C6015 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3309F7892517CA52004C6015 /* Localizable.strings */; };
 		330C51852562B6AC00B6EE0A /* ImageDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330C51842562B6AC00B6EE0A /* ImageDataModels.swift */; };
 		330EFDFE253A0BB20025BF39 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EFDFD253A0BB20025BF39 /* Channel.swift */; };
@@ -116,6 +117,8 @@
 		3302E11F2527149F00BF8EEE /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		3302E122252714C700BF8EEE /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		3302E1262527168E00BF8EEE /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
+		3304F24C2580CBCE008CA3F6 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		3304F2562580D121008CA3F6 /* InfoPlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistParser.swift; sourceTree = "<group>"; };
 		3309F7882517CA52004C6015 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3309F78C2517CA70004C6015 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		330C51842562B6AC00B6EE0A /* ImageDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModels.swift; sourceTree = "<group>"; };
@@ -311,6 +314,7 @@
 		331EC63C250BB9470084E89C = {
 			isa = PBXGroup;
 			children = (
+				3304F24C2580CBCE008CA3F6 /* Config.xcconfig */,
 				331EC647250BB9470084E89C /* chatterbox */,
 				334E5F722571061100FF594B /* chatterboxUITests */,
 				33EC6FEC2573BE98008DF9DA /* chatterboxUnitTests */,
@@ -351,6 +355,7 @@
 				335FA511255573E70021457E /* RootAssembly.swift */,
 				33EA446E251E016600DA3401 /* Logger.swift */,
 				331EC648250BB9470084E89C /* AppDelegate.swift */,
+				3304F2562580D121008CA3F6 /* InfoPlistParser.swift */,
 				331EC656250BB94B0084E89C /* Info.plist */,
 				334AF34F2539F20C001A666B /* GoogleService-Info.plist */,
 				331EC65E250BBDB30084E89C /* .gitignore */,
@@ -971,6 +976,7 @@
 				33F4648C252324E300ACA297 /* UIView.swift in Sources */,
 				33F28336255D79A500E1FBB0 /* FirebaseManager.swift in Sources */,
 				33265565251F5A8600C16D5E /* ConfigurableView.swift in Sources */,
+				3304F2572580D121008CA3F6 /* InfoPlistParser.swift in Sources */,
 				33E9B34825334BCD0061CABC /* SaveButton.swift in Sources */,
 				33C1A1DD2516134200531116 /* UIAlertController.swift in Sources */,
 				337BDFEB25628D8A005E9626 /* ImageLoaderService.swift in Sources */,
@@ -1158,7 +1164,7 @@
 		};
 		331EC65A250BB94B0084E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 322273BCF0DE40F0D8889461 /* Pods-chatterbox.debug.xcconfig */;
+			baseConfigurationReference = 3304F24C2580CBCE008CA3F6 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1180,7 +1186,7 @@
 		};
 		331EC65B250BB94B0084E89C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D2F2229F47041E821CB446B /* Pods-chatterbox.release.xcconfig */;
+			baseConfigurationReference = 3304F24C2580CBCE008CA3F6 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1205,7 +1211,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = chatterboxUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1225,7 +1231,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				INFOPLIST_FILE = chatterboxUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1247,7 +1253,7 @@
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				HEADER_SEARCH_PATHS = "${SRCROOT}/Pods/Firebase/CoreOnly/Sources\n";
 				INFOPLIST_FILE = chatterboxUnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1269,7 +1275,7 @@
 				DEVELOPMENT_TEAM = AQL4937GS7;
 				HEADER_SEARCH_PATHS = "${SRCROOT}/Pods/Firebase/CoreOnly/Sources\n";
 				INFOPLIST_FILE = chatterboxUnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
